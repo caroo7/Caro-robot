@@ -27,6 +27,10 @@
         <spring.version>4.3.2.RELEASE</spring.version>
         <testng.version>6.9.10</testng.version>
         <mockito.version>1.10.19</mockito.version>
+
+        <jacoco.version>0.7.7.201606060606</jacoco.version>
+        <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
+        <datafile>${basedir}/target/coverage-reports/jacoco-unit.exec</datafile>
     </properties>
 
     <prerequisites>
@@ -70,5 +74,62 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <!-- excluded classes -->
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                            <rules>
+                                <rule>
+                                    <limits>
+                                        <limit>
+                                            <counter>INSTRUCTION</counter>
+                                            <minimum>0.90</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>METHOD</counter>
+                                            <minimum>0.80</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
