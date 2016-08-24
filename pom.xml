@@ -30,7 +30,7 @@
         <mockito.version>1.10.19</mockito.version>
         <hibernate.version>5.1.1.Final</hibernate.version> <!-- newest hibernate version is 5.2.2 but in there is a problem between spring 4.3.2
                                                                 and this version of hibernate during database test invocation -->
-        <lombock.version>1.16.10.0</lombock.version>
+        <lombock.version>1.16.10</lombock.version>
 
         <jacoco.version>0.7.7.201606060606</jacoco.version>
         <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
@@ -78,9 +78,8 @@
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven</artifactId>
+                <artifactId>lombok</artifactId>
                 <version>${lombock.version}</version>
-                <type>provided</type>
             </dependency>
 
             <dependency>
