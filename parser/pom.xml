@@ -11,7 +11,7 @@
 
     <artifactId>parser</artifactId>
 
-    <name>Parser</name>
+    <name>parser</name>
     <description>Module for all parsers which are responsible for retrieving books data from web pages and saving them into database</description>
 
     <dependencies>
