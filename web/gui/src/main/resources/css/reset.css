@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+	line-height: 2;
 	background-color:  #d3ffce;
 }
 ol, ul {
@@ -46,4 +46,50 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+.logo{
+    background-color: #008080;
+    font:bold 60px Georgia, serif;
+    width: 80%;
+    outline-style: groove;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+#libraries{
+    margin-top: 10px;
+    margin-left: 10px;
+    outline-style: groove;
+    background-color: #cdf3e7;
+    width: 5%;
+    float:left;
+}
+
+
+#books{
+    margin-top:10px;
+    margin-left:30px;
+    background-color:#cdf3e7;
+    width: 75%;
+    float:left;
+
+
+}
+
+.panel{
+    margin-top:10px;
+    margin-left:20px;
+    width: 80%;
+    border: 1px solid black;
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+
+.logging{
+   width: 160px;
+   top:20%;
+   margin-left:20%;
+   margin-right:auto;
+   position: absolute;
+
 }
