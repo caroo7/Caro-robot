@@ -14,6 +14,14 @@
     <name>database</name>
     <description>Database access layer. Contains all entities and DAOs.</description>
 
+    <properties>
+        <spring.data.jpa.version>1.10.2.RELEASE</spring.data.jpa.version>
+        <cglib.version>3.2.1</cglib.version>
+        <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
+        <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
+        <hsqldb.version>2.3.4</hsqldb.version>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -24,25 +32,25 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.10.2.RELEASE</version>
+            <version>${spring.data.jpa.version}</version>
         </dependency>
 
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
-            <version>3.2.1</version>
+            <version>${cglib.version}</version>
         </dependency>
 
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.1-901-1.jdbc4</version>
+            <version>${postgresql.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
+            <version>${hibernate.jpa.version}</version>
         </dependency>
 
         <dependency>
@@ -76,7 +84,8 @@
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>2.3.4</version>
+            <version>${hsqldb.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
