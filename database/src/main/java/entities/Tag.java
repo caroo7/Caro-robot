@@ -1,5 +1,9 @@
 package entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +11,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
+@NoArgsConstructor
 public class Tag implements Serializable {
 
     @Id
@@ -15,14 +20,8 @@ public class Tag implements Serializable {
 
     private String name;
 
-    private Tag() {
-    }
-
     public Tag(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
 }

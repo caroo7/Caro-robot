@@ -1,10 +1,15 @@
 package entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 public class Library implements Serializable {
 
     @Id
@@ -19,14 +24,9 @@ public class Library implements Serializable {
     @JoinColumn(name = "library_id")
     List<Book> books;
 
-    private Library() {
-    }
-
-    public Library(String name, String URL, List<Book> books) {
+    public Library(String name, String URL) {
         this.name = name;
         this.URL = URL;
-        this.books = books;
     }
-
 
 }
