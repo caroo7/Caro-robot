@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>book-robot</artifactId>
@@ -12,12 +12,28 @@
     <artifactId>parser</artifactId>
 
     <name>parser</name>
-    <description>Module for all parsers which are responsible for retrieving books data from web pages and saving them into database</description>
+    <description>Module for all parsers which are responsible for retrieving books data from web pages and saving them
+        into database
+    </description>
+
+    <properties>
+        <jsoup.version>1.9.2</jsoup.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>github.yggdrasil</groupId>
             <artifactId>database</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
         </dependency>
     </dependencies>
 
