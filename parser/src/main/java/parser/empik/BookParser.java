@@ -3,6 +3,8 @@ package parser.empik;
 import org.jsoup.nodes.Document;
 import parser.DTO.Book;
 import parser.IBookParser;
+import parser.ParserUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +16,6 @@ class BookParser implements IBookParser{
     private String getBookTitle(Document document){
        return document.select("h1.productMainTitle > span").first().text();
     }
-
     private String getAuthor(Document document){
         return document.select("span.pDAuthorList > a").first().text();
     }
@@ -26,15 +27,7 @@ class BookParser implements IBookParser{
     private String getPercentageDiscount(Document document){
         //12,80 zł (40%)
         String priceWithDiscount=document.select("span.saving").first().text();
-
-        Pattern patter = Pattern.compile("\\((.*?)\\)");
-        Matcher matchPattern = patter.matcher(priceWithDiscount);
-
-        String percentageDiscount="";
-        while(matchPattern.find()) {
-            percentageDiscount=matchPattern.group(1);
-        }
-        return percentageDiscount;
+        return ParserUtils.extractDataFromRegex("\\((.*?)\\)",priceWithDiscount);
     }
 
     private String getGenre(Document document){

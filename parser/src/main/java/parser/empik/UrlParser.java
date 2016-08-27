@@ -4,8 +4,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import parser.PageLoader;
+import parser.ParserUtils;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -17,20 +20,21 @@ import java.util.stream.Collectors;
  */
 class UrlParser {
 
-    private List<String> getLinksList(String prefixUrl,Elements aHrefElement) {
-        return aHrefElement.stream().map(element ->prefixUrl+ element.attr("href")).filter(s -> !s.contains("#")).distinct().collect(Collectors.toList());
+    private List<String> getLinksList(Document document, String cssQuery, String hostUrl) {
+        Elements element = document.select(cssQuery);
+        return element.stream().map(e -> hostUrl + e.attr("href")).filter(s -> !s.contains("#")).distinct().collect(Collectors.toList());
     }
 
-    public List<String> getLinksToGenreDetailsPromotion(String prefixUrl,Document document){
-        return getLinksList(prefixUrl,document.select("a.more_lnk" ));
+    List<String> getLinksToGenreDetailsPromotion( Document document) {
+        return getLinksList(document, "a.more_lnk", ParserUtils.getHostUrlFromDocument(document));
     }
 
-    public List<String> getLinksToBooksDetails(String prefixUrl,Document document){
-        return getLinksList(prefixUrl,document.select( "a.productBox-450Pic"));
+    List<String> getLinksToBooksDetails(Document document) {
+        return getLinksList(document, "a.productBox-450Pic", ParserUtils.getHostUrlFromDocument(document));
     }
 
-    public List<String> getLinksToNextPages(String prefixUrl,Document document){
-        return getLinksList(prefixUrl,document.select("div.pageNumerationBox > a"));
+    List<String> getLinksToNextPages( Document document) {
+        return getLinksList(document, "div.pageNumerationBox > a", document.baseUri());
     }
 
 }
