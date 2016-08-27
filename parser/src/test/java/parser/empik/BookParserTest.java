@@ -7,7 +7,6 @@ import org.testng.asserts.SoftAssert;
 import parser.DTO.Book;
 import parser.IBookParser;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -18,7 +17,7 @@ public class BookParserTest {
 
     @Test
     public void testOfParsingHtmlDocumentToBook() throws Exception {
-        String htmlPage = new String(Files.readAllBytes(Paths.get(getClass().getResource("/empik/sampleBookDetails.html").toURI())));
+        String htmlPage = new String(Files.readAllBytes(Paths.get(getClass().getResource("/empik/uwiklanie-miloszewski-zygmunt.html").toURI())));
 
         Document document = Jsoup.parse(htmlPage);
 
