@@ -1,24 +1,21 @@
-package parser.empik;
+package parser;
 
 import parser.DTO.Book;
-import parser.IBookParser;
-import parser.PageLoader;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by grzegorz_sledz on 25.08.16.
+ * Created by Grzesiek on 2016-08-28.
  */
-public class BookCrawler {
+public abstract class BookCrawler {
 
     private final IBookParser bookParser;
     private final PageLoader pageLoader;
 
-    public BookCrawler(PageLoader pageLoader){
+    public BookCrawler(PageLoader pageLoader,IBookParser bookParser){
         this.pageLoader=pageLoader;
-        this.bookParser=new BookParser();
+        this.bookParser=bookParser;
     }
 
     public List<Book> getBooks(List<String> urlsToBookDetails) {

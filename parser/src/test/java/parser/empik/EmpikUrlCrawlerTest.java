@@ -15,15 +15,15 @@ import static org.testng.AssertJUnit.assertTrue;
 /**
  * Created by Grzesiek on 2016-08-27.
  */
-public class UrlCrawlerTest {
+public class EmpikUrlCrawlerTest {
     @Test
     public void testPrepareLinksToAllBooks() throws IOException, URISyntaxException {
         //arrange
         PageLoader pageLoader = mock(PageLoader.class);
-        UrlCrawler urlCrawler = new UrlCrawler(pageLoader);
-        String genreUrl = urlCrawler.mainUrl + "/ebooki/kryminaly-i-sensacje";
-        when(pageLoader.getPage(urlCrawler.promotionUrl)).thenReturn(Utils.loadHtmlDocument("/empik/ebook_promotions_main.html", urlCrawler.mainUrl));
-        when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/genre_promotion_details.html", urlCrawler.mainUrl));
+        EmpikUrlCrawler empikUrlCrawler = new EmpikUrlCrawler(pageLoader);
+        String genreUrl = empikUrlCrawler.mainUrl + "/ebooki/kryminaly-i-sensacje";
+        when(pageLoader.getPage(empikUrlCrawler.promotionUrl)).thenReturn(Utils.loadHtmlDocument("/empik/ebook_promotions_main.html", empikUrlCrawler.mainUrl));
+        when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/genre_promotion_details.html", empikUrlCrawler.mainUrl));
 
 
         when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/book_list_p1.html", genreUrl));
@@ -33,7 +33,7 @@ public class UrlCrawlerTest {
 
         List<String> expectedResult = Utils.loadFileByLineToList("/empik/urlsToBookDetails.txt");
         //act
-        List<String> result = urlCrawler.prepareLinksToAllBooks();
+        List<String> result = empikUrlCrawler.getLinksToAllBooks();
 
         //assert
         SoftAssert sf = new SoftAssert();
