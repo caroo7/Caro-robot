@@ -1,4 +1,4 @@
-package parser;
+package parser.utils;
 
 import org.jsoup.nodes.Document;
 
@@ -12,22 +12,11 @@ import java.util.regex.Pattern;
  */
 public class ParserUtils {
 
-    public static String getHostUrlFromDocument(Document document){
-        URL url=null;
-        try {
-            url=new URL(document.baseUri());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return url.getProtocol()+"://"+url.getHost();
-    }
-
     public static String extractDataFromRegex(String regex,String data){
         Pattern patter = Pattern.compile(regex);
         Matcher matchPattern = patter.matcher(data);
         matchPattern.find();
         return matchPattern.group(1);
     }
-
 
 }

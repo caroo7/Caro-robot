@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 /**
  * Created by grzegorz_sledz on 25.08.16.
  */
-public class BookParserTest {
+public class EmpikBookParserTest {
 
     @Test
     public void testOfParsingHtmlDocumentToBook() throws Exception {
@@ -21,7 +21,7 @@ public class BookParserTest {
 
         Document document = Jsoup.parse(htmlPage);
 
-        IBookParser bookParser = new BookParser();
+        IBookParser bookParser = new EmpikBookParser();
         Book book = bookParser.parse(document);
         SoftAssert sf = new SoftAssert();
 

@@ -13,15 +13,15 @@ import java.util.List;
 /**
  * Created by grzegorz_sledz on 25.08.16.
  */
-public class UrlParserTest {
+public class EmpikUrlParserTest {
 
     private final String mainPageUrl = "http://www.empik.com";
 
-    private UrlParser urlParser;
+    private EmpikUrlParser empikUrlParser;
 
     @BeforeTest
     public void beforeTest(){
-        this.urlParser = new UrlParser();
+        this.empikUrlParser = new EmpikUrlParser();
     }
 
     @Test
@@ -35,7 +35,7 @@ public class UrlParserTest {
 //        expectedUrls.add("http://www.empik.com/ebooki/gwf");
 
         //act
-        List<String> results = urlParser.getLinksToGenreDetailsPromotion(document);
+        List<String> results = empikUrlParser.getLinksToGenreDetailsPromotion(document);
 
         //assert
         SoftAssert sf=new SoftAssert();
@@ -51,7 +51,7 @@ public class UrlParserTest {
         List<String> expectedResult= Utils.loadFileByLineToList("/empik/book_list_p1_urls.txt");
 
         //act
-        List<String> results= urlParser.getLinksToBooksDetails(document);
+        List<String> results= empikUrlParser.getLinksToBooksDetails(document);
 
         //assert
         SoftAssert sf=new SoftAssert();
@@ -72,7 +72,7 @@ public class UrlParserTest {
         expectedResults.add("http://www.empik.com/ebooki/kryminaly-i-sensacje?productPoolId=74791&hideUnavailable=true&start=121&sort=scoreDesc");
 
         //act
-        List<String> pagesUrl= urlParser.getLinksToNextPages(document);
+        List<String> pagesUrl= empikUrlParser.getLinksToNextPages(document);
 
         //assert
         SoftAssert sf=new SoftAssert();

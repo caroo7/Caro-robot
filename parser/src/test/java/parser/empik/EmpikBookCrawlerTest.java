@@ -19,16 +19,16 @@ import static org.testng.Assert.*;
 /**
  * Created by Grzesiek on 2016-08-27.
  */
-public class BookCrawlerTest {
+public class EmpikBookCrawlerTest {
 
-    private BookCrawler bookCrawler;
+    private EmpikBookCrawler bookCrawler;
     private final String bookDetailsUrl="http://www.empik.com/uwiklanie-miloszewski-zygmunt,p1046125476,ebooki-i-mp3-p";
 
 
     @BeforeTest
     public void beforeTest() throws IOException, URISyntaxException {
         PageLoader pageLoader = mock(PageLoader.class);
-        bookCrawler=new BookCrawler(pageLoader);
+        bookCrawler=new EmpikBookCrawler(pageLoader);
         when(pageLoader.getPage(bookDetailsUrl)).thenReturn(Utils.loadHtmlDocument("/empik/uwiklanie-miloszewski-zygmunt.html", "http://www.empik.com"));
     }
     @Test
