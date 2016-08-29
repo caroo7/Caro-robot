@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -11,8 +12,8 @@ import java.util.stream.Collectors;
  */
 public abstract class UrlParser {
 
-    protected List<String> getLinksList(Document document, String cssQuery) {
-        Elements element = document.select(cssQuery);
+    protected List<String> getLinksList(Optional<Document> document, String cssQuery) {
+        Elements element = document.get().select(cssQuery);
         return element.stream().map(e -> e.absUrl("href")).filter(s -> !s.contains("#")).distinct().collect(Collectors.toList());
     }
 }

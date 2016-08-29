@@ -6,6 +6,7 @@ import parser.PageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +30,7 @@ public class EmpikUrlCrawler implements IUrlCrawler {
 
         bookListUrls.addAll(genrePageUrls);
         bookListUrls.addAll(genrePageUrls.stream().map(s -> {
-            Document doc = pageLoader.getPage(s);
+            Optional<Document> doc = pageLoader.getPage(s);
             return empikUrlParser.getLinksToNextPages(doc);
         }).flatMap(strings -> strings.stream()).collect(Collectors.toList()));
 
@@ -38,14 +39,14 @@ public class EmpikUrlCrawler implements IUrlCrawler {
 
     List<String> getUrlsToBookDetails(List<String> bookListUrls) {
         List<String> bookDetailsUrls = bookListUrls.stream().map(s -> {
-            Document doc = pageLoader.getPage(s);
+            Optional<Document> doc = pageLoader.getPage(s);
             return empikUrlParser.getLinksToBooksDetails(doc);
         }).flatMap(strings -> strings.stream()).collect(Collectors.toList());
         return bookDetailsUrls;
     }
 
     public List<String> getLinksToAllBooks() {
-        Document promotionPage = pageLoader.getPage(promotionUrl);
+        Optional<Document> promotionPage = pageLoader.getPage(promotionUrl);
         List<String> genrePageUrls = empikUrlParser.getLinksToGenreDetailsPromotion(promotionPage);
         List<String> bookListUrls = getUrlsToPagesWithBooksList(genrePageUrls);
         List<String> bookDetailsUrls = getUrlsToBookDetails(bookListUrls);

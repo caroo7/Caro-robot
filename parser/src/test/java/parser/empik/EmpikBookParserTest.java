@@ -9,6 +9,7 @@ import parser.IBookParser;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 /**
  * Created by grzegorz_sledz on 25.08.16.
@@ -22,7 +23,7 @@ public class EmpikBookParserTest {
         Document document = Jsoup.parse(htmlPage);
 
         IBookParser bookParser = new EmpikBookParser();
-        Book book = bookParser.parse(document);
+        Book book = bookParser.parse(Optional.of(document));
         SoftAssert sf = new SoftAssert();
 
         sf.assertEquals("Uwikłanie", book.getTitle());

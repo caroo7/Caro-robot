@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,11 +23,11 @@ public class Utils {
         return Paths.get(Utils.class.getClass().getResource(relativePath).toURI());
     }
 
-    public static Document loadHtmlDocument(String relativePath, String pageUrl) throws URISyntaxException, IOException {
+    public static Optional<Document> loadHtmlDocument(String relativePath, String pageUrl) throws URISyntaxException, IOException {
         String htmlPage = new String(Files.readAllBytes(getPathInResources(relativePath)));
         Document document = Jsoup.parse(htmlPage);
         document.setBaseUri(pageUrl);
-        return document;
+        return Optional.of(document);
     }
 
     public static List<String> loadFileByLineToList(String relativePath)  {
@@ -34,9 +35,7 @@ public class Utils {
 
         try (Stream<String> stream = Files.lines(getPathInResources(relativePath))) {
             textLineByLine = stream.collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
         return textLineByLine;

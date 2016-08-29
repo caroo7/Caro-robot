@@ -14,13 +14,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Optional;
 
 public class PageLoader {
 
     private static final String userAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0";
 
-    public Document getPage(String requestUrl) {
-        Document document = null;
+    public Optional<Document> getPage(String requestUrl) {
+        Document document;
         try {
             Connection.Response response = Jsoup.connect(requestUrl)
                     .userAgent(userAgent)
@@ -29,8 +30,10 @@ public class PageLoader {
                     .execute();
             document = response.parse();
         } catch (IOException e) {
-            e.printStackTrace();
+            document = null;
         }
-        return document;
+        return Optional.ofNullable(document);
     }
+
 }
+
