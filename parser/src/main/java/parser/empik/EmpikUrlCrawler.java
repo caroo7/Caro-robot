@@ -5,6 +5,7 @@ import parser.IUrlCrawler;
 import parser.PageLoader;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,44 +15,42 @@ import java.util.stream.Collectors;
  */
 public class EmpikUrlCrawler implements IUrlCrawler {
 
-    final String mainUrl = "http://www.empik.com";
-    final String promotionUrl =mainUrl+ "/ebooki/promocje";
+    final String MAIN_URL = "http://www.empik.com";
+    final String PROMOTION_URL = MAIN_URL + "/ebooki/promocje";
 
     private final PageLoader pageLoader;
     private final EmpikUrlParser empikUrlParser;
 
-    public EmpikUrlCrawler(PageLoader pageLoader) {
+    EmpikUrlCrawler(PageLoader pageLoader) {
         this.pageLoader = pageLoader;
         this.empikUrlParser = new EmpikUrlParser();
     }
 
-    List<String> getUrlsToPagesWithBooksList(List<String> genrePageUrls) {
+    private List<String> getUrlsToPagesWithBooksList(List<String> genrePageUrls) {
         List<String> bookListUrls = new ArrayList<>();
 
         bookListUrls.addAll(genrePageUrls);
         bookListUrls.addAll(genrePageUrls.stream().map(s -> {
             Optional<Document> doc = pageLoader.getPage(s);
             return empikUrlParser.getLinksToNextPages(doc);
-        }).flatMap(strings -> strings.stream()).collect(Collectors.toList()));
+        }).flatMap(Collection::stream).collect(Collectors.toList()));
 
         return bookListUrls;
     }
 
-    List<String> getUrlsToBookDetails(List<String> bookListUrls) {
-        List<String> bookDetailsUrls = bookListUrls.stream().map(s -> {
+    private List<String> getUrlsToBookDetails(List<String> bookListUrls) {
+        return bookListUrls.stream().map(s -> {
             Optional<Document> doc = pageLoader.getPage(s);
             return empikUrlParser.getLinksToBooksDetails(doc);
-        }).flatMap(strings -> strings.stream()).collect(Collectors.toList());
-        return bookDetailsUrls;
+        }).flatMap(Collection::stream).collect(Collectors.toList());
     }
 
     public List<String> getLinksToAllBooks() {
-        Optional<Document> promotionPage = pageLoader.getPage(promotionUrl);
+        Optional<Document> promotionPage = pageLoader.getPage(PROMOTION_URL);
         List<String> genrePageUrls = empikUrlParser.getLinksToGenreDetailsPromotion(promotionPage);
         List<String> bookListUrls = getUrlsToPagesWithBooksList(genrePageUrls);
-        List<String> bookDetailsUrls = getUrlsToBookDetails(bookListUrls);
 
-        return bookDetailsUrls;
+        return getUrlsToBookDetails(bookListUrls);
     }
 
 }
