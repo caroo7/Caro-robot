@@ -19,6 +19,6 @@ public abstract class BookCrawler {
     }
 
     public List<Book> getBooks(List<String> urlsToBookDetails) {
-        return urlsToBookDetails.parallelStream().map(s -> bookParser.parse(pageLoader.getPage(s))).collect(Collectors.toList());
+        return urlsToBookDetails.parallelStream().map(s ->bookParser.parse(pageLoader.getPage(s))).collect(Collectors.toList());
     }
 }
