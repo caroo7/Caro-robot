@@ -35,7 +35,8 @@
         <jacoco.version>0.7.7.201606060606</jacoco.version>
         <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
         <datafile>${basedir}/target/coverage-reports/jacoco-unit.exec</datafile>
-
+        <jstl.version>1.2</jstl.version>
+        <servletapi.version>3.1.0</servletapi.version>
         <database.module.version>1.0-SNAPSHOT</database.module.version>
     </properties>
 
