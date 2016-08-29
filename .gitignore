@@ -28,3 +28,4 @@ buildNumber.properties
 
 *initdata*
 
+**/logs/*.log

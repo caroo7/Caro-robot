@@ -35,6 +35,8 @@
         <jacoco.version>0.7.7.201606060606</jacoco.version>
         <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
         <datafile>${basedir}/target/coverage-reports/jacoco-unit.exec</datafile>
+        <log4j2.version>2.6.2</log4j2.version>
+        <slf4j.version>1.7.21</slf4j.version>
 
         <database.module.version>1.0-SNAPSHOT</database.module.version>
     </properties>
@@ -94,6 +96,29 @@
                 <artifactId>mockito-all</artifactId>
                 <version>${mockito.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- Logging -->
+            <!--slf4j-api needed for exporting logs to log4j-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
             </dependency>
 
         </dependencies>
