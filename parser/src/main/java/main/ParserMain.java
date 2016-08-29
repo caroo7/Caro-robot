@@ -1,26 +1,13 @@
 package main;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import parser.DTO.Book;
-import parser.PageLoader;
-import parser.PromotionLibrary;
-import parser.empik.EmpikPromotionLibrary;
-
-import java.util.List;
+import config.DatabaseConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ParserMain {
 
-    public static void main(String[] args)  {
-        List<Book> books;
-
-        PageLoader pageLoader=new PageLoader();
-        PromotionLibrary empik=new EmpikPromotionLibrary(pageLoader);
-
-        books=empik.collect();
-        books.stream().forEach(book -> System.out.println(book));
-        System.out.println(books.size());
-
-}
+    public static void main(String[] args) {
+        new AnnotationConfigApplicationContext(DatabaseConfiguration.class);
+    }
 
 }
