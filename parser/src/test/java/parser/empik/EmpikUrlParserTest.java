@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by grzegorz_sledz on 25.08.16.
@@ -28,7 +29,7 @@ public class EmpikUrlParserTest {
     public void getLinksToGenreDetailsTest() throws Exception {
 
         //arrange
-        Document document=Utils.loadHtmlDocument("/empik/ebook_promotions_main.html",mainPageUrl);
+        Optional<Document> document=Utils.loadHtmlDocument("/empik/ebook_promotions_main.html",mainPageUrl);
 
         List<String> expectedUrls = new ArrayList<>();
         expectedUrls.add("http://www.empik.com/ebooki/kryminaly-i-sensacje");
@@ -47,7 +48,7 @@ public class EmpikUrlParserTest {
     @Test
     public void getLinksToBooksDetailsTest() throws IOException, URISyntaxException {
         //arrange
-        Document document=Utils.loadHtmlDocument("/empik/book_list_p1.html",mainPageUrl);
+        Optional<Document>  document=Utils.loadHtmlDocument("/empik/book_list_p1.html",mainPageUrl);
         List<String> expectedResult= Utils.loadFileByLineToList("/empik/book_list_p1_urls.txt");
 
         //act
@@ -64,7 +65,7 @@ public class EmpikUrlParserTest {
     public void getLinksToNextPagesTest() throws Exception {
 
         //arrange
-        Document document=Utils.loadHtmlDocument("/empik/genre_promotion_details.html","http://www.empik.com/ebooki/kryminaly-i-sensacje");
+        Optional<Document>  document=Utils.loadHtmlDocument("/empik/genre_promotion_details.html","http://www.empik.com/ebooki/kryminaly-i-sensacje");
 
         List<String> expectedResults=new ArrayList<>();
         expectedResults.add("http://www.empik.com/ebooki/kryminaly-i-sensacje?productPoolId=74791&hideUnavailable=true&start=41&sort=scoreDesc");
