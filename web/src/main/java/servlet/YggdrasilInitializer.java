@@ -1,5 +1,6 @@
 package servlet;
 
+import config.DatabaseConfiguration;
 import config.YggdrasilWebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -15,7 +16,8 @@ public class YggdrasilInitializer extends AbstractAnnotationConfigDispatcherServ
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-            YggdrasilWebConfig.class};
+                YggdrasilWebConfig.class,
+                DatabaseConfiguration.class};
     }
 
     @Override
