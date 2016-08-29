@@ -12,8 +12,6 @@
     <artifactId>web</artifactId>
     <packaging>pom</packaging>
 
-
-
     <name>web</name>
     <description>Web application. Contains all necessary services and gui.</description>
     <dependencies>
