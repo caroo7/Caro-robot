@@ -41,7 +41,7 @@ public class Book implements Serializable {
     )
     Set<Tag> tags;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "book_genre",
             joinColumns = @JoinColumn(name = "book_id"),

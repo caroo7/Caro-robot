@@ -1,8 +1,9 @@
 package parser;
 
-import parser.DTO.Book;
+import DTO.BookDetails;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Grzesiek on 2016-08-28.
@@ -16,7 +17,7 @@ public abstract class PromotionLibrary {
         this.bookCrawler=bookCrawler;
     }
 
-    public List<Book> collect(){
+    public Set<BookDetails> collect(){
         return bookCrawler.getBooks(urlCrawler.getLinksToAllBooks());
     }
 
