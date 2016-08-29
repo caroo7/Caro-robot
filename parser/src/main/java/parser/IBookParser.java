@@ -1,7 +1,7 @@
 package parser;
 
+import DTO.BookDetails;
 import org.jsoup.nodes.Document;
-import parser.DTO.Book;
 
 import java.util.Optional;
 
@@ -22,8 +22,8 @@ public interface IBookParser {
 
     String getDescription(Optional<Document> document);
 
-    default Book parse(Optional<Document> document) {
-        Book book = new Book();
+    default BookDetails parse(Optional<Document> document) {
+        BookDetails book = new BookDetails();
         book.setTitle(getTitle(document));
         book.setAuthor(getAuthor(document));
         book.setPrice(getPrice(document));

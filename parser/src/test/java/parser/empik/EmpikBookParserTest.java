@@ -1,10 +1,10 @@
 package parser.empik;
 
+import DTO.BookDetails;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import parser.DTO.Book;
 import parser.IBookParser;
 
 import java.nio.file.Files;
@@ -23,7 +23,7 @@ public class EmpikBookParserTest {
         Document document = Jsoup.parse(htmlPage);
 
         IBookParser bookParser = new EmpikBookParser();
-        Book book = bookParser.parse(Optional.of(document));
+        BookDetails book = bookParser.parse(Optional.of(document));
         SoftAssert sf = new SoftAssert();
 
         sf.assertEquals("Uwikłanie", book.getTitle());
