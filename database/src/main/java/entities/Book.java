@@ -1,12 +1,19 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Set;
+
+// not sure about model classes serialization, maybe later we create some kind of DTO classes to passing over HTTP
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book implements Serializable {
 
     @Id
@@ -17,17 +24,29 @@ public class Book implements Serializable {
 
     private String authors;
 
+    @Column(length = 10000)
     private String description;
 
-    // add library list (entity), tag list (entity), category id (entity), discount type (enum)
+    private String discount;
 
-    private Book() {
-    }
+    private String price;
 
-    public Book(String title, String authors, String description) {
-        this.title = title;
-        this.authors = authors;
-        this.description = description;
-    }
+    private Timestamp timestamp;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "book_tag",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    Set<Tag> tags;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "book_genre",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    Set<Genre> genres;
 
 }
