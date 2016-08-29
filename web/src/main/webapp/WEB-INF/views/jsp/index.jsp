@@ -1,9 +1,14 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <spring:url value="/resources/core/css/reset.css" var="coreCss" />
+    <spring:url value="/resources/core/css/bootstrap.min.css" var="bootstrapCss" />
+    <link href="${bootstrapCss}" rel="stylesheet" />
+    <link href="${coreCss}" rel="stylesheet" />
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled Bootstrap -->
