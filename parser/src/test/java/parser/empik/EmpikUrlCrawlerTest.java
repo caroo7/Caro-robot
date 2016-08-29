@@ -21,9 +21,9 @@ public class EmpikUrlCrawlerTest {
         //arrange
         PageLoader pageLoader = mock(PageLoader.class);
         EmpikUrlCrawler empikUrlCrawler = new EmpikUrlCrawler(pageLoader);
-        String genreUrl = empikUrlCrawler.mainUrl + "/ebooki/kryminaly-i-sensacje";
-        when(pageLoader.getPage(empikUrlCrawler.promotionUrl)).thenReturn(Utils.loadHtmlDocument("/empik/ebook_promotions_main.html", empikUrlCrawler.mainUrl));
-        when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/genre_promotion_details.html", empikUrlCrawler.mainUrl));
+        String genreUrl = empikUrlCrawler.MAIN_URL + "/ebooki/kryminaly-i-sensacje";
+        when(pageLoader.getPage(empikUrlCrawler.PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/empik/ebook_promotions_main.html", empikUrlCrawler.MAIN_URL));
+        when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/genre_promotion_details.html", empikUrlCrawler.MAIN_URL));
 
 
         when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/book_list_p1.html", genreUrl));
