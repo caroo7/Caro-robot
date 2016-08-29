@@ -28,7 +28,7 @@ public class YggdrasilWebConfig extends WebMvcConfigurerAdapter {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/views/jsp/");
-        viewResolver.setSuffix("index.jsp");
+        viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
 

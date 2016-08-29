@@ -21,7 +21,7 @@ public class Book implements Serializable {
     private long id;
 
     private String title;
-
+    
     private String authors;
 
     @Column(length = 10000)
@@ -49,4 +49,7 @@ public class Book implements Serializable {
     )
     Set<Genre> genres;
 
+    public String getTitle() {
+        return title;
+    }
 }
