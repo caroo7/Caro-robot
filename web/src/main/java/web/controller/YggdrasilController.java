@@ -22,12 +22,10 @@ public class YggdrasilController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
-         ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView();
         List<Book> books = repo.findAll();
-        System.out.println("dupa dupa dupa dupa");
-        model.addObject("books",books);
-        books.forEach(n-> System.out.println(n.toString()));
-         return model;
+        model.addObject("books", books);
+        return model;
     }
 
 

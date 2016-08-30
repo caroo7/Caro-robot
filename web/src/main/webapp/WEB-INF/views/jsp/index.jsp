@@ -34,20 +34,15 @@
     </div>
     <div id="books">
         Here we will see the list of books
-        <c:if test="${not empty objects}">
              <table>
                 <c:forEach var="b" items="${books}">
                 <tr>
-                    <td>${b.title}</td>
-                    <td>${b.authors}</td>
-                    <td>${b.description}</td>
-                    <td>${b.discount}</td>
-                    <td>${b.price}</td>
-                    <td>${b.genres}</td>
+                    <td>${b.getTitle()}</td>
+                    <td>${b.getAuthors()}</td>
                 </tr>
                 </c:forEach>
              </table>
-        </c:if>
+
     </div>
 </div>
 </body>
