@@ -22,11 +22,11 @@ class NextPageUrlProducer implements Runnable {
     private PublioUrlParser publioUrlParser;
     private PageLoader pageLoader;
 
-    public NextPageUrlProducer(BlockingQueue urlToNextPageQueue, String startUrl) {
+    public NextPageUrlProducer(BlockingQueue urlToNextPageQueue, PageLoader pageLoader,String startUrl) {
         this.urlToNextPageQueue = urlToNextPageQueue;
         this.startUrl=startUrl;
         this.publioUrlParser=new PublioUrlParser();
-        this.pageLoader=new PageLoader();
+        this.pageLoader=pageLoader;
     }
 
     @Override
