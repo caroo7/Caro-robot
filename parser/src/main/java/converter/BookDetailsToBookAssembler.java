@@ -3,7 +3,6 @@ package converter;
 import DTO.BookDetails;
 import entities.Book;
 import entities.Genre;
-import mapper.EmpikGenreMapper;
 import mapper.Mapper;
 import repositories.GenreRepository;
 
@@ -12,19 +11,22 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BookConverter {
+/**
+ * Responsible for converting book DTO retrieved from web parser to book entity which will be saved on database
+ */
+public class BookDetailsToBookAssembler {
 
     private static final int STANDARD_FIELD_LENGTH = 256;
 
     private static final int STANDARD_DESCRIPTION_LENGTH = 10000;
 
-    private BookValidator validator = new BookValidator();
+    private final BookFieldPreparator validator = new BookFieldPreparator();
 
-    private Mapper genreMapper;
+    private final Mapper genreMapper;
 
-    private GenreRepository genreRepo;
+    private final GenreRepository genreRepo;
 
-    public BookConverter(Mapper genreMapper, GenreRepository genreRepo) {
+    public BookDetailsToBookAssembler(Mapper genreMapper, GenreRepository genreRepo) {
         this.genreMapper = genreMapper;
         this.genreRepo = genreRepo;
     }

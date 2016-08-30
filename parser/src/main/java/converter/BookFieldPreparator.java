@@ -1,6 +1,6 @@
 package converter;
 
-class BookValidator {
+class BookFieldPreparator {
 
     String validateField(String value, int length) {
         if(value == null) {
