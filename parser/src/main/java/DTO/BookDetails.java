@@ -1,5 +1,7 @@
 package DTO;
 
+import java.util.Set;
+
 /**
  * Created by grzegorz_sledz on 25.08.16.
  */
@@ -11,7 +13,7 @@ public class BookDetails {
     private String percentageDiscount;
     private String genre;
     private String description;
-
+    private Set<String> tags;
 
     public void setTitle(String title) {
         this.title = title;
@@ -61,6 +63,16 @@ public class BookDetails {
         this.description = description;
     }
 
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,6 +103,6 @@ public class BookDetails {
 
     @Override
     public String toString() {
-        return "BookDetails [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + ", description=" + description + "]";
+        return "Book [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + " tags "+tags+ ", description=" + description + "]";
     }
 }

@@ -19,4 +19,10 @@ public class ParserUtils {
         return matchPattern.group(1);
     }
 
+    public static String calculatePercentageDiscount(float orginalPrice,float salePrice){
+        float discount = (1 - salePrice / orginalPrice) * 100;
+        return Math.round(discount) + "%";
+    }
+
+
 }
