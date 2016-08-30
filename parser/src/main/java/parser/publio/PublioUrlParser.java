@@ -13,11 +13,13 @@ import java.util.Optional;
 public class PublioUrlParser extends UrlParser {
 
     String getLinkToNextPage(Optional<Document> document) {
-        Element element=document.get().select("div.pages-list > a.page--next").first();
-        if (element!=null){
+        logger.debug("document: "+document.get().baseUri());
+
+        Element element = document.get().select("div.pages-list > a.page--next").first();
+        if (element != null) {
             return element.absUrl("href");
         }
-       return null;
+        return null;
     }
 
     List<String> getLinksToBooksDetails(Optional<Document> document) {
