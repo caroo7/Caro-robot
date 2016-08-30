@@ -30,7 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 2;
-	background-color:  #d3ffce;
+
 }
 ol, ul {
 	list-style: none;
@@ -61,8 +61,7 @@ table {
     margin-top: 10px;
     margin-left: 10px;
     outline-style: groove;
-    background-color: #cdf3e7;
-    width: 5%;
+    width: 10%;
     float:left;
 }
 
@@ -70,7 +69,6 @@ table {
 #books{
     margin-top:10px;
     margin-left:30px;
-    background-color:#cdf3e7;
     width: 75%;
     float:left;
 
