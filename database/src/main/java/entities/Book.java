@@ -1,8 +1,6 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,23 +12,24 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude="id")
 public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @Getter
     private String title;
-
+    @Getter
     private String authors;
-
+    @Getter
     @Column(length = 10000)
     private String description;
-
+    @Getter
     private String discount;
-
+    @Getter
     private String price;
-
+    @Getter
     private Timestamp timestamp;
 
     @OneToMany(fetch = FetchType.EAGER)
