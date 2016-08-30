@@ -29,4 +29,30 @@ public class Library implements Serializable {
         this.URL = URL;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getURL() {
+        return URL;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Library library = (Library) o;
+
+        if (name != null ? !name.equals(library.name) : library.name != null) return false;
+        return URL != null ? URL.equals(library.URL) : library.URL == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (URL != null ? URL.hashCode() : 0);
+        return result;
+    }
 }

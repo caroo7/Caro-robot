@@ -7,11 +7,11 @@ import java.util.Properties;
 
 public abstract class Mapper {
 
-    Map<String, String> genresMap;
+    protected Map<String, String> genresMap;
 
-    Properties props = new Properties();
+    protected Properties props = new Properties();
 
-    void loadProperties(String pathToFile) {
+    protected void loadProperties(String pathToFile) {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(getClass()
                     .getResourceAsStream(pathToFile), "UTF-8");

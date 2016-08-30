@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>web</artifactId>
-    <packaging>pom</packaging>
 
     <name>web</name>
     <description>Web application. Contains all necessary services and gui.</description>
