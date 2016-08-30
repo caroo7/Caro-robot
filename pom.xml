@@ -26,6 +26,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <spring.version>4.3.2.RELEASE</spring.version>
+        <springtestmvc.version>1.0.0.BUILD-SNAPSHOT</springtestmvc.version>
         <testng.version>6.9.10</testng.version>
         <mockito.version>1.10.19</mockito.version>
         <hibernate.version>5.1.1.Final</hibernate.version> <!-- newest hibernate version is 5.2.2 but in there is a problem between spring 4.3.2
@@ -35,6 +36,9 @@
         <jacoco.version>0.7.7.201606060606</jacoco.version>
         <destfile>${basedir}/target/coverage-reports/jacoco-unit.exec</destfile>
         <datafile>${basedir}/target/coverage-reports/jacoco-unit.exec</datafile>
+        <jstl.version>1.2</jstl.version>
+        <servletapi.version>3.1.0</servletapi.version>
+        <jetty.version>9.2.11.v20150529</jetty.version>
         <log4j2.version>2.6.2</log4j2.version>
         <slf4j.version>1.7.21</slf4j.version>
 
@@ -80,7 +84,12 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test-mvc</artifactId>
+                <version>${springtestmvc.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -180,6 +189,18 @@
                     </execution>
                 </executions>
 
+            </plugin>
+            <!-- embedded Jetty server, for testing -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/servlet</contextPath>
+                    </webApp>
+                </configuration>
             </plugin>
         </plugins>
     </build>

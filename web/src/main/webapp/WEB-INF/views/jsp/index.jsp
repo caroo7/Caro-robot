@@ -34,14 +34,11 @@
     </div>
     <div id="books">
         Here we will see the list of books
-
              <table>
-             <c:forEach var="b" items="${books}">
+                <c:forEach var="b" items="${books}">
                 <tr>
-
                     <td>${b.getTitle()}</td>
-
-
+                    <td>${b.getAuthors()}</td>
                 </tr>
                 </c:forEach>
              </table>
