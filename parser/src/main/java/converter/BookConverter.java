@@ -4,6 +4,7 @@ import DTO.BookDetails;
 import entities.Book;
 import entities.Genre;
 import mapper.EmpikGenreMapper;
+import mapper.Mapper;
 import repositories.GenreRepository;
 
 import java.sql.Timestamp;
@@ -19,9 +20,14 @@ public class BookConverter {
 
     private BookValidator validator = new BookValidator();
 
-    private EmpikGenreMapper genreMapper = new EmpikGenreMapper();
+    private Mapper genreMapper;
 
     private GenreRepository genreRepo;
+
+    public BookConverter(Mapper genreMapper, GenreRepository genreRepo) {
+        this.genreMapper = genreMapper;
+        this.genreRepo = genreRepo;
+    }
 
     public Set<Book> convert(Set<BookDetails> booksDetails) {
         return booksDetails.stream()
@@ -37,16 +43,18 @@ public class BookConverter {
         String price = validator.validateField(bookDetails.getPrice(), STANDARD_FIELD_LENGTH);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        Set<Genre> genres = new HashSet<>();
-        String genreString = genreMapper.getGenresMap().get(bookDetails.getGenre());
-        Genre genre = genreRepo.findByName(genreString);
-        genres.add(genre != null ? genre : genreRepo.findByName("no category"));
+        Set<Genre> genres = retrieveGenres(bookDetails);
 
         return Book.builder().title(title).authors(authors).description(description).
                 discount(discount).price(price).timestamp(timestamp).genres(genres).build();
     }
 
-    public void setGenreRepo(GenreRepository genreRepo) {
-        this.genreRepo = genreRepo;
+    private Set<Genre> retrieveGenres(BookDetails bookDetails) {
+        Set<Genre> genres = new HashSet<>();
+        String genreString = genreMapper.getGenresMap().get(bookDetails.getGenre());
+        Genre genre = genreRepo.findByName(genreString);
+        genres.add(genre != null ? genre : genreRepo.findByName("no category"));
+        return genres;
     }
+
 }

@@ -22,7 +22,7 @@ public class Library implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "library_id")
-    List<Book> books;
+    private List<Book> books;
 
     public Library(String name, String URL) {
         this.name = name;

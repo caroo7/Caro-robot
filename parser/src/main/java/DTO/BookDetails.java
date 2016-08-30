@@ -61,7 +61,6 @@ public class BookDetails {
         this.description = description;
     }
 
-    // improve these equals and hashCode methods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

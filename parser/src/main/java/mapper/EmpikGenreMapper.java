@@ -7,14 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class EmpikGenreMapper {
-
-    private final Map<String, String> genresMap;
-
-    private Properties props = new Properties();
+public class EmpikGenreMapper extends Mapper {
 
     {
-        loadProperties();
+        loadProperties("/empik/empik_genres.properties");
         genresMap = new HashMap<>();
         genresMap.put(props.getProperty("biographical"), "biographical");
         genresMap.put(props.getProperty("economic"), "economic");
@@ -46,17 +42,4 @@ public class EmpikGenreMapper {
         genresMap.put(props.getProperty("thriller"), "thriller");
     }
 
-    private void loadProperties() {
-        try {
-            InputStreamReader inputStreamReader = new InputStreamReader(getClass()
-                    .getResourceAsStream("/empik/empik_genres.properties"), "UTF-8");
-            props.load(inputStreamReader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Map<String, String> getGenresMap() {
-        return genresMap;
-    }
 }
