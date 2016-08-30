@@ -1,8 +1,9 @@
 package parser;
 
-import parser.DTO.Book;
+import DTO.BookDetails;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -18,7 +19,7 @@ public abstract class BookCrawler {
         this.bookParser=bookParser;
     }
 
-    public List<Book> getBooks(List<String> urlsToBookDetails) {
-        return urlsToBookDetails.parallelStream().map(s -> bookParser.parse(pageLoader.getPage(s))).collect(Collectors.toList());
+    public Set<BookDetails> getBooks(List<String> urlsToBookDetails) {
+        return urlsToBookDetails.parallelStream().map(s -> bookParser.parse(pageLoader.getPage(s))).collect(Collectors.toSet());
     }
 }
