@@ -16,8 +16,8 @@ public class PublioUrlCrawler implements IUrlCrawler {
 
     private static final Logger logger = LogManager.getRootLogger();
 
-    final String mainUrl = "http://www.publio.pl";
-    final String promotionUrl = mainUrl + "/szukaj,promocja.html?sections=EBOOK";
+    final String MAIN_URL = "http://www.publio.pl";
+    final String PROMOTION_URL = MAIN_URL + "/szukaj,promocja.html?sections=EBOOK";
 
     private final PageLoader pageLoader;
     private final PublioUrlParser publioUrlParser;
@@ -36,8 +36,8 @@ public class PublioUrlCrawler implements IUrlCrawler {
     public List<String> getLinksToAllBooks() {
         BlockingQueue queue = new ArrayBlockingQueue<>(32);
 
-        NextPageUrlProducer nextPageUrlProducer = new NextPageUrlProducer(queue, promotionUrl);
-        NextPageUrlConsumer nextPageUrlConsumer = new NextPageUrlConsumer(queue);
+        NextPageUrlProducer nextPageUrlProducer = new NextPageUrlProducer(queue,pageLoader, PROMOTION_URL);
+        NextPageUrlConsumer nextPageUrlConsumer = new NextPageUrlConsumer(queue,pageLoader);
 
         Thread nextPageUrlProducerThread = new Thread(nextPageUrlProducer);
         Thread nextPageUrlConsumerThread = new Thread(nextPageUrlConsumer);

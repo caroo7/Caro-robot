@@ -3,6 +3,7 @@ package parser.empik;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import parser.PageLoader;
+import parser.Utils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

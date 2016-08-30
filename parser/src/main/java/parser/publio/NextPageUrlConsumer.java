@@ -22,9 +22,9 @@ class NextPageUrlConsumer implements Runnable {
     PageLoader pageLoader;
     List<String> bookDetailsUrls;
 
-    public NextPageUrlConsumer(BlockingQueue urlToNextPageQueue) {
+    public NextPageUrlConsumer(BlockingQueue urlToNextPageQueue,PageLoader pageLoader) {
         this.urlToNextPageQueue = urlToNextPageQueue;
-        this.pageLoader = new PageLoader();
+        this.pageLoader = pageLoader;
         this.publioUrlParser = new PublioUrlParser();
         bookDetailsUrls = new ArrayList<>();
     }

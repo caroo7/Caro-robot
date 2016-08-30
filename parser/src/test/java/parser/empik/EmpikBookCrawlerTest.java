@@ -5,16 +5,15 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import parser.DTO.Book;
 import parser.PageLoader;
+import parser.Utils;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
 
 /**
  * Created by Grzesiek on 2016-08-27.
