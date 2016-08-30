@@ -1,5 +1,7 @@
 package parser.DTO;
 
+import java.util.Set;
+
 /**
  * Created by grzegorz_sledz on 25.08.16.
  */
@@ -11,7 +13,7 @@ public class Book {
     private String percentageDiscount;
     private String genre;
     private String description;
-
+    private Set<String> tags;
 
     public void setTitle(String title) {
         this.title = title;
@@ -61,8 +63,16 @@ public class Book {
         this.description = description;
     }
 
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public String toString() {
-        return "Book [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + ", description=" + description + "]";
+        return "Book [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + " tags "+tags+ ", description=" + description + "]";
     }
 }

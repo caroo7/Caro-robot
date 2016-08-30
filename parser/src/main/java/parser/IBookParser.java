@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import parser.DTO.Book;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by grzegorz_sledz on 25.08.16.
@@ -27,6 +28,8 @@ public interface IBookParser {
 
     String getDescription(Optional<Document> document);
 
+    Set<String> getTags(Optional<Document> document);
+
     default Book parse(Optional<Document> document) {
         Book book = new Book();
         book.setTitle(getTitle(document));
@@ -35,6 +38,7 @@ public interface IBookParser {
         book.setPercentageDiscount(getPercentageDiscount(document));
         book.setGenre(getGenre(document));
         book.setDescription(getDescription(document));
+        book.setTags(getTags(document));
 
         logger.debug(book);
         return book;

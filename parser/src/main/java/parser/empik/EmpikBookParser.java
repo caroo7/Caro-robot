@@ -1,10 +1,14 @@
 package parser.empik;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by grzegorz_sledz on 25.08.16.
@@ -54,6 +58,11 @@ class EmpikBookParser implements IBookParser {
         if(document.isPresent()) {
             return document.get().select("div.contentPacketText").first().text();
         }
+        return null;
+    }
+
+    @Override
+    public Set<String> getTags(Optional<Document> document) {
         return null;
     }
 

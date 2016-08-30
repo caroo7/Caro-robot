@@ -1,10 +1,14 @@
 package parser.publio;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Grzesiek on 2016-08-27.
@@ -67,5 +71,16 @@ public class PublioBookParser implements IBookParser {
         }
         return null;
     }
+
+    @Override
+    public Set<String> getTags(Optional<Document> document) {
+        if(document.isPresent()) {
+            Set<String> tags=new HashSet<>();
+            Elements tagsElements=document.get().select("div.product-card-labels-info > a");
+            return tagsElements.stream().map(element -> element.text()).collect(Collectors.toSet());
+        }
+        return null;
+    }
+
 
 }
