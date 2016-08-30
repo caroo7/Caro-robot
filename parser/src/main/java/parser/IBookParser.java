@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import DTO.BookDetails;
 import org.jsoup.nodes.Document;
-import parser.DTO.Book;
 
 import java.util.Optional;
 import java.util.Set;
@@ -40,7 +39,6 @@ public interface IBookParser {
         book.setGenre(getGenre(document));
         book.setDescription(getDescription(document));
         book.setTags(getTags(document));
-
         logger.debug(book);
         return book;
     }

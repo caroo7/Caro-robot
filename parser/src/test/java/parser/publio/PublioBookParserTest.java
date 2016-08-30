@@ -1,10 +1,10 @@
 package parser.publio;
 
+import DTO.BookDetails;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import parser.DTO.Book;
 import parser.IBookParser;
 
 import java.nio.file.Files;
@@ -27,7 +27,7 @@ public class PublioBookParserTest {
 
         IBookParser bookParser = new PublioBookParser();
         //act
-        Book book = bookParser.parse(Optional.of(document));
+        BookDetails book = bookParser.parse(Optional.of(document));
 
         //assert
         SoftAssert sf = new SoftAssert();
