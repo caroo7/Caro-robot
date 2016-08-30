@@ -34,7 +34,6 @@ public class EmpikUrlParserTest {
 
         List<String> expectedUrls = new ArrayList<>();
         expectedUrls.add("http://www.empik.com/ebooki/kryminaly-i-sensacje");
-//        expectedUrls.add("http://www.empik.com/ebooki/gwf");
 
         //act
         List<String> results = empikUrlParser.getLinksToGenreDetailsPromotion(document);

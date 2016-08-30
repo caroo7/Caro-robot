@@ -41,7 +41,7 @@ public class PublioBookParser implements IBookParser {
     }
 
     /**
-     * Price has form 25,90 zł
+     * Price has format 25,90 zł. For extract some data ParserUtils is used.
      * @param document
      * @return
      */

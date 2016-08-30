@@ -19,16 +19,18 @@ public class EmpikBookParserTest {
 
     @Test
     public void testOfParsingHtmlDocumentToBook() throws Exception {
+        //arrange
         String htmlPage = new String(Files.readAllBytes(Paths.get(getClass().getResource("/empik/uwiklanie-miloszewski-zygmunt.html").toURI())));
-
         Document document = Jsoup.parse(htmlPage);
         String bookUrl="http://www.empik.com/uwiklanie-miloszewski-zygmunt,p1046125476,ebooki-i-mp3-p";
         String coverUrl="http://ecsmedia.pl/c/uwiklanie-u-iext44119960.jpg";
         document.setBaseUri(bookUrl);
         IBookParser bookParser = new EmpikBookParser();
+
+        //act
         BookDetails book = bookParser.parse(Optional.of(document));
+        //assert
         SoftAssert sf = new SoftAssert();
-        System.out.println(book);
         sf.assertEquals("Uwikłanie", book.getTitle());
         sf.assertEquals("Miłoszewski Zygmunt", book.getAuthor());
         sf.assertEquals("19,19 zł", book.getPrice());

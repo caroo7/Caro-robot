@@ -121,6 +121,6 @@ public class BookDetails {
 
     @Override
     public String toString() {
-        return "Book [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + " tags "+tags+ ", description=" + description +", url="+url+", coverUrl= "+coverUrl+"]";
+        return "BookDetails [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + " tags "+tags+ ", description=" + description +", url="+url+", coverUrl= "+coverUrl+"]";
     }
 }

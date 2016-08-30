@@ -37,10 +37,16 @@ class EmpikBookParser implements IBookParser {
         }
         return null;
     }
+
+    /**
+     * Percentage discount on web page is presented as format: 12,80 zł (40%)
+     * The percentage value is exctrated by ParserUtils
+     * @param document
+     * @return
+     */
     @Override
     public String getPercentageDiscount(Optional<Document> document) {
         if(document.isPresent()) {
-            //12,80 zł (40%)
             String priceWithDiscount = document.get().select("span.saving").first().text();
             return ParserUtils.extractDataFromRegex("\\((.*?)\\)", priceWithDiscount);
         }
