@@ -1,4 +1,6 @@
-package mapper;
+package parser.empik;
+
+import mapper.Mapper;
 
 import java.io.FileInputStream;
 import java.io.IOException;

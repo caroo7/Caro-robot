@@ -1,3 +1,6 @@
+insert into library (name, url) values ('EMPIK', 'http://www.empik.com/ebooki/promocje');
+insert into library (name, url) values ('PUBLIO', 'http://www.publio.pl/szukaj,promocja.html?sections=EBOOK');
+
 insert into genre (name) values ('no category');
 insert into genre (name) values ('biographical');
 insert into genre (name) values ('economic');
