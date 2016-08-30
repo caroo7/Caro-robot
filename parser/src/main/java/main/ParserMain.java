@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import parser.PromotionLibrary;
+import repositories.AuthorRepository;
 import repositories.BookRepository;
 import repositories.GenreRepository;
 import repositories.LibraryRepository;
@@ -32,6 +33,7 @@ public class ParserMain {
         BookRepository repo = ctx.getBean(BookRepository.class);
         GenreRepository genreRepo = ctx.getBean(GenreRepository.class);
         LibraryRepository libraryRepo = ctx.getBean(LibraryRepository.class);
+        AuthorRepository authorRepo = ctx.getBean(AuthorRepository.class);
 
         LibraryMapContainer libraryMapper = new LibraryMapContainer();
         libraryMapper.initialize(libraryRepo);
@@ -43,7 +45,7 @@ public class ParserMain {
         }
         Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
 
-        BookDetailsToBookAssembler converter = new BookDetailsToBookAssembler(actualPromotionLibrary.getGenreMapper(), genreRepo);
+        BookDetailsToBookAssembler converter = new BookDetailsToBookAssembler(actualPromotionLibrary.getGenreMapper(), genreRepo, authorRepo);
         Set<Book> books = converter.convert(booksDetails);
 
         repo.save(books);
