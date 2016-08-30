@@ -17,6 +17,19 @@
     <title>Robot library checker</title>
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://github.com/caroo7/Caro-robot">Github Repository</a>
+        </div>
+      </div>
+    </nav>
 <div class"container text-center">
  <div class="jumbotron">
       <div class="container">
@@ -34,6 +47,11 @@
     <div id="books">
 
              <table class="table table-bordered">
+             <thead >
+             <tr id="heads">
+             <th>Title</th>
+             <th>Author</th>
+             </tr>
                 <c:forEach var="b" items="${books}">
                 <tr>
                     <td>${b.getTitle()}</td>
@@ -41,6 +59,8 @@
                 </tr>
                 </c:forEach>
              </table>
+             </thead>
+
 
     </div>
    </div>

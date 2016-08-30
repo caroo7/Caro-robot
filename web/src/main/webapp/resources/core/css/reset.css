@@ -91,3 +91,7 @@ table {
    position: absolute;
 
 }
+
+#heads{
+    font-weight: bold;
+}
