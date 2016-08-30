@@ -46,11 +46,7 @@ public class PublioBookParser implements IBookParser {
             priceWithoutDiscount = ParserUtils.extractDataFromRegex("^([0-9]+[,]?[0-9]?).*", priceWithoutDiscount).replaceAll(",", ".");
             priceAfterDiscount = ParserUtils.extractDataFromRegex("^([0-9]+[,]?[0-9]?).*", priceAfterDiscount).replaceAll(",", ".");
 
-            float orginal = new Float(priceWithoutDiscount);
-            float salePrice = new Float(priceAfterDiscount);
-            float discount = (1 - salePrice / orginal) * 100;
-
-            return Math.round(discount) + "%";
+            return ParserUtils.calculatePercentageDiscount( new Float(priceWithoutDiscount),new Float(priceAfterDiscount));
         }
         return null;
     }
