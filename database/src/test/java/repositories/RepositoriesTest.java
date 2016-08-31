@@ -1,6 +1,7 @@
 package repositories;
 
 import config.DatabaseConfiguration;
+import entities.Author;
 import entities.Book;
 import entities.Genre;
 import entities.Tag;
@@ -13,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,6 +30,9 @@ public class RepositoriesTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private GenreRepository genreRepo;
+
+    @Autowired
+    private AuthorRepository authorRepo;
 
     @Autowired
     private TagRepository tagRepo;
@@ -54,7 +59,11 @@ public class RepositoriesTest extends AbstractTestNGSpringContextTests {
         genres.add(genre);
         genres.add(genre2);
 
-        book = Book.builder().title("Firma").authors("John Grisham").description("Swietna ksiazka").discount("30%").
+        Author author = new Author("Grisham John");
+        authorRepo.save(author);
+        Set<Author> authors = new HashSet<Author>(Arrays.asList(author));
+
+        book = Book.builder().title("Firma").authors(authors).description("Swietna ksiazka").discount("30%").
                 price("29zl").timestamp(new Timestamp(System.currentTimeMillis())).tags(tags).genres(genres).build();
     }
 

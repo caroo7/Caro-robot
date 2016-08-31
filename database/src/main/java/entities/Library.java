@@ -46,7 +46,6 @@ public class Library implements Serializable {
 
         if (name != null ? !name.equals(library.name) : library.name != null) return false;
         return URL != null ? URL.equals(library.URL) : library.URL == null;
-
     }
 
     @Override
