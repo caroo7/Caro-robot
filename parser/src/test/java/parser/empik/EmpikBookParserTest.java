@@ -32,7 +32,7 @@ public class EmpikBookParserTest {
         //assert
         SoftAssert sf = new SoftAssert();
         sf.assertEquals("Uwikłanie", book.getTitle());
-        sf.assertEquals("Miłoszewski Zygmunt", book.getAuthors().get(0));
+        sf.assertEquals("Miłoszewski Zygmunt", book.getAuthor());
         sf.assertEquals("19,19 zł", book.getPrice());
         sf.assertEquals("40%", book.getPercentageDiscount());
         sf.assertEquals("Kryminał", book.getGenre());

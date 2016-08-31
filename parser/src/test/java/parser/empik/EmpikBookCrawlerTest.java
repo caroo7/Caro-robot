@@ -41,7 +41,7 @@ public class EmpikBookCrawlerTest {
         for(BookDetails resultBook: books) {
             SoftAssert sf=new SoftAssert();
             sf.assertEquals(books.size(),1);
-            sf.assertEquals(expectedBook.getAuthors().get(0),resultBook.getAuthors().get(0));
+            sf.assertEquals(expectedBook.getAuthor(),resultBook.getAuthor());
             sf.assertEquals(expectedBook.getTitle(),resultBook.getTitle());
             sf.assertEquals(expectedBook.getPrice(),resultBook.getPrice());
             sf.assertEquals(expectedBook.getPercentageDiscount(),resultBook.getPercentageDiscount());

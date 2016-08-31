@@ -11,6 +11,7 @@ import repositories.AuthorRepository;
 import repositories.GenreRepository;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,7 +63,7 @@ public class BookDetailsToBookAssembler {
     }
 
     private Set<Author> retrieveAuthors(BookDetails bookDetails) {
-        List<String> authorsString = bookDetails.getAuthors();
+        List<String> authorsString = Arrays.asList(bookDetails.getAuthor());
 
         return authorsString.stream().map(s -> {
             Author author=authorRepo.findAuthor(s);

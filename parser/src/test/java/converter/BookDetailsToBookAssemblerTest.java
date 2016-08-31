@@ -4,6 +4,7 @@ import DTO.BookDetails;
 import entities.Author;
 import entities.Book;
 import entities.Genre;
+import lombok.Builder;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -89,32 +90,26 @@ public class BookDetailsToBookAssemblerTest {
     private Set<BookDetails> prepareBookDetails(boolean isValid, boolean isTooLongPrice) {
         Set<BookDetails> bookDetails = new HashSet<>();
 
-        BookDetails details = new BookDetails();
+        BookDetails.BookDetailsBuilder builder = BookDetails.builder().description("opis").author("Grisham John").price("29,90 zl").percentageDiscount("30%").genre("Prawo");
 
         if (isValid) {
-            details.setTitle("Firma");
+            builder.title("Firma");
         } else {
-            details.setTitle(null);
+            builder.title(null);
         }
 
-        details.setDescription("opis");
-        details.setAuthor("Grisham John");
-        details.setPrice("29,90 zl");
-        details.setPercentageDiscount("30%");
-        details.setGenre("Prawo");
-
         if (isTooLongPrice) {
-            details.setPrice("29,9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
+            builder.price("29,9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
                     "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
                     "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
                     "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
                     "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" +
                     "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 zl");
         } else {
-            details.setPrice("29,90 zl");
+            builder.price("29,90 zl");
         }
 
-        bookDetails.add(details);
+        bookDetails.add(builder.build());
         return bookDetails;
     }
 
