@@ -62,18 +62,16 @@ public class BookDetailsToBookAssembler {
     }
 
     private Set<Author> retrieveAuthors(BookDetails bookDetails) {
-        Set<Author> authors = new HashSet<>();
         List<String> authorsString = bookDetails.getAuthors();
 
-        for (String name : authorsString) {
-            Author author = authorRepo.findAuthor(name);
+        return authorsString.stream().map(s -> {
+            Author author=authorRepo.findAuthor(s);
             if (author == null) {
-                author = new Author(name);
+                author = new Author(s);
                 authorRepo.save(author);
             }
-            authors.add(author);
-        }
-        return authors;
+            return author;
+        }).collect(Collectors.toSet());
     }
 
     private Set<Genre> retrieveGenres(BookDetails bookDetails) {
