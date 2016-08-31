@@ -65,23 +65,15 @@ public class BookDetailsToBookAssembler {
         Set<Author> authors = new HashSet<>();
         List<String> authorsString = bookDetails.getAuthors();
 
-        for (String authorString : authorsString) {
-            String[] authorsData = authorString.split("\\s");
-            if (authorsData.length >= 2) {
-                String name = authorsData[0];
-                String surname = authorsData[1];
-                Author author = authorRepo.findAuthor(name, surname);
-                if (author == null) {
-                    author = new Author(name, surname);
-                    authorRepo.save(author);
-                }
-                authors.add(author);
-            } else {
-                logger.warn("Not enough info about author!");
+        for (String name : authorsString) {
+            Author author = authorRepo.findAuthor(name);
+            if (author == null) {
+                author = new Author(name);
+                authorRepo.save(author);
             }
+            authors.add(author);
         }
         return authors;
-
     }
 
     private Set<Genre> retrieveGenres(BookDetails bookDetails) {

@@ -59,7 +59,7 @@ public class RepositoriesTest extends AbstractTestNGSpringContextTests {
         genres.add(genre);
         genres.add(genre2);
 
-        Author author = new Author("John", "Grisham");
+        Author author = new Author("Grisham John");
         authorRepo.save(author);
         Set<Author> authors = new HashSet<Author>(Arrays.asList(author));
 

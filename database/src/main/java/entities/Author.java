@@ -19,12 +19,8 @@ public class Author {
     @Getter
     private String name;
 
-    @Getter
-    private String surname;
-
-    public Author(String name, String surname) {
+    public Author(String name) {
         this.name = name;
-        this.surname = surname;
     }
 
 }
