@@ -16,7 +16,8 @@ public interface IBookParser {
 
     String getTitle(Optional<Document> document);
 
-    String getAuthor(Optional<Document> document);
+    //String in set contains surname and name ex. Wroński Marcin
+    Set<String> getAuthors(Optional<Document> document);
 
     String getPrice(Optional<Document> document);
 
@@ -35,7 +36,7 @@ public interface IBookParser {
 
     default BookDetails parse(Optional<Document> document) {
 
-        BookDetails book = BookDetails.builder().author(getAuthor(document)).title(getTitle(document))
+        BookDetails book = BookDetails.builder().authors(getAuthors(document)).title(getTitle(document))
                 .price(getPrice(document)).percentageDiscount(getPercentageDiscount(document))
                 .genre(getGenre(document)).description(getDescription(document)).tags(getTags(document))
                 .url(getUrl(document)).coverUrl(getCoverUrl(document)).build();

@@ -11,7 +11,7 @@ public class BookDetails {
     @Getter
     private String title;
     @Getter
-    private String author;
+    private Set<String> authors;
     @Getter
     private String price;
     @Getter
@@ -35,28 +35,34 @@ public class BookDetails {
         BookDetails that = (BookDetails) o;
 
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (author != null ? !author.equals(that.author) : that.author != null) return false;
+        if (authors != null ? !authors.equals(that.authors) : that.authors != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (percentageDiscount != null ? !percentageDiscount.equals(that.percentageDiscount) : that.percentageDiscount != null)
             return false;
         if (genre != null ? !genre.equals(that.genre) : that.genre != null) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (tags != null ? !tags.equals(that.tags) : that.tags != null) return false;
+        if (url != null ? !url.equals(that.url) : that.url != null) return false;
+        return coverUrl != null ? coverUrl.equals(that.coverUrl) : that.coverUrl == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (authors != null ? authors.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (percentageDiscount != null ? percentageDiscount.hashCode() : 0);
         result = 31 * result + (genre != null ? genre.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (coverUrl != null ? coverUrl.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "BookDetails [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + " tags " + tags + ", description=" + description + ", url=" + url + ", coverUrl= " + coverUrl + "]";
+        return "BookDetails [title=" + title + ", authors=" + authors + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + " tags " + tags + ", description=" + description + ", url=" + url + ", coverUrl= " + coverUrl + "]";
     }
 }

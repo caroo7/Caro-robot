@@ -9,7 +9,9 @@ import parser.IBookParser;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 
 public class PublioBookParserTest {
@@ -22,13 +24,17 @@ public class PublioBookParserTest {
         Document document = Jsoup.parse(htmlPage);
         document.setBaseUri(PublioUrlCrawler.MAIN_URL);
         IBookParser bookParser = new PublioBookParser();
+
+        Set<String> expectedAuthors=new HashSet<>();
+        expectedAuthors.add("Piotrowski Piotr");
+
         //act
         BookDetails book = bookParser.parse(Optional.of(document));
 
         //assert
         SoftAssert sf = new SoftAssert();
         sf.assertEquals("07 zgłasza się", book.getTitle());
-        sf.assertEquals("Piotr Piotrowski", book.getAuthor());
+        sf.assertEquals(expectedAuthors, book.getAuthors());
         sf.assertEquals("12,80 zł", book.getPrice());
         sf.assertEquals("50%", book.getPercentageDiscount());
         sf.assertEquals("Kultura, sztuka, media", book.getGenre());

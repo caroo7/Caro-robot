@@ -10,7 +10,9 @@ import parser.publio.PublioUrlCrawler;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by grzegorz_sledz on 25.08.16.
@@ -27,12 +29,15 @@ public class EmpikBookParserTest {
         document.setBaseUri(bookUrl);
         IBookParser bookParser = new EmpikBookParser();
 
+        Set<String> authors=new HashSet<>();
+        authors.add("Miłoszewski Zygmunt");
+
         //act
         BookDetails book = bookParser.parse(Optional.of(document));
         //assert
         SoftAssert sf = new SoftAssert();
         sf.assertEquals("Uwikłanie", book.getTitle());
-        sf.assertEquals("Miłoszewski Zygmunt", book.getAuthor());
+        sf.assertEquals(authors, book.getAuthors());
         sf.assertEquals("19,19 zł", book.getPrice());
         sf.assertEquals("40%", book.getPercentageDiscount());
         sf.assertEquals("Kryminał", book.getGenre());

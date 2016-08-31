@@ -21,9 +21,9 @@ class EmpikBookParser implements IBookParser {
     }
 
     @Override
-    public String getAuthor(Optional<Document> document) {
-        if(document.isPresent()) {
-            return document.get().select("span.pDAuthorList > a").first().text();
+    public Set<String> getAuthors(Optional<Document> document) {
+        if (document.isPresent()) {
+            return  document.get().select("span.pDAuthorList > a").stream().map(element -> element.text()).collect(Collectors.toSet());
         }
         return null;
     }

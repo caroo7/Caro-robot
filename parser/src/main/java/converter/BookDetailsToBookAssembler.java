@@ -63,7 +63,7 @@ public class BookDetailsToBookAssembler {
     }
 
     private Set<Author> retrieveAuthors(BookDetails bookDetails) {
-        List<String> authorsString = Arrays.asList(bookDetails.getAuthor());
+        Set<String> authorsString = bookDetails.getAuthors();
 
         return authorsString.stream().map(s -> {
             Author author=authorRepo.findAuthor(s);
