@@ -10,9 +10,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Created by grzegorz_sledz on 25.08.16.
- */
 class EmpikBookParser implements IBookParser {
 
     @Override

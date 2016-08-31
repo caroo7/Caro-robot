@@ -14,9 +14,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Created by Grzesiek on 2016-08-27.
- */
 public class Utils {
 
     private static Path getPathInResources(String relativePath) throws URISyntaxException {

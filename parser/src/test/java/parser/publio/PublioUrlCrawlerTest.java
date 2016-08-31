@@ -12,9 +12,6 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by grzegorz_sledz on 30.08.16.
- */
 public class PublioUrlCrawlerTest {
 
     @Test

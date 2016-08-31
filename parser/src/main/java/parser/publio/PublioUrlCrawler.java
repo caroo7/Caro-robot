@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-/**
- * Created by Grzesiek on 2016-08-27.
- */
 @Log4j2
 public class PublioUrlCrawler implements IUrlCrawler {
 
@@ -18,11 +15,10 @@ public class PublioUrlCrawler implements IUrlCrawler {
     static final String PROMOTION_URL = MAIN_URL + "/szukaj,promocja.html?sections=EBOOK";
 
     private final PageLoader pageLoader;
-    private final PublioUrlParser publioUrlParser;
+    private final PublioUrlParser publioUrlParser= new PublioUrlParser();
 
     public PublioUrlCrawler(PageLoader pageLoader) {
         this.pageLoader = pageLoader;
-        this.publioUrlParser = new PublioUrlParser();
     }
 
     /**
@@ -38,14 +34,16 @@ public class PublioUrlCrawler implements IUrlCrawler {
         NextPageUrlConsumer nextPageUrlConsumer = new NextPageUrlConsumer(queue,pageLoader);
 
         Thread nextPageUrlProducerThread = new Thread(nextPageUrlProducer);
+        nextPageUrlProducerThread.setName("NextPageUrlProducerThread");
         Thread nextPageUrlConsumerThread = new Thread(nextPageUrlConsumer);
+        nextPageUrlConsumerThread.setName("NextPageUrlConsumerThread");
         nextPageUrlProducerThread.start();
         nextPageUrlConsumerThread.start();
 
         try {
             nextPageUrlConsumerThread.join();
         } catch (InterruptedException e) {
-            log.error(e);
+            log.error(e.getMessage());
         }
         return nextPageUrlConsumer.getBookDetailsUrls();
     }

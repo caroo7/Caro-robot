@@ -50,7 +50,7 @@ class NextPageUrlProducer implements Runnable {
 
             log.debug("finished work - thread exit - putting DONE to urlToNextPageQueue");
         } catch (InterruptedException e) {
-            log.error(e);
+            log.error(e.getMessage());
         }
     }
 }

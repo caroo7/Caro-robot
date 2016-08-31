@@ -19,13 +19,12 @@ class NextPageUrlConsumer implements Runnable {
     BlockingQueue<String> urlToNextPageQueue;
     PublioUrlParser publioUrlParser;
     PageLoader pageLoader;
-    List<String> bookDetailsUrls;
+    List<String>  bookDetailsUrls = new ArrayList<>();
 
     public NextPageUrlConsumer(BlockingQueue urlToNextPageQueue,PageLoader pageLoader) {
         this.urlToNextPageQueue = urlToNextPageQueue;
         this.pageLoader = pageLoader;
         this.publioUrlParser = new PublioUrlParser();
-        bookDetailsUrls = new ArrayList<>();
     }
 
     List<String> getListToBookDetails(String page) {
@@ -50,7 +49,7 @@ class NextPageUrlConsumer implements Runnable {
 
                 bookDetailsUrls.addAll(getListToBookDetails(url));
             } catch (InterruptedException e) {
-                log.error(e);
+                log.error(e.getMessage());
             }
         }
         log.debug("exit thread");

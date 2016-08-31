@@ -8,9 +8,6 @@ import parser.UrlParser;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by Grzesiek on 2016-08-27.
- */
 @Log4j2
 public class PublioUrlParser extends UrlParser {
 

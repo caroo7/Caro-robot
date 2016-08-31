@@ -11,11 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static org.testng.Assert.*;
 
-/**
- * Created by grzegorz_sledz on 30.08.16.
- */
 public class PublioBookParserTest {
 
     @Test

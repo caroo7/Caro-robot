@@ -10,9 +10,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Created by Grzesiek on 2016-08-27.
- */
 public class PublioBookParser implements IBookParser {
 
     @Override
