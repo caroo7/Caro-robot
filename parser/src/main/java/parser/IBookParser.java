@@ -1,14 +1,18 @@
 package parser;
 
 import DTO.BookDetails;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Document;
 
 import java.util.Optional;
+import java.util.Set;
 
-/**
- * Created by grzegorz_sledz on 25.08.16.
- */
+
 public interface IBookParser {
+
+    Logger logger = LogManager.getRootLogger();
+
 
     String getTitle(Optional<Document> document);
 
@@ -22,14 +26,21 @@ public interface IBookParser {
 
     String getDescription(Optional<Document> document);
 
+    Set<String> getTags(Optional<Document> document);
+
+    String getUrl(Optional<Document> document);
+
+    String getCoverUrl(Optional<Document> document);
+
+
     default BookDetails parse(Optional<Document> document) {
-        BookDetails book = new BookDetails();
-        book.setTitle(getTitle(document));
-        book.setAuthor(getAuthor(document));
-        book.setPrice(getPrice(document));
-        book.setPercentageDiscount(getPercentageDiscount(document));
-        book.setGenre(getGenre(document));
-        book.setDescription(getDescription(document));
+
+        BookDetails book = BookDetails.builder().author(getAuthor(document)).title(getTitle(document))
+                .price(getPrice(document)).percentageDiscount(getPercentageDiscount(document))
+                .genre(getGenre(document)).description(getDescription(document)).tags(getTags(document))
+                .url(getUrl(document)).coverUrl(getCoverUrl(document)).build();
+
+        logger.debug(book);
         return book;
     }
 

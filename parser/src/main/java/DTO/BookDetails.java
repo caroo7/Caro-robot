@@ -1,65 +1,31 @@
 package DTO;
 
-/**
- * Created by grzegorz_sledz on 25.08.16.
- */
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Set;
+@Builder
 public class BookDetails {
 
+    @Getter
     private String title;
+    @Getter
     private String author;
+    @Getter
     private String price;
+    @Getter
     private String percentageDiscount;
+    @Getter
     private String genre;
+    @Getter
     private String description;
-
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getPercentageDiscount() {
-        return percentageDiscount;
-    }
-
-    public void setPercentageDiscount(String percentageDiscount) {
-        this.percentageDiscount = percentageDiscount;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @Getter
+    private Set<String> tags;
+    @Getter
+    private String url;
+    @Getter
+    private String coverUrl;
 
     @Override
     public boolean equals(Object o) {
@@ -91,6 +57,6 @@ public class BookDetails {
 
     @Override
     public String toString() {
-        return "BookDetails [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + ", description=" + description + "]";
+        return "BookDetails [title=" + title + ", author=" + author + ", price=" + price + ", percentageDiscount=" + percentageDiscount + ", genre=" + genre + " tags " + tags + ", description=" + description + ", url=" + url + ", coverUrl= " + coverUrl + "]";
     }
 }

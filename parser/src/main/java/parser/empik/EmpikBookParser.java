@@ -1,14 +1,15 @@
 package parser.empik;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-/**
- * Created by grzegorz_sledz on 25.08.16.
- */
 class EmpikBookParser implements IBookParser {
 
     @Override
@@ -33,10 +34,16 @@ class EmpikBookParser implements IBookParser {
         }
         return null;
     }
+
+    /**
+     * Percentage discount on web page is presented as format: 12,80 zł (40%)
+     * The percentage value is exctrated by ParserUtils
+     * @param document
+     * @return
+     */
     @Override
     public String getPercentageDiscount(Optional<Document> document) {
         if(document.isPresent()) {
-            //12,80 zł (40%)
             String priceWithDiscount = document.get().select("span.saving").first().text();
             return ParserUtils.extractDataFromRegex("\\((.*?)\\)", priceWithDiscount);
         }
@@ -53,6 +60,27 @@ class EmpikBookParser implements IBookParser {
     public String getDescription(Optional<Document> document) {
         if(document.isPresent()) {
             return document.get().select("div.contentPacketText").first().text();
+        }
+        return null;
+    }
+
+    @Override
+    public Set<String> getTags(Optional<Document> document) {
+        return null;
+    }
+
+    @Override
+    public String getUrl(Optional<Document> document) {
+        if(document.isPresent()) {
+            return document.get().baseUri();
+        }
+        return null;
+    }
+
+    @Override
+    public String getCoverUrl(Optional<Document> document) {
+        if(document.isPresent()) {
+            return document.get().select("div.productMainPic > a > img ").first().attributes().get("src");
         }
         return null;
     }

@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import parser.Utils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,11 +30,10 @@ public class EmpikUrlParserTest {
     public void getLinksToGenreDetailsTest() throws Exception {
 
         //arrange
-        Optional<Document> document=Utils.loadHtmlDocument("/empik/ebook_promotions_main.html",mainPageUrl);
+        Optional<Document> document= Utils.loadHtmlDocument("/empik/ebook_promotions_main.html",mainPageUrl);
 
         List<String> expectedUrls = new ArrayList<>();
         expectedUrls.add("http://www.empik.com/ebooki/kryminaly-i-sensacje");
-//        expectedUrls.add("http://www.empik.com/ebooki/gwf");
 
         //act
         List<String> results = empikUrlParser.getLinksToGenreDetailsPromotion(document);
