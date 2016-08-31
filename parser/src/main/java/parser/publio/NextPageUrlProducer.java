@@ -1,7 +1,6 @@
 package parser.publio;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
 import parser.PageLoader;
 
@@ -13,9 +12,9 @@ import java.util.concurrent.BlockingQueue;
  * Publio page is really slow so it is need to produce url next pages and this result is
  * consume by NextPageUrlConsumer which produce url to book details
  */
+@Log4j2
 class NextPageUrlProducer implements Runnable {
 
-    private static final Logger logger = LogManager.getRootLogger();
 
     private BlockingQueue urlToNextPageQueue;
     private String startUrl;
@@ -31,17 +30,17 @@ class NextPageUrlProducer implements Runnable {
 
     @Override
     public void run() {
-        logger.debug("start thread");
+        log.debug("start thread");
 
         Optional<Document> document = pageLoader.getPage(startUrl);
         String nextPage= publioUrlParser.getLinkToNextPage(document);
 
         try {
-            logger.debug("putting to urlToNextPageQueue "+startUrl);
+            log.debug("putting to urlToNextPageQueue "+startUrl);
             urlToNextPageQueue.put(startUrl);
 
             while (nextPage!=null){
-                logger.debug("putting to urlToNextPageQueue "+nextPage);
+                log.debug("putting to urlToNextPageQueue "+nextPage);
                 urlToNextPageQueue.put(nextPage);
 
                 document = pageLoader.getPage(nextPage);
@@ -49,9 +48,9 @@ class NextPageUrlProducer implements Runnable {
             }
             urlToNextPageQueue.put("DONE");
 
-            logger.debug("finished work - thread exit - putting DONE to urlToNextPageQueue");
+            log.debug("finished work - thread exit - putting DONE to urlToNextPageQueue");
         } catch (InterruptedException e) {
-            logger.error(e);
+            log.error(e);
         }
     }
 }

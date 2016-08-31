@@ -11,6 +11,7 @@ import java.util.Set;
 /**
  * Created by grzegorz_sledz on 25.08.16.
  */
+
 public interface IBookParser {
 
     Logger logger = LogManager.getRootLogger();

@@ -1,7 +1,6 @@
 package parser.publio;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import parser.IUrlCrawler;
 import parser.PageLoader;
 
@@ -12,9 +11,8 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Created by Grzesiek on 2016-08-27.
  */
+@Log4j2
 public class PublioUrlCrawler implements IUrlCrawler {
-
-    private final Logger logger = LogManager.getRootLogger();
 
     static final String MAIN_URL = "http://www.publio.pl";
     static final String PROMOTION_URL = MAIN_URL + "/szukaj,promocja.html?sections=EBOOK";
@@ -47,7 +45,7 @@ public class PublioUrlCrawler implements IUrlCrawler {
         try {
             nextPageUrlConsumerThread.join();
         } catch (InterruptedException e) {
-            logger.error(e);
+            log.error(e);
         }
         return nextPageUrlConsumer.getBookDetailsUrls();
     }

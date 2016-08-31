@@ -1,7 +1,6 @@
 package parser.publio;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
 import parser.PageLoader;
 
@@ -13,9 +12,9 @@ import java.util.concurrent.BlockingQueue;
 /**
  * This thread is needed for consuming url to next pages to produce urls to books details
  */
+@Log4j2
 class NextPageUrlConsumer implements Runnable {
 
-    private final Logger logger = LogManager.getRootLogger();
 
     BlockingQueue<String> urlToNextPageQueue;
     PublioUrlParser publioUrlParser;
@@ -38,12 +37,12 @@ class NextPageUrlConsumer implements Runnable {
 
     @Override
     public void run() {
-        logger.debug("start thread");
+        log.debug("start thread");
 
         while (true) {
             try {
                 String url = urlToNextPageQueue.take();
-                logger.debug("from urlToNextPageQueue " + url);
+                log.debug("from urlToNextPageQueue " + url);
 
                 if ("DONE".equals(url)) {
                     break;
@@ -51,10 +50,10 @@ class NextPageUrlConsumer implements Runnable {
 
                 bookDetailsUrls.addAll(getListToBookDetails(url));
             } catch (InterruptedException e) {
-                logger.error(e);
+                log.error(e);
             }
         }
-        logger.debug("exit thread");
+        log.debug("exit thread");
     }
 
     List<String> getBookDetailsUrls() {
