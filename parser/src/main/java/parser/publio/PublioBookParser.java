@@ -21,12 +21,13 @@ public class PublioBookParser implements IBookParser {
     }
 
     @Override
-    public String getAuthor(Optional<Document> document) {
+    public Set<String> getAuthors(Optional<Document> document) {
         if (document.isPresent()) {
-            return document.get().select("div.product-detail-value > a").first().text();
+            return document.get().select("div.product-detail-value > a").stream().filter(element -> element.getElementsByAttributeValueMatching("data-seo-id", "authors").size() != 0).map(element -> ParserUtils.moveLastWordOnBeginning(element.attr("title"))).collect(Collectors.toSet());
         }
         return null;
     }
+
 
     @Override
     public String getPrice(Optional<Document> document) {

@@ -13,6 +13,7 @@
 
     <name>web</name>
     <description>Web application. Contains all necessary services and gui.</description>
+
     <dependencies>
         <dependency>
             <groupId>github.yggdrasil</groupId>
@@ -74,8 +75,6 @@
             <version>${servletapi.version}</version>
             <scope>provided</scope>
         </dependency>
-
-
 
 
         <!-- Logging -->
