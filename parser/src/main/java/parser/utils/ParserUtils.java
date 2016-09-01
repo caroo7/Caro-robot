@@ -1,13 +1,24 @@
 package parser.utils;
 
-import org.jsoup.nodes.Document;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParserUtils {
+
+    public static String moveLastWordOnBeginning(String text){
+        if(text==null || !text.contains(" ")){
+            return text;
+        }
+
+        String result="";
+
+        String lastWord = text.substring(text.lastIndexOf(" "));
+        text=text.substring(0,text.length()-lastWord.length());
+
+        result=lastWord.substring(1,lastWord.length())+" "+text;
+
+        return result;
+    }
 
     public static String extractDataFromRegex(String regex,String data){
         Pattern patter = Pattern.compile(regex);

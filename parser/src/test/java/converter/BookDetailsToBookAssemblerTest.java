@@ -90,7 +90,10 @@ public class BookDetailsToBookAssemblerTest {
     private Set<BookDetails> prepareBookDetails(boolean isValid, boolean isTooLongPrice) {
         Set<BookDetails> bookDetails = new HashSet<>();
 
-        BookDetails.BookDetailsBuilder builder = BookDetails.builder().description("opis").author("Grisham John").price("29,90 zl").percentageDiscount("30%").genre("Prawo");
+
+        Set<String> authors = new HashSet<>();
+        authors.add("Grisham John");
+        BookDetails.BookDetailsBuilder builder = BookDetails.builder().description("opis").authors(authors).price("29,90 zl").percentageDiscount("30%").genre("Prawo");
 
         if (isValid) {
             builder.title("Firma");
