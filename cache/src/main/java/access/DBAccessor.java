@@ -17,17 +17,13 @@ import java.util.List;
 @Log4j2
 public class DBAccessor {
 
-
-    public List<Book> getBooks() {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class);
-        BookRepository repo = ctx.getBean(BookRepository.class);
-        List<Book> books = repo.findAll();
-        return books;
+    public List<Book> getBooks(BookRepository bookRepo) {
+        return bookRepo.findAll();
     }
 
     public void createCache(List<Book> list) {
         try {
-            FileOutputStream outputStream = new FileOutputStream("cache.txt");
+            FileOutputStream outputStream = new FileOutputStream("web/cache.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(list);
         } catch (FileNotFoundException fNFE) {

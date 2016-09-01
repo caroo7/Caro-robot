@@ -1,24 +1,21 @@
-package main;
+package cache;
 
 import access.DBAccessor;
 import entities.Book;
 import lombok.extern.log4j.Log4j2;
+import repositories.BookRepository;
 
 import java.util.List;
 
 @Log4j2
-public class CacheMain {
+public class Cache {
 
-
-    public static void main(String[] args) {
+    public void initializeCache(BookRepository bookRepo) {
         log.info("Cache creation initialized");
         DBAccessor dbAccessor = new DBAccessor();
-        List<Book> bookList = dbAccessor.getBooks();
+        List<Book> bookList = dbAccessor.getBooks(bookRepo);
         dbAccessor.createCache(bookList);
         log.info("Cache created");
-
     }
 
-
 }
-

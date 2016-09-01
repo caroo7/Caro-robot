@@ -1,6 +1,8 @@
 package main;
 
 import DTO.BookDetails;
+import cache.Cache;
+import config.CacheConfiguration;
 import config.DatabaseConfiguration;
 import config.ParserConfiguration;
 import converter.BookDetailsToBookAssembler;
@@ -15,6 +17,7 @@ import repositories.BookRepository;
 import repositories.LibraryRepository;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Log4j2
 public class ParserMain {
@@ -27,7 +30,7 @@ public class ParserMain {
             System.exit(-1);
         }
 
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class, ParserConfiguration.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class, ParserConfiguration.class, CacheConfiguration.class);
         LibraryRepository libraryRepo = ctx.getBean(LibraryRepository.class);
         BookRepository bookRepo = ctx.getBean(BookRepository.class);
 
@@ -43,13 +46,23 @@ public class ParserMain {
         }
         Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
 
+
+        // DEMO PURPOSES!!!
+        // ******************************************************************************************
+        Set<BookDetails> testSubset = booksDetails.stream()
+                .limit(5)
+                .collect(Collectors.toSet());
         BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
         converter.initialize(actualPromotionLibrary.getGenreMapper(), library);
-        Set<Book> books = converter.convert(booksDetails);
+        Set<Book> books = converter.convert(testSubset);
+        // ******************************************************************************************
 
         bookRepo.save(books);
 
         log.info("Parser finish his work.");
+
+        Cache cache = ctx.getBean(Cache.class);
+        cache.initializeCache(bookRepo);
     }
 
 }
