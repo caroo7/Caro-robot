@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 // not sure about model classes serialization, maybe later we create some kind of DTO classes to passing over HTTP
@@ -65,6 +64,12 @@ public class Book implements Serializable {
     private Set<Genre> genres;
 
 
+    @ManyToOne
+    @JoinColumn(name = "library_id")
+    @Getter
+    private Library library;
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,7 +77,9 @@ public class Book implements Serializable {
 
         Book book = (Book) o;
 
-        return title != null ? title.equals(book.title) : book.title == null;
+        if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (price != null ? !price.equals(book.price) : book.price != null) return false;
+        return library != null ? library.equals(book.library) : book.library == null;
 
     }
 

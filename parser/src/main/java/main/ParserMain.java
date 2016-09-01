@@ -2,16 +2,16 @@ package main;
 
 import DTO.BookDetails;
 import config.DatabaseConfiguration;
+import config.ParserConfiguration;
 import converter.BookDetailsToBookAssembler;
 import entities.Book;
+import entities.Library;
 import library.LibraryMapContainer;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import parser.PromotionLibrary;
-import repositories.AuthorRepository;
 import repositories.BookRepository;
-import repositories.GenreRepository;
 import repositories.LibraryRepository;
 
 import java.util.Set;
@@ -22,28 +22,29 @@ public class ParserMain {
     public static void main(String[] args) {
         log.info("Parser application starts");
 
-        if(args.length == 0) {
+        if (args.length == 0) {
             log.error("No library name provided!");
             System.exit(-1);
         }
 
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class);
-        BookRepository bookRepo = ctx.getBean(BookRepository.class);
-        GenreRepository genreRepo = ctx.getBean(GenreRepository.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class, ParserConfiguration.class);
         LibraryRepository libraryRepo = ctx.getBean(LibraryRepository.class);
-        AuthorRepository authorRepo = ctx.getBean(AuthorRepository.class);
+        BookRepository bookRepo = ctx.getBean(BookRepository.class);
+
 
         LibraryMapContainer libraryMapper = new LibraryMapContainer();
         libraryMapper.initialize(libraryRepo);
 
-        PromotionLibrary actualPromotionLibrary = libraryMapper.getLibrary(args[0]);
-        if(actualPromotionLibrary == null) {
+        Library library = libraryRepo.findByName(args[0]);
+        PromotionLibrary actualPromotionLibrary = libraryMapper.getLibrary(library);
+        if (actualPromotionLibrary == null) {
             log.error("Invalid library name!");
             System.exit(-1);
         }
         Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
 
-        BookDetailsToBookAssembler converter = new BookDetailsToBookAssembler(actualPromotionLibrary.getGenreMapper(), genreRepo, authorRepo,bookRepo);
+        BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
+        converter.initialize(actualPromotionLibrary.getGenreMapper(), library);
         Set<Book> books = converter.convert(booksDetails);
 
         bookRepo.save(books);

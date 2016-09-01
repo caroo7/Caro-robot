@@ -4,9 +4,10 @@ import DTO.BookDetails;
 import entities.Author;
 import entities.Book;
 import entities.Genre;
+import entities.Library;
+import lombok.extern.log4j.Log4j2;
 import mapper.Mapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import repositories.AuthorRepository;
 import repositories.BookRepository;
 import repositories.GenreRepository;
@@ -20,34 +21,37 @@ import java.util.stream.Collectors;
 /**
  * Responsible for converting book DTO retrieved from web parser to book entity which will be saved on database
  */
+@Log4j2
 public class BookDetailsToBookAssembler {
-
-    private static final Logger logger = LogManager.getRootLogger();
 
     private static final int STANDARD_FIELD_LENGTH = 256;
 
     private static final int STANDARD_DESCRIPTION_LENGTH = 10000;
 
+    @Autowired
+    AuthorRepository authorRepo;
+
+    @Autowired
+    GenreRepository genreRepo;
+
+    @Autowired
+    BookRepository bookRepo;
+
     private final BookFieldPreparator preparator = new BookFieldPreparator();
 
-    private final Mapper genreMapper;
-
-    private final GenreRepository genreRepo;
-
-    private final AuthorRepository authorRepo;
-
-    private final BookRepository bookRepo;
+    private Mapper genreMapper;
 
     private List<Author> authorsCache;
+
     private List<Book> booksCache;
 
-    public BookDetailsToBookAssembler(Mapper genreMapper, GenreRepository genreRepo, AuthorRepository authorRepo,BookRepository bookRepo) {
+    private Library library;
+
+    public void initialize(Mapper genreMapper, Library library) {
         this.genreMapper = genreMapper;
-        this.genreRepo = genreRepo;
-        this.bookRepo=bookRepo;
-        this.authorRepo = authorRepo;
-        this.authorsCache=authorRepo.findAll();
-        this.booksCache=bookRepo.findAll();
+        this.library = library;
+        authorsCache = authorRepo.findAll();
+        booksCache = bookRepo.findAll();
     }
 
     public Set<Book> convert(Set<BookDetails> booksDetails) {
@@ -66,11 +70,13 @@ public class BookDetailsToBookAssembler {
         Set<Author> authors = retrieveAuthors(bookDetails);
         Set<Genre> genres = retrieveGenres(bookDetails);
 
-        Book book=Book.builder().title(title).authors(authors).description(description).
-                discount(discount).price(price).timestamp(timestamp).genres(genres).build();
-        if(booksCache.contains(book)){
-            int indexInCache=booksCache.indexOf(book);
-            book=booksCache.get(indexInCache);
+        Book book = Book.builder().title(title).authors(authors).description(description).
+                discount(discount).price(price).timestamp(timestamp).genres(genres).library(library).build();
+        if (booksCache.contains(book)) {
+            int indexInCache = booksCache.indexOf(book);
+            book = booksCache.get(indexInCache);
+        }else {
+            log.debug("Book will be saved on database: "+book);
         }
 
         return book;
@@ -80,13 +86,14 @@ public class BookDetailsToBookAssembler {
         Set<String> authorsString = bookDetails.getAuthors();
 
         return authorsString.stream().map(s -> {
-            Author author=new Author(s);
+            Author author = new Author(s);
             if (!this.authorsCache.contains(author)) {
                 authorRepo.save(author);
+                log.debug("Author will be saved on database: "+author);
                 this.authorsCache.add(author);
-            }else{
-                int indexInCache=authorsCache.indexOf(author);
-                author=this.authorsCache.get(indexInCache);
+            } else {
+                int indexInCache = authorsCache.indexOf(author);
+                author = this.authorsCache.get(indexInCache);
             }
             return author;
         }).collect(Collectors.toSet());
