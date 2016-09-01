@@ -4,9 +4,6 @@ import config.DatabaseConfiguration;
 import config.YggdrasilWebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
- * Created by bartlomiej on 26.08.16.
- */
 public class YggdrasilInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
