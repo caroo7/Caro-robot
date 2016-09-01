@@ -18,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Book implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -43,22 +44,24 @@ public class Book implements Serializable {
     @Getter
     private Timestamp timestamp;
 
-    @Getter
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "book_tag",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+    @Getter
     private Set<Tag> tags;
 
-    @Getter
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "book_genre",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
+    @Getter
     private Set<Genre> genres;
 
 }
