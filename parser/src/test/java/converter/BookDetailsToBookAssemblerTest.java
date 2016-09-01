@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import parser.empik.EmpikGenreMapper;
 import repositories.AuthorRepository;
+import repositories.BookRepository;
 import repositories.GenreRepository;
 
 import java.util.HashSet;
@@ -27,9 +28,10 @@ public class BookDetailsToBookAssemblerTest {
         when(genreRepo.findByName(anyString())).thenReturn(new Genre("law"));
 
         AuthorRepository authorRepo = mock(AuthorRepository.class);
-        when(authorRepo.findAuthor(anyString())).thenReturn(new Author("Grisham John"));
 
-        assembler = new BookDetailsToBookAssembler(new EmpikGenreMapper(), genreRepo, authorRepo);
+        BookRepository bookRepo = mock(BookRepository.class);
+
+        assembler = new BookDetailsToBookAssembler(new EmpikGenreMapper(), genreRepo, authorRepo,bookRepo);
     }
 
     @Test

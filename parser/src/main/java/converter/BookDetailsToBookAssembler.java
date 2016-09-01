@@ -8,10 +8,10 @@ import mapper.Mapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import repositories.AuthorRepository;
+import repositories.BookRepository;
 import repositories.GenreRepository;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,10 +36,18 @@ public class BookDetailsToBookAssembler {
 
     private final AuthorRepository authorRepo;
 
-    public BookDetailsToBookAssembler(Mapper genreMapper, GenreRepository genreRepo, AuthorRepository authorRepo) {
+    private final BookRepository bookRepo;
+
+    private List<Author> authorsCache;
+    private List<Book> booksCache;
+
+    public BookDetailsToBookAssembler(Mapper genreMapper, GenreRepository genreRepo, AuthorRepository authorRepo,BookRepository bookRepo) {
         this.genreMapper = genreMapper;
         this.genreRepo = genreRepo;
+        this.bookRepo=bookRepo;
         this.authorRepo = authorRepo;
+        this.authorsCache=authorRepo.findAll();
+        this.booksCache=bookRepo.findAll();
     }
 
     public Set<Book> convert(Set<BookDetails> booksDetails) {
@@ -58,18 +66,27 @@ public class BookDetailsToBookAssembler {
         Set<Author> authors = retrieveAuthors(bookDetails);
         Set<Genre> genres = retrieveGenres(bookDetails);
 
-        return Book.builder().title(title).authors(authors).description(description).
+        Book book=Book.builder().title(title).authors(authors).description(description).
                 discount(discount).price(price).timestamp(timestamp).genres(genres).build();
+        if(booksCache.contains(book)){
+            int indexInCache=booksCache.indexOf(book);
+            book=booksCache.get(indexInCache);
+        }
+
+        return book;
     }
 
     private Set<Author> retrieveAuthors(BookDetails bookDetails) {
         Set<String> authorsString = bookDetails.getAuthors();
 
         return authorsString.stream().map(s -> {
-            Author author=authorRepo.findAuthor(s);
-            if (author == null) {
-                author = new Author(s);
+            Author author=new Author(s);
+            if (!this.authorsCache.contains(author)) {
                 authorRepo.save(author);
+                this.authorsCache.add(author);
+            }else{
+                int indexInCache=authorsCache.indexOf(author);
+                author=this.authorsCache.get(indexInCache);
             }
             return author;
         }).collect(Collectors.toSet());
