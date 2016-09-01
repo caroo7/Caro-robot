@@ -9,10 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-/**
- * Created by bartlomiej on 26.08.16.
- */
-
 @Controller
 public class YggdrasilController {
 

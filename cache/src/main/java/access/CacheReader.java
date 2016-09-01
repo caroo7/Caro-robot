@@ -9,9 +9,6 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by bartlomiej on 01.09.16.
- */
 @Log4j2
 public class CacheReader {
 

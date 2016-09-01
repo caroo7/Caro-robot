@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-/**
- * Created by bartlomiej on 01.09.16.
- */
+
 @Log4j2
 public class DBAccessor {
 

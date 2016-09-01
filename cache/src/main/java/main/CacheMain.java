@@ -6,9 +6,6 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
 
-/**
- * Created by bartlomiej on 31.08.16.
- */
 @Log4j2
 public class CacheMain {
 
