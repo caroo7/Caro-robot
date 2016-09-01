@@ -13,6 +13,7 @@
         <module>database</module>
         <module>parser</module>
         <module>web</module>
+        <module>cache</module>
     </modules>
 
     <description>Web application responsible for presenting books which are on promotion in different bookshops. Another functionality is to retrieve necessary data using parsers</description>
@@ -46,6 +47,7 @@
         <servletapi.version>3.1.0</servletapi.version>
 
         <database.module.version>1.0-SNAPSHOT</database.module.version>
+        <cache.module.version>1.0-SNAPSHOT</cache.module.version>
     </properties>
 
     <prerequisites>
@@ -59,6 +61,12 @@
                 <groupId>github.yggdrasil</groupId>
                 <artifactId>database</artifactId>
                 <version>${database.module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>github.yggdrasil</groupId>
+                <artifactId>cache</artifactId>
+                <version>${cache.module.version}</version>
             </dependency>
 
             <dependency>
