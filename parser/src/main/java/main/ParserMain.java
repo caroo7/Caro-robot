@@ -2,55 +2,54 @@ package main;
 
 import DTO.BookDetails;
 import config.DatabaseConfiguration;
+import config.ParserConfiguration;
 import converter.BookDetailsToBookAssembler;
 import entities.Book;
+import entities.Library;
 import library.LibraryMapContainer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import parser.PromotionLibrary;
-import repositories.AuthorRepository;
 import repositories.BookRepository;
-import repositories.GenreRepository;
 import repositories.LibraryRepository;
 
 import java.util.Set;
 
+@Log4j2
 public class ParserMain {
 
-    private static Logger logger = LogManager.getRootLogger();
-
     public static void main(String[] args) {
-        logger.info("Parser application starts");
+        log.info("Parser application starts");
 
-        if(args.length == 0) {
-            logger.error("No library name provided!");
+        if (args.length == 0) {
+            log.error("No library name provided!");
             System.exit(-1);
         }
 
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class);
-        BookRepository repo = ctx.getBean(BookRepository.class);
-        GenreRepository genreRepo = ctx.getBean(GenreRepository.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class, ParserConfiguration.class);
         LibraryRepository libraryRepo = ctx.getBean(LibraryRepository.class);
-        AuthorRepository authorRepo = ctx.getBean(AuthorRepository.class);
+        BookRepository bookRepo = ctx.getBean(BookRepository.class);
+
 
         LibraryMapContainer libraryMapper = new LibraryMapContainer();
         libraryMapper.initialize(libraryRepo);
 
-        PromotionLibrary actualPromotionLibrary = libraryMapper.getLibrary(args[0]);
-        if(actualPromotionLibrary == null) {
-            logger.error("Invalid library name!");
+        Library library = libraryRepo.findByName(args[0]);
+        PromotionLibrary actualPromotionLibrary = libraryMapper.getLibrary(library);
+        if (actualPromotionLibrary == null) {
+            log.error("Invalid library name!");
             System.exit(-1);
         }
         Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
 
-        BookDetailsToBookAssembler converter = new BookDetailsToBookAssembler(actualPromotionLibrary.getGenreMapper(), genreRepo, authorRepo);
+        BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
+        converter.initialize(actualPromotionLibrary.getGenreMapper(), library);
         Set<Book> books = converter.convert(booksDetails);
 
-        repo.save(books);
+        bookRepo.save(books);
 
-        logger.info("Parser finish his work.");
+        log.info("Parser finish his work.");
     }
 
 }

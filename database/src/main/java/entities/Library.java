@@ -1,12 +1,12 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,10 +19,6 @@ public class Library implements Serializable {
     private String name;
 
     private String URL;
-
-    @OneToMany
-    @JoinColumn(name = "library_id")
-    private List<Book> books;
 
     public Library(String name, String URL) {
         this.name = name;
@@ -44,14 +40,12 @@ public class Library implements Serializable {
 
         Library library = (Library) o;
 
-        if (name != null ? !name.equals(library.name) : library.name != null) return false;
-        return URL != null ? URL.equals(library.URL) : library.URL == null;
+        return name.equals(library.name);
+
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (URL != null ? URL.hashCode() : 0);
-        return result;
+        return name.hashCode();
     }
 }

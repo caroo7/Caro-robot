@@ -4,14 +4,16 @@ import DTO.BookDetails;
 import entities.Author;
 import entities.Book;
 import entities.Genre;
-import lombok.Builder;
+import entities.Library;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import parser.empik.EmpikGenreMapper;
 import repositories.AuthorRepository;
+import repositories.BookRepository;
 import repositories.GenreRepository;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,9 +29,16 @@ public class BookDetailsToBookAssemblerTest {
         when(genreRepo.findByName(anyString())).thenReturn(new Genre("law"));
 
         AuthorRepository authorRepo = mock(AuthorRepository.class);
-        when(authorRepo.findAuthor(anyString())).thenReturn(new Author("Grisham John"));
+        when(authorRepo.findAll()).thenReturn(new ArrayList<>());
 
-        assembler = new BookDetailsToBookAssembler(new EmpikGenreMapper(), genreRepo, authorRepo);
+        BookRepository bookRepo = mock(BookRepository.class);
+        when(bookRepo.findAll()).thenReturn(new ArrayList<>());
+
+        assembler = new BookDetailsToBookAssembler();
+        assembler.authorRepo = authorRepo;
+        assembler.bookRepo = bookRepo;
+        assembler.genreRepo = genreRepo;
+        assembler.initialize(new EmpikGenreMapper(), new Library("EMPIK", ""));
     }
 
     @Test

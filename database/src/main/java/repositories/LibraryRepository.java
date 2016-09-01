@@ -1,6 +1,5 @@
 package repositories;
 
-import entities.Book;
 import entities.Library;
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,4 +9,5 @@ public interface LibraryRepository extends CrudRepository<Library, Long> {
 
     List<Library> findAll();
 
+    Library findByName(String name);
 }
