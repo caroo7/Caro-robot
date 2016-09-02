@@ -10,10 +10,12 @@
     <spring:url value="http://getbootstrap.com/examples/jumbotron/jumbotron.css" var="jumbotronCss" />
     <spring:url value="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" var="jQuery"/>
     <spring:url value="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" var="bootstrap"/>
+    <spring:url value="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" var="jQueryTables"/>
     <link href="${bootstrapCss}" rel="stylesheet" />
     <link href="${coreCss}" rel="stylesheet" />
     <link href="${jumbotronCss}" rel="stylesheet" />
     <script src="${jQuery}"></script>
+    <script src="${jQueryTables}"></script>
     <script src="${bootstrap}"></script>
     <title>Robot library checker</title>
 </head>
@@ -47,7 +49,7 @@
 </div>
     <div id="books">
 
-           <table class="table table-bordered">
+           <table class="table table-bordered" id="bookTable">
             <thead>
              <tr id="heads">
              <th>Title</th>
