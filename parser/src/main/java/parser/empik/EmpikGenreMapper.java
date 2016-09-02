@@ -8,35 +8,35 @@ public class EmpikGenreMapper extends Mapper {
 
     {
         loadProperties("/empik/empik_genres.properties");
-        genresMap = new HashMap<>();
-        genresMap.put(props.getProperty("biographical"), "biographical");
-        genresMap.put(props.getProperty("economic"), "economic");
-        genresMap.put(props.getProperty("kids"), "kids");
-        genresMap.put(props.getProperty("youth"), "youth");
-        genresMap.put(props.getProperty("house"), "house");
-        genresMap.put(props.getProperty("encyclopedia"), "encyclopedia");
-        genresMap.put(props.getProperty("fantasy"), "fantasy");
-        genresMap.put(props.getProperty("IT"), "IT");
-        genresMap.put(props.getProperty("technology"), "technology");
-        genresMap.put(props.getProperty("languages"), "languages");
-        genresMap.put(props.getProperty("classic"), "classic");
-        genresMap.put(props.getProperty("comic"), "comic");
-        genresMap.put(props.getProperty("criminal"), "criminal");
-        genresMap.put(props.getProperty("academic_book"), "academic_book");
-        genresMap.put(props.getProperty("kitchen"), "kitchen");
-        genresMap.put(props.getProperty("lectures"), "lectures");
-        genresMap.put(props.getProperty("literature"), "literature");
-        genresMap.put(props.getProperty("medicine"), "medicine");
-        genresMap.put(props.getProperty("science"), "science");
-        genresMap.put(props.getProperty("student_book"), "student_book");
-        genresMap.put(props.getProperty("guide"), "guide");
-        genresMap.put(props.getProperty("law"), "law");
-        genresMap.put(props.getProperty("romance"), "romance");
-        genresMap.put(props.getProperty("prose"), "prose");
-        genresMap.put(props.getProperty("sensation"), "sensation");
-        genresMap.put(props.getProperty("art"), "art");
-        genresMap.put(props.getProperty("vacation"), "vacation");
-        genresMap.put(props.getProperty("thriller"), "thriller");
+        map = new HashMap<>();
+        map.put(props.getProperty("biographical"), "biographical");
+        map.put(props.getProperty("economic"), "economic");
+        map.put(props.getProperty("kids"), "kids");
+        map.put(props.getProperty("youth"), "youth");
+        map.put(props.getProperty("house"), "house");
+        map.put(props.getProperty("encyclopedia"), "encyclopedia");
+        map.put(props.getProperty("fantasy"), "fantasy");
+        map.put(props.getProperty("IT"), "IT");
+        map.put(props.getProperty("technology"), "technology");
+        map.put(props.getProperty("languages"), "languages");
+        map.put(props.getProperty("classic"), "classic");
+        map.put(props.getProperty("comic"), "comic");
+        map.put(props.getProperty("criminal"), "criminal");
+        map.put(props.getProperty("academic_book"), "academic_book");
+        map.put(props.getProperty("kitchen"), "kitchen");
+        map.put(props.getProperty("lectures"), "lectures");
+        map.put(props.getProperty("literature"), "literature");
+        map.put(props.getProperty("medicine"), "medicine");
+        map.put(props.getProperty("science"), "science");
+        map.put(props.getProperty("student_book"), "student_book");
+        map.put(props.getProperty("guide"), "guide");
+        map.put(props.getProperty("law"), "law");
+        map.put(props.getProperty("romance"), "romance");
+        map.put(props.getProperty("prose"), "prose");
+        map.put(props.getProperty("sensation"), "sensation");
+        map.put(props.getProperty("art"), "art");
+        map.put(props.getProperty("vacation"), "vacation");
+        map.put(props.getProperty("thriller"), "thriller");
     }
 
 }

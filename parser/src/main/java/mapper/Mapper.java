@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public abstract class Mapper {
 
-    protected Map<String, String> genresMap;
+    protected Map<String, String> map;
 
     protected Properties props = new Properties();
 
@@ -21,7 +21,8 @@ public abstract class Mapper {
         }
     }
 
-    public Map<String, String> getGenresMap() {
-        return genresMap;
+    public Map<String, String> getMap() {
+        return map;
     }
+
 }
