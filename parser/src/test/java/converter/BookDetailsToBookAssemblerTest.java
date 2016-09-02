@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import parser.empik.EmpikGenreMapper;
+import parser.empik.EmpikTagMapper;
 import repositories.AuthorRepository;
 import repositories.BookRepository;
 import repositories.GenreRepository;
@@ -38,7 +39,7 @@ public class BookDetailsToBookAssemblerTest {
         assembler.authorRepo = authorRepo;
         assembler.bookRepo = bookRepo;
         assembler.genreRepo = genreRepo;
-        assembler.initialize(new EmpikGenreMapper(), new Library("EMPIK", ""));
+        assembler.initialize(new EmpikGenreMapper(), new EmpikTagMapper(), new Library("EMPIK", ""));
     }
 
     @Test

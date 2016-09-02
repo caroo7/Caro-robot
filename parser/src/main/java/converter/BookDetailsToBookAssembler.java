@@ -4,6 +4,7 @@ import DTO.BookDetails;
 import entities.Author;
 import entities.Book;
 import entities.Genre;
+import entities.Tag;
 import entities.Library;
 import lombok.extern.log4j.Log4j2;
 import mapper.Mapper;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import repositories.AuthorRepository;
 import repositories.BookRepository;
 import repositories.GenreRepository;
+import repositories.TagRepository;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -37,9 +39,14 @@ public class BookDetailsToBookAssembler {
     @Autowired
     BookRepository bookRepo;
 
+    @Autowired
+    TagRepository tagRepo;
+
     private final BookFieldPreparator preparator = new BookFieldPreparator();
 
     private Mapper genreMapper;
+
+    private Mapper tagMapper;
 
     private List<Author> authorsCache;
 
@@ -47,8 +54,9 @@ public class BookDetailsToBookAssembler {
 
     private Library library;
 
-    public void initialize(Mapper genreMapper, Library library) {
+    public void initialize(Mapper genreMapper, Mapper tagMapper, Library library) {
         this.genreMapper = genreMapper;
+        this.tagMapper = tagMapper;
         this.library = library;
         authorsCache = authorRepo.findAll();
         booksCache = bookRepo.findAll();
@@ -69,9 +77,10 @@ public class BookDetailsToBookAssembler {
 
         Set<Author> authors = retrieveAuthors(bookDetails);
         Set<Genre> genres = retrieveGenres(bookDetails);
+        Set<Tag> tags = retrieveTags(bookDetails);
 
         Book book = Book.builder().title(title).authors(authors).description(description).
-                discount(discount).price(price).timestamp(timestamp).genres(genres).library(library).build();
+                discount(discount).price(price).timestamp(timestamp).genres(genres).tags(tags).library(library).build();
         if (booksCache.contains(book)) {
             int indexInCache = booksCache.indexOf(book);
             book = booksCache.get(indexInCache);
@@ -101,10 +110,21 @@ public class BookDetailsToBookAssembler {
 
     private Set<Genre> retrieveGenres(BookDetails bookDetails) {
         Set<Genre> genres = new HashSet<>();
-        String genreString = genreMapper.getGenresMap().get(bookDetails.getGenre());
+        String genreString = genreMapper.getMap().get(bookDetails.getGenre());
         Genre genre = genreRepo.findByName(genreString);
         genres.add(genre != null ? genre : genreRepo.findByName("no category"));
         return genres;
+    }
+
+    // todo improve this method - iterate over getTags method
+    private Set<Tag> retrieveTags(BookDetails bookDetails) {
+        Set<Tag> tags = new HashSet<>();
+        String tagString = tagMapper.getMap().get(bookDetails.getTags());
+        Tag tag = tagRepo.findByName(tagString);
+        if(tag != null) {
+            tags.add(tag);
+        }
+        return tags;
     }
 
 }

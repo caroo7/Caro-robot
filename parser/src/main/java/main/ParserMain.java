@@ -45,7 +45,7 @@ public class ParserMain {
         }
         Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
         BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
-        converter.initialize(actualPromotionLibrary.getGenreMapper(), library);
+        converter.initialize(actualPromotionLibrary.getGenreMapper(), actualPromotionLibrary.getTagMapper(), library);
         Set<Book> books = converter.convert(booksDetails);
 
         bookRepo.save(books);
