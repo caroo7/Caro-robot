@@ -17,7 +17,6 @@ import repositories.BookRepository;
 import repositories.LibraryRepository;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Log4j2
 public class ParserMain {
@@ -45,17 +44,9 @@ public class ParserMain {
             System.exit(-1);
         }
         Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
-
-
-        // DEMO PURPOSES!!!
-        // ******************************************************************************************
-        Set<BookDetails> testSubset = booksDetails.stream()
-                .limit(5)
-                .collect(Collectors.toSet());
         BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
         converter.initialize(actualPromotionLibrary.getGenreMapper(), library);
-        Set<Book> books = converter.convert(testSubset);
-        // ******************************************************************************************
+        Set<Book> books = converter.convert(booksDetails);
 
         bookRepo.save(books);
 
