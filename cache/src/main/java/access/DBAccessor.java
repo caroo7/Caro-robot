@@ -1,10 +1,7 @@
 package access;
 
-import config.DatabaseConfiguration;
 import entities.Book;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import repositories.BookRepository;
 
 import java.io.FileNotFoundException;
@@ -21,9 +18,11 @@ public class DBAccessor {
         return bookRepo.findAll();
     }
 
+    private static final String CACHE_FILE_SAVE_LOCATION = "../../web/cache.txt";
+
     public void createCache(List<Book> list) {
         try {
-            FileOutputStream outputStream = new FileOutputStream("web/cache.txt");
+            FileOutputStream outputStream = new FileOutputStream(CACHE_FILE_SAVE_LOCATION);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(list);
         } catch (FileNotFoundException fNFE) {
@@ -33,5 +32,3 @@ public class DBAccessor {
         }
     }
 }
-
-
