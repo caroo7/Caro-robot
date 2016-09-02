@@ -1,6 +1,6 @@
 package servlet;
 
-import config.DatabaseConfiguration;
+import config.CacheConfiguration;
 import config.YggdrasilWebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -14,7 +14,7 @@ public class YggdrasilInitializer extends AbstractAnnotationConfigDispatcherServ
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
                 YggdrasilWebConfig.class,
-                DatabaseConfiguration.class};
+                CacheConfiguration.class};
     }
 
     @Override

@@ -1,6 +1,8 @@
 package main;
 
 import DTO.BookDetails;
+import cache.Cache;
+import config.CacheConfiguration;
 import config.DatabaseConfiguration;
 import config.ParserConfiguration;
 import converter.BookDetailsToBookAssembler;
@@ -27,7 +29,7 @@ public class ParserMain {
             System.exit(-1);
         }
 
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class, ParserConfiguration.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(DatabaseConfiguration.class, ParserConfiguration.class, CacheConfiguration.class);
         LibraryRepository libraryRepo = ctx.getBean(LibraryRepository.class);
         BookRepository bookRepo = ctx.getBean(BookRepository.class);
 
@@ -42,7 +44,6 @@ public class ParserMain {
             System.exit(-1);
         }
         Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
-
         BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
         converter.initialize(actualPromotionLibrary.getGenreMapper(), library);
         Set<Book> books = converter.convert(booksDetails);
@@ -50,6 +51,9 @@ public class ParserMain {
         bookRepo.save(books);
 
         log.info("Parser finish his work.");
+
+        Cache cache = ctx.getBean(Cache.class);
+        cache.initializeCache(bookRepo);
     }
 
 }

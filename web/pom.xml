@@ -103,14 +103,6 @@
             <groupId>github.yggdrasil</groupId>
             <artifactId>cache</artifactId>
         </dependency>
-        <dependency>
-            <groupId>github.yggdrasil</groupId>
-            <artifactId>cache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>github.yggdrasil</groupId>
-            <artifactId>cache</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
