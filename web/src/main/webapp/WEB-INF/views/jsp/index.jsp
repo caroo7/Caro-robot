@@ -9,14 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <spring:url value="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" var="bootstrapCss" />
     <spring:url value="/resources/core/css/reset.css" var="coreCss" />
+    <spring:url value="/resources/core/css/js/scripts.js" var="coreScripts" />
     <spring:url value="http://getbootstrap.com/examples/jumbotron/jumbotron.css" var="jumbotronCss" />
     <spring:url value="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" var="jQuery"/>
     <spring:url value="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" var="bootstrap"/>
+    <spring:url value="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" var="jQueryTables"/>
+    <spring:url value="http://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" var="tableCSS"/>
+    <link href="${tableCSS}" rel="stylesheet"/>
     <link href="${bootstrapCss}" rel="stylesheet" />
     <link href="${coreCss}" rel="stylesheet" />
     <link href="${jumbotronCss}" rel="stylesheet" />
     <script src="${jQuery}"></script>
+    <script src="${jQueryTables}"></script>
     <script src="${bootstrap}"></script>
+    <script src="${coreScripts}"></script>
     <title>Robot library checker</title>
 </head>
 <body>
@@ -49,7 +55,8 @@
 </div>
     <div id="books">
 
-           <table class="table table-bordered">
+
+           <table id="bookTable" class="display" cellspacing="0" width="100%">
             <thead>
              <tr id="heads">
              <th>Title</th>
@@ -60,6 +67,7 @@
              <th>Tags</th>
              <th>Genre</th>
              </tr>
+             <tbody>
                 <c:forEach var="b" items="${books}" varStatus="myIndex">
                 <tr>
                     <td>${b.getTitle()}</td>
@@ -83,7 +91,9 @@
                     <td>${b.getGenres().toString()}</td>
                 </tr>
                 </c:forEach>
+                <tbody>
              </thead>
+
             </table>
 
     </div>
