@@ -1,11 +1,9 @@
 package parser.empik;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,7 +50,8 @@ class EmpikBookParser implements IBookParser {
     @Override
     public String getGenre(Optional<Document> document) {
         if(document.isPresent()) {
-            return document.get().select("div.productLocalizer > a").last().text();
+            // Ebooki
+            return document.get().select("div.productLocalizer > a").get(3).text();
         }
         return null;
     }
