@@ -6,6 +6,9 @@ import parser.PromotionLibrary;
 import parser.empik.EmpikGenreMapper;
 import parser.empik.EmpikPromotionLibrary;
 import parser.empik.EmpikTagMapper;
+import parser.publio.PublioGenreMapper;
+import parser.publio.PublioPromotionLibrary;
+import parser.publio.PublioTagMapper;
 import repositories.LibraryRepository;
 
 import java.util.HashMap;
@@ -22,7 +25,8 @@ public class LibraryMapContainer {
                 PromotionLibrary empikPromotionLibrary = new EmpikPromotionLibrary(new PageLoader(), new EmpikGenreMapper(), new EmpikTagMapper());
                 libraryMap.put(library, empikPromotionLibrary);
             } else if (library.getName().equalsIgnoreCase(Libraries.PUBLIO.toString())) {
-                // todo implement for publio
+                PromotionLibrary publioPromotionLibrary = new PublioPromotionLibrary(new PageLoader(), new PublioGenreMapper(), new PublioTagMapper());
+                libraryMap.put(library, publioPromotionLibrary);
             }
         }
     }

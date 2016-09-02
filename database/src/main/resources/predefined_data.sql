@@ -2,6 +2,7 @@ insert into library (name, url) values ('EMPIK', 'http://www.empik.com/ebooki/pr
 insert into library (name, url) values ('PUBLIO', 'http://www.publio.pl/szukaj,promocja.html?sections=EBOOK');
 
 insert into genre (name) values ('no category');
+
 insert into genre (name) values ('biographical');
 insert into genre (name) values ('economic');
 insert into genre (name) values ('kids');
@@ -30,3 +31,14 @@ insert into genre (name) values ('sensation');
 insert into genre (name) values ('art');
 insert into genre (name) values ('vacation');
 insert into genre (name) values ('thriller');
+
+insert into genre (name) values ('album');
+insert into genre (name) values ('sport');
+insert into genre (name) values ('poetry');
+insert into genre (name) values ('erotic');
+insert into genre (name) values ('fact');
+insert into genre (name) values ('professional');
+insert into genre (name) values ('history');
+insert into genre (name) values ('political');
+insert into genre (name) values ('novel');
+insert into genre (name) values ('psychology');
