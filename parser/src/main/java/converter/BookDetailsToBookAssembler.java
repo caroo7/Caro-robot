@@ -15,6 +15,7 @@ import repositories.GenreRepository;
 import repositories.TagRepository;
 
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -84,8 +85,8 @@ public class BookDetailsToBookAssembler {
         if (booksCache.contains(book)) {
             int indexInCache = booksCache.indexOf(book);
             book = booksCache.get(indexInCache);
-        }else {
-            log.debug("Book will be saved on database: "+book);
+        } else {
+            log.debug("Book will be saved on database: " + book);
         }
 
         return book;
@@ -98,7 +99,7 @@ public class BookDetailsToBookAssembler {
             Author author = new Author(s);
             if (!this.authorsCache.contains(author)) {
                 authorRepo.save(author);
-                log.debug("Author will be saved on database: "+author);
+                log.debug("Author will be saved on database: " + author);
                 this.authorsCache.add(author);
             } else {
                 int indexInCache = authorsCache.indexOf(author);
@@ -116,15 +117,14 @@ public class BookDetailsToBookAssembler {
         return genres;
     }
 
-    // todo improve this method - iterate over getTags method
+
     private Set<Tag> retrieveTags(BookDetails bookDetails) {
-        Set<Tag> tags = new HashSet<>();
-        String tagString = tagMapper.getMap().get(bookDetails.getTags());
-        Tag tag = tagRepo.findByName(tagString);
-        if(tag != null) {
-            tags.add(tag);
+        if (bookDetails.getTags() == null) {
+            return Collections.emptySet();
         }
-        return tags;
+        return bookDetails.getTags().stream().map(s -> tagRepo.findByName(tagMapper.getMap().get(s)))
+                .filter(tag -> tag != null)
+                .collect(Collectors.toSet());
     }
 
 }
