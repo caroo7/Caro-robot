@@ -15,15 +15,14 @@ public class YggdrasilController {
 
     @Autowired
     private CacheReader cacheReader;
-
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
-
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
-        List<Book> books = cacheReader.getBooksFromCache();
-        model.addObject("books", books);
+        List<Book> empik = cacheReader.getBooksFromCache("EMPIK");
+        List<Book> publio = cacheReader.getBooksFromCache("PUBLIO");
+        model.addObject("empik", empik);
+        model.addObject("publio", publio);
         return model;
     }
-
-
 }
