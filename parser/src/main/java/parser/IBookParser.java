@@ -34,7 +34,6 @@ public interface IBookParser {
 
 
     default BookDetails parse(Optional<Document> document) {
-        System.out.println(document.get().baseUri());
         BookDetails book = BookDetails.builder().authors(getAuthors(document)).title(getTitle(document))
                 .price(getPrice(document)).percentageDiscount(getPercentageDiscount(document))
                 .genre(getGenre(document)).description(getDescription(document)).tags(getTags(document))
