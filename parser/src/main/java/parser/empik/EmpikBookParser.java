@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -65,7 +66,7 @@ class EmpikBookParser implements IBookParser {
 
     @Override
     public Set<String> getTags(Optional<Document> document) {
-        return null;
+        return new HashSet<>();
     }
 
     @Override

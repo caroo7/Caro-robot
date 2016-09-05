@@ -1,11 +1,7 @@
 package converter;
 
 import DTO.BookDetails;
-import entities.Author;
-import entities.Book;
-import entities.Genre;
-import entities.Tag;
-import entities.Library;
+import entities.*;
 import lombok.extern.log4j.Log4j2;
 import mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +11,9 @@ import repositories.GenreRepository;
 import repositories.TagRepository;
 
 import java.sql.Timestamp;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -82,13 +78,15 @@ public class BookDetailsToBookAssembler {
 
         Book book = Book.builder().title(title).authors(authors).description(description).
                 discount(discount).price(price).timestamp(timestamp).genres(genres).tags(tags).library(library).build();
-        if (booksCache.contains(book)) {
-            int indexInCache = booksCache.indexOf(book);
-            book = booksCache.get(indexInCache);
-        } else {
+
+        if (!booksCache.contains(book)) {
             log.debug("Book will be saved on database: " + book);
+            return book;
         }
 
+        int indexInCache = booksCache.indexOf(book);
+        book = booksCache.get(indexInCache);
+        book.setTimestamp(new Timestamp(System.currentTimeMillis()));
         return book;
     }
 
@@ -117,13 +115,9 @@ public class BookDetailsToBookAssembler {
         return genres;
     }
 
-
     private Set<Tag> retrieveTags(BookDetails bookDetails) {
-        if (bookDetails.getTags() == null) {
-            return Collections.emptySet();
-        }
         return bookDetails.getTags().stream().map(s -> tagRepo.findByName(tagMapper.getMap().get(s)))
-                .filter(tag -> tag != null)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
     }
 
