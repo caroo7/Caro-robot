@@ -4,7 +4,7 @@ import org.jsoup.nodes.Document;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ class EmpikBookParser implements IBookParser {
         if (document.isPresent()) {
             return  document.get().select("span.pDAuthorList > a").stream().map(element -> element.text()).collect(Collectors.toSet());
         }
-        return null;
+        return Collections.emptySet();
     }
     @Override
     public String getPrice(Optional<Document> document) {
@@ -66,7 +66,7 @@ class EmpikBookParser implements IBookParser {
 
     @Override
     public Set<String> getTags(Optional<Document> document) {
-        return new HashSet<>();
+        return Collections.emptySet();
     }
 
     @Override

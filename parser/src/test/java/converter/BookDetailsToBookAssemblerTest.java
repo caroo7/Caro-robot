@@ -15,6 +15,7 @@ import repositories.BookRepository;
 import repositories.GenreRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -103,7 +104,8 @@ public class BookDetailsToBookAssemblerTest {
 
         Set<String> authors = new HashSet<>();
         authors.add("Grisham John");
-        BookDetails.BookDetailsBuilder builder = BookDetails.builder().description("opis").authors(authors).price("29,90 zl").percentageDiscount("30%").genre("Prawo");
+        BookDetails.BookDetailsBuilder builder = BookDetails.builder().description("opis").authors(authors)
+                .price("29,90 zl").percentageDiscount("30%").genre("Prawo").tags(Collections.emptySet());
 
         if (isValid) {
             builder.title("Firma");

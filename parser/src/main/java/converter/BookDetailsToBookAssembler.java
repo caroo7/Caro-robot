@@ -70,7 +70,7 @@ public class BookDetailsToBookAssembler {
         String description = preparator.validateField(bookDetails.getDescription(), STANDARD_DESCRIPTION_LENGTH);
         String discount = preparator.validateField(bookDetails.getPercentageDiscount(), STANDARD_FIELD_LENGTH);
         String price = preparator.validateField(bookDetails.getPrice(), STANDARD_FIELD_LENGTH);
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Timestamp timestamp = new Timestamp(System.nanoTime());
 
         Set<Author> authors = retrieveAuthors(bookDetails);
         Set<Genre> genres = retrieveGenres(bookDetails);
@@ -84,9 +84,13 @@ public class BookDetailsToBookAssembler {
             return book;
         }
 
+        return retrieveBookFromCache(book);
+    }
+
+    private Book retrieveBookFromCache(Book book) {
         int indexInCache = booksCache.indexOf(book);
         book = booksCache.get(indexInCache);
-        book.setTimestamp(new Timestamp(System.currentTimeMillis()));
+        book.setTimestamp(new Timestamp(System.nanoTime()));
         return book;
     }
 

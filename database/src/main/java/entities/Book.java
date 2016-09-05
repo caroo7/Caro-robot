@@ -69,6 +69,11 @@ public class Book implements Serializable {
     private Library library;
 
 
+    /**
+     * Books are distinguished based on title, price (probably it shouldn't be?) and library.
+     * If in other library there is book with same title it is treated as different book
+     * (it will be saved as another record in database).
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,7 +84,6 @@ public class Book implements Serializable {
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
         if (price != null ? !price.equals(book.price) : book.price != null) return false;
         return library != null ? library.equals(book.library) : book.library == null;
-
     }
 
     @Override

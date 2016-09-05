@@ -40,11 +40,11 @@ public class ParserMain {
         for(Libraries lib: Libraries.values()) {
             log.info("Start parser for " + lib.toString() + " library.");
 
-            Library library = libraryRepo.findByName(lib.toString());
+            Library library = libraryRepo.findByName(lib.name());
             PromotionLibrary actualPromotionLibrary = libraryMapper.getLibrary(library);
 
             if (actualPromotionLibrary == null) {
-                log.error("Promotion library for name " + lib.toString() + " doesn't exist!");
+                log.error("Promotion library for name " + lib.name() + " doesn't exist!");
                 continue;
             }
 
@@ -57,7 +57,7 @@ public class ParserMain {
 
             Cache cache = ctx.getBean(Cache.class);
             cache.initializeCache(bookRepo, libraryRepo.findByName(lib.name()));
-            log.info("End parser for " + lib.toString() + " library.");
+            log.info("End parser for " + lib.name() + " library.");
         }
 
         log.info("Parser finish his work.");
