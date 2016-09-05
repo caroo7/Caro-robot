@@ -53,7 +53,7 @@ public class ParserMain {
         log.info("Parser finish his work.");
 
         Cache cache = ctx.getBean(Cache.class);
-        cache.initializeCache(bookRepo);
+        cache.initializeCache(bookRepo, args[0]);
     }
 
 }

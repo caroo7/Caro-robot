@@ -12,10 +12,10 @@ import java.util.List;
 @Log4j2
 public class CacheReader {
 
-    public List<Book> getBooksFromCache() {
+    public List<Book> getBooksFromCache(String libName) {
 
         List<Book> books = new ArrayList<>();
-        try (FileInputStream fileInputStream = new FileInputStream("cache.txt")) {
+        try (FileInputStream fileInputStream = new FileInputStream(libName+"cache.txt")) {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             books = (List<Book>) objectInputStream.readObject();
             objectInputStream.close();
