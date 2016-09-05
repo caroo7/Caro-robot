@@ -40,6 +40,7 @@ public class PublioBookParser implements IBookParser {
 
     /**
      * Price has format 25,90 zł. For extract some data ParserUtils is used.
+     *
      * @param document
      * @return
      */
@@ -53,7 +54,7 @@ public class PublioBookParser implements IBookParser {
             priceWithoutDiscount = ParserUtils.extractDataFromRegex("^([0-9]+[,]?[0-9]?).*", priceWithoutDiscount).replaceAll(",", ".");
             priceAfterDiscount = ParserUtils.extractDataFromRegex("^([0-9]+[,]?[0-9]?).*", priceAfterDiscount).replaceAll(",", ".");
 
-            return ParserUtils.calculatePercentageDiscount( new Float(priceWithoutDiscount),new Float(priceAfterDiscount));
+            return ParserUtils.calculatePercentageDiscount(new Float(priceWithoutDiscount), new Float(priceAfterDiscount));
         }
         return null;
     }
@@ -77,17 +78,18 @@ public class PublioBookParser implements IBookParser {
 
     @Override
     public Set<String> getTags(Optional<Document> document) {
-        if(document.isPresent()) {
-            Set<String> tags=new HashSet<>();
-            Elements tagsElements=document.get().select("div.product-card-labels-info > a");
-            return tagsElements.stream().map(element -> element.text()).collect(Collectors.toSet());
+        if (!document.isPresent()) {
+            return new HashSet<>();
         }
-        return null;
+
+        Elements tagsElements = document.get().select("div.product-card-labels-info > a");
+        return tagsElements.stream().map(element -> element.text()).collect(Collectors.toSet());
+
     }
 
     @Override
     public String getUrl(Optional<Document> document) {
-        if(document.isPresent()) {
+        if (document.isPresent()) {
             return document.get().baseUri();
         }
         return null;
@@ -95,7 +97,7 @@ public class PublioBookParser implements IBookParser {
 
     @Override
     public String getCoverUrl(Optional<Document> document) {
-        if(document.isPresent()) {
+        if (document.isPresent()) {
             return document.get().select("div.product-card-cover > a > img").first().attr("abs:src");
         }
         return null;
