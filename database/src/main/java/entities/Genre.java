@@ -1,7 +1,6 @@
 package entities;
 
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +9,6 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@ToString
 @NoArgsConstructor
 public class Genre implements Serializable {
 
@@ -25,6 +23,11 @@ public class Genre implements Serializable {
     }
 
     public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
         return name;
     }
 }

@@ -30,5 +30,5 @@ buildNumber.properties
 
 **/logs/*.log
 /cache.txt
-/web/PUBLIOcache.txt
-/web/EMPIKcache.txt
+/web/PUBLIO
+/web/EMPIK

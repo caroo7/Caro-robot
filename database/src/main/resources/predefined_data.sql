@@ -42,3 +42,7 @@ insert into genre (name) values ('history');
 insert into genre (name) values ('political');
 insert into genre (name) values ('novel');
 insert into genre (name) values ('psychology');
+
+insert into tag (name) values ('recent');
+insert into tag (name) values ('bestseller');
+insert into tag (name) values ('promotion');

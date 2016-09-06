@@ -1,20 +1,19 @@
 package converter;
 
 import DTO.BookDetails;
-import entities.Author;
-import entities.Book;
-import entities.Genre;
-import entities.Library;
+import entities.*;
 import lombok.extern.log4j.Log4j2;
 import mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import repositories.AuthorRepository;
 import repositories.BookRepository;
 import repositories.GenreRepository;
+import repositories.TagRepository;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,9 +36,14 @@ public class BookDetailsToBookAssembler {
     @Autowired
     BookRepository bookRepo;
 
+    @Autowired
+    TagRepository tagRepo;
+
     private final BookFieldPreparator preparator = new BookFieldPreparator();
 
     private Mapper genreMapper;
+
+    private Mapper tagMapper;
 
     private List<Author> authorsCache;
 
@@ -47,8 +51,9 @@ public class BookDetailsToBookAssembler {
 
     private Library library;
 
-    public void initialize(Mapper genreMapper, Library library) {
+    public void initialize(Mapper genreMapper, Mapper tagMapper, Library library) {
         this.genreMapper = genreMapper;
+        this.tagMapper = tagMapper;
         this.library = library;
         authorsCache = authorRepo.findAll();
         booksCache = bookRepo.findAll();
@@ -65,20 +70,27 @@ public class BookDetailsToBookAssembler {
         String description = preparator.validateField(bookDetails.getDescription(), STANDARD_DESCRIPTION_LENGTH);
         String discount = preparator.validateField(bookDetails.getPercentageDiscount(), STANDARD_FIELD_LENGTH);
         String price = preparator.validateField(bookDetails.getPrice(), STANDARD_FIELD_LENGTH);
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Timestamp timestamp = new Timestamp(System.nanoTime());
 
         Set<Author> authors = retrieveAuthors(bookDetails);
         Set<Genre> genres = retrieveGenres(bookDetails);
+        Set<Tag> tags = retrieveTags(bookDetails);
 
         Book book = Book.builder().title(title).authors(authors).description(description).
-                discount(discount).price(price).timestamp(timestamp).genres(genres).library(library).build();
-        if (booksCache.contains(book)) {
-            int indexInCache = booksCache.indexOf(book);
-            book = booksCache.get(indexInCache);
-        }else {
-            log.debug("Book will be saved on database: "+book);
+                discount(discount).price(price).timestamp(timestamp).genres(genres).tags(tags).library(library).build();
+
+        if (!booksCache.contains(book)) {
+            log.debug("Book will be saved on database: " + book);
+            return book;
         }
 
+        return retrieveBookFromCache(book);
+    }
+
+    private Book retrieveBookFromCache(Book book) {
+        int indexInCache = booksCache.indexOf(book);
+        book = booksCache.get(indexInCache);
+        book.setTimestamp(new Timestamp(System.nanoTime()));
         return book;
     }
 
@@ -89,7 +101,7 @@ public class BookDetailsToBookAssembler {
             Author author = new Author(s);
             if (!this.authorsCache.contains(author)) {
                 authorRepo.save(author);
-                log.debug("Author will be saved on database: "+author);
+                log.debug("Author will be saved on database: " + author);
                 this.authorsCache.add(author);
             } else {
                 int indexInCache = authorsCache.indexOf(author);
@@ -101,10 +113,16 @@ public class BookDetailsToBookAssembler {
 
     private Set<Genre> retrieveGenres(BookDetails bookDetails) {
         Set<Genre> genres = new HashSet<>();
-        String genreString = genreMapper.getGenresMap().get(bookDetails.getGenre());
+        String genreString = genreMapper.getMap().get(bookDetails.getGenre());
         Genre genre = genreRepo.findByName(genreString);
         genres.add(genre != null ? genre : genreRepo.findByName("no category"));
         return genres;
+    }
+
+    private Set<Tag> retrieveTags(BookDetails bookDetails) {
+        return bookDetails.getTags().stream().map(s -> tagRepo.findByName(tagMapper.getMap().get(s)))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
 }
