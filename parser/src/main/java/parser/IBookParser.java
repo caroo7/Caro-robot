@@ -13,7 +13,6 @@ public interface IBookParser {
 
     Logger logger = LogManager.getRootLogger();
 
-
     String getTitle(Optional<Document> document);
 
     //String in set contains surname and name ex. Wroński Marcin
@@ -35,7 +34,6 @@ public interface IBookParser {
 
 
     default BookDetails parse(Optional<Document> document) {
-
         BookDetails book = BookDetails.builder().authors(getAuthors(document)).title(getTitle(document))
                 .price(getPrice(document)).percentageDiscount(getPercentageDiscount(document))
                 .genre(getGenre(document)).description(getDescription(document)).tags(getTags(document))

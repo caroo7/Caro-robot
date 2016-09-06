@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Created by Grzesiek on 2016-08-28.
- */
 public abstract class BookCrawler {
 
     private final IBookParser bookParser;

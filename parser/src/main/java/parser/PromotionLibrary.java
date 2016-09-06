@@ -3,20 +3,16 @@ package parser;
 import DTO.BookDetails;
 import mapper.Mapper;
 
-import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Grzesiek on 2016-08-28.
- */
 public abstract class PromotionLibrary {
-    private IUrlCrawler urlCrawler;
+    private UrlCrawler urlCrawler;
     private BookCrawler bookCrawler;
 
     protected Mapper genreMapper;
     protected Mapper tagMapper;
 
-    public PromotionLibrary(IUrlCrawler urlCrawler,BookCrawler bookCrawler){
+    public PromotionLibrary(UrlCrawler urlCrawler, BookCrawler bookCrawler){
         this.urlCrawler=urlCrawler;
         this.bookCrawler=bookCrawler;
     }

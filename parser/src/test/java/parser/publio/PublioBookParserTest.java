@@ -22,7 +22,7 @@ public class PublioBookParserTest {
         //arrange
         String htmlPage = new String(Files.readAllBytes(Paths.get(getClass().getResource("/publio/07_zgłasza_się.html").toURI())));
         Document document = Jsoup.parse(htmlPage);
-        document.setBaseUri(PublioUrlCrawler.MAIN_URL);
+        document.setBaseUri("http://www.publio.pl");
         IBookParser bookParser = new PublioBookParser();
 
         Set<String> expectedAuthors=new HashSet<>();
