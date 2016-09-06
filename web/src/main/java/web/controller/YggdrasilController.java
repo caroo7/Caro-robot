@@ -38,5 +38,11 @@ public class YggdrasilController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/account")
+    public ModelAndView account(){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
 
 }
