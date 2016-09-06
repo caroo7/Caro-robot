@@ -6,6 +6,7 @@ import org.jsoup.select.Elements;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -27,7 +28,7 @@ class HelionBookParser implements IBookParser {
         if (document.isPresent()) {
             return Stream.of(document.get().select("div.author-group > dl.author > dd").first().text().split(",")).map(s -> ParserUtils.moveLastWordOnBeginning(s.trim())).collect(Collectors.toSet());
         }
-        return null;
+        return Collections.emptySet();
     }
 
     @Override
@@ -99,7 +100,7 @@ class HelionBookParser implements IBookParser {
             Elements tagsElements = document.get().select("ul.tags > li");
             return tagsElements.stream().filter(e -> !e.text().contains("#")).map(element -> element.text().replaceAll("Przejdź", "").trim()).collect(Collectors.toSet());
         }
-        return null;
+        return Collections.emptySet();
     }
 
     @Override

@@ -14,6 +14,9 @@ import static org.mockito.Mockito.when;
 
 public class PublioUrlCrawlerTest {
 
+    private final String MAIN_URL="http://www.publio.pl";
+    private final String PROMOTION_URL=MAIN_URL+"/szukaj,promocja.html?sections=EBOOK";
+
     @Test
     public void testPrepareLinksToAllBooks() throws IOException, URISyntaxException {
         //arrange
@@ -21,8 +24,8 @@ public class PublioUrlCrawlerTest {
 
         PublioUrlCrawler publioUrlCrawler = new PublioUrlCrawler(pageLoader);
 
-        when(pageLoader.getPage(publioUrlCrawler.PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/publio/book_list_p1.html", publioUrlCrawler.MAIN_URL));
-        when(pageLoader.getPage("http://www.publio.pl/szukaj,strona2,promocja.html?sections=EBOOK")).thenReturn(Utils.loadHtmlDocument("/publio/book_list_p2.html", publioUrlCrawler.MAIN_URL));
+        when(pageLoader.getPage(PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/publio/book_list_p1.html", MAIN_URL));
+        when(pageLoader.getPage(MAIN_URL+"/szukaj,strona2,promocja.html?sections=EBOOK")).thenReturn(Utils.loadHtmlDocument("/publio/book_list_p2.html", MAIN_URL));
 
         List<String> expectedResult = Utils.loadFileByLineToList("/publio/urlsToBookDetails.txt");
 

@@ -14,6 +14,9 @@ import static org.mockito.Mockito.when;
 
 public class HelionUrlCrawlerTest {
 
+    private final String MAIN_URL="http://helion.pl";
+    private final String PROMOTION_URL=MAIN_URL+"/kategorie/ebooki?formaty=p,em&ceny=-&wydawca=&jezyk=";
+
     @Test
     public void testPrepareLinksToAllBooks() throws IOException, URISyntaxException {
         //arrange
@@ -21,8 +24,8 @@ public class HelionUrlCrawlerTest {
 
         HelionUrlCrawler helionUrlCrawler = new HelionUrlCrawler(pageLoader);
 
-        when(pageLoader.getPage(HelionUrlCrawler.PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/helion/book_list_p1.html", HelionUrlCrawler.MAIN_URL));
-        when(pageLoader.getPage("http://helion.pl/kategorie/ebooki/2?ceny=-&formaty=p,em&jezyk=&wydawca=")).thenReturn(Utils.loadHtmlDocument("/helion/book_list_p2.html", HelionUrlCrawler.MAIN_URL));
+        when(pageLoader.getPage(PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/helion/book_list_p1.html", MAIN_URL));
+        when(pageLoader.getPage(MAIN_URL+"/kategorie/ebooki/2?ceny=-&formaty=p,em&jezyk=&wydawca=")).thenReturn(Utils.loadHtmlDocument("/helion/book_list_p2.html",MAIN_URL));
 
         List<String> expectedResult = Utils.loadFileByLineToList("/helion/urlsToBookDetails.txt");
 

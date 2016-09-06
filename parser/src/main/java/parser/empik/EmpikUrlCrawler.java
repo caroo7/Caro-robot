@@ -12,12 +12,10 @@ import java.util.stream.Collectors;
 
 class EmpikUrlCrawler extends UrlCrawler {
 
-    static final String MAIN_URL = "http://www.empik.com";
-    static final String PROMOTION_URL = MAIN_URL + "/ebooki/promocje";
-
     private final EmpikUrlParser empikUrlParser;
 
     EmpikUrlCrawler(PageLoader pageLoader) {
+        super("http://www.empik.com","http://www.empik.com/ebooki/promocje");
         this.pageLoader = pageLoader;
         this.empikUrlParser = new EmpikUrlParser();
     }

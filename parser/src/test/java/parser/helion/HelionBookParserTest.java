@@ -21,7 +21,7 @@ public class HelionBookParserTest {
         //arrange
         String htmlPage = new String(Files.readAllBytes(Paths.get(getClass().getResource("/helion/model-biznesowy.html").toURI())));
         Document document = Jsoup.parse(htmlPage);
-        document.setBaseUri(HelionUrlCrawler.MAIN_URL);
+        document.setBaseUri("http://helion.pl");
         IBookParser bookParser = new HelionBookParser();
 
         Set<String> expectedAuthors=new HashSet<>();

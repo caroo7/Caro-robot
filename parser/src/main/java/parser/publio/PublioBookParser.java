@@ -5,6 +5,7 @@ import org.jsoup.select.Elements;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -25,7 +26,7 @@ public class PublioBookParser implements IBookParser {
         if (document.isPresent()) {
             return document.get().select("div.product-detail-value > a").stream().filter(element -> element.getElementsByAttributeValueMatching("data-seo-id", "authors").size() != 0).map(element -> ParserUtils.moveLastWordOnBeginning(element.attr("title"))).collect(Collectors.toSet());
         }
-        return null;
+        return Collections.emptySet();
     }
 
 
