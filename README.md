@@ -2,6 +2,7 @@
 Screen scraping project for e-libraries
 
 +20 points - first estimates
++2 points
 
 How to run?
 - clone project from repository: https://github.com/caroo7/Caro-robot

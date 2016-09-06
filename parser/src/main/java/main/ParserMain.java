@@ -18,6 +18,7 @@ import repositories.BookRepository;
 import repositories.LibraryRepository;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Log4j2
 public class ParserMain {
@@ -40,6 +41,13 @@ public class ParserMain {
         for(Libraries lib: Libraries.values()) {
             log.info("Start parser for " + lib.toString() + " library.");
 
+            // FOR DEMO
+            // *********************************************************************************************************
+            /*if(!lib.name().equals(Libraries.EMPIK.toString())) {
+                continue;
+            }*/
+            // *********************************************************************************************************
+
             Library library = libraryRepo.findByName(lib.name());
             PromotionLibrary actualPromotionLibrary = libraryMapper.getLibrary(library);
 
@@ -49,9 +57,15 @@ public class ParserMain {
             }
 
             Set<BookDetails> booksDetails = actualPromotionLibrary.collect();
+
+            // FOR DEMO
+            // *********************************************************************************************************
+            Set<BookDetails> booksToSave = booksDetails.stream().limit(3).collect(Collectors.toSet());
+            //**********************************************************************************************************
+
             BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
             converter.initialize(actualPromotionLibrary.getGenreMapper(), actualPromotionLibrary.getTagMapper(), library);
-            Set<Book> books = converter.convert(booksDetails);
+            Set<Book> books = converter.convert(booksToSave);
 
             bookRepo.save(books);
 
