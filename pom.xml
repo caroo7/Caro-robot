@@ -14,6 +14,7 @@
         <module>parser</module>
         <module>web</module>
         <module>cache</module>
+        <module>security</module>
     </modules>
 
     <description>Web application responsible for presenting books which are on promotion in different bookshops. Another functionality is to retrieve necessary data using parsers</description>
@@ -28,6 +29,7 @@
 
         <spring.version>4.3.2.RELEASE</spring.version>
         <springtestmvc.version>1.0.0.BUILD-SNAPSHOT</springtestmvc.version>
+        <springsecurity.version>4.1.3.RELEASE</springsecurity.version>
         <testng.version>6.9.10</testng.version>
         <mockito.version>1.10.19</mockito.version>
         <hibernate.version>5.1.1.Final</hibernate.version> <!-- newest hibernate version is 5.2.2 but in there is a problem between spring 4.3.2
@@ -48,6 +50,7 @@
 
         <database.module.version>1.0-SNAPSHOT</database.module.version>
         <cache.module.version>1.0-SNAPSHOT</cache.module.version>
+        <security.module.version>1.0-SNAPSHOT</security.module.version>
     </properties>
 
     <prerequisites>
@@ -67,6 +70,12 @@
                 <groupId>github.yggdrasil</groupId>
                 <artifactId>cache</artifactId>
                 <version>${cache.module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>github.yggdrasil</groupId>
+                <artifactId>security</artifactId>
+                <version>${security.module.version}</version>
             </dependency>
 
             <dependency>
@@ -97,6 +106,11 @@
                 <artifactId>spring-test-mvc</artifactId>
                 <version>${springtestmvc.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${springsecurity.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
