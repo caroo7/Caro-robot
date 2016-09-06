@@ -32,5 +32,11 @@ public class YggdrasilController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/register")
+    public ModelAndView register(){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
 
 }
