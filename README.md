@@ -12,6 +12,6 @@ How to run?
 - in Caro-robot\parser\target \parser-executable.jar file will be created. Run it:
   java -jar parser-executable.jar. Database will' be created, ebooks from empik and publio will be downloaded,
   everything will be saved on database and finally cache files will be created (cache module will save serialized objects from database into files).
-- go to Caro-robot\web and run 'mvn jetty run' - web client will appear in browser under: 'localhost:8080/servlet' address and you can use it.
+- go to Caro-robot\web and run 'mvn jetty:run' - web client will appear in browser under: 'localhost:8080/servlet' address and you can use it.
 
 FOR DEMO PURPOSES, RIGHT NOW ONLY FEW BOOKS ARE PROCESSED BECAUSE OF PERFORMANCE!
