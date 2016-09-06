@@ -1,41 +1,31 @@
-package entities;
+package DTO;
 
+import entities.Library;
 import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Set;
 
-// not sure about model classes serialization, maybe later we create some kind of DTO classes to passing over HTTP
-@Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book implements Serializable {
+public class BookDTO implements Serializable {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @Getter
+    @Setter
     private String title;
 
     @Getter
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "book_author",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id")
-    )
-    private Set<Author> authors;
+    @Setter
+    private String authors;
 
     @Getter
-    @Column(length = 10000)
+    @Setter
     private String description;
     @Getter
+    @Setter
     private String discount;
     @Getter
+    @Setter
     private String price;
 
     @Setter
@@ -43,36 +33,25 @@ public class Book implements Serializable {
     private Timestamp timestamp;
 
     @Getter
+    @Setter
     private String url;
 
     @Getter
-    @Column(name = "cover_url")
+    @Setter
     private String coverUrl;
 
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "book_tag",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
     @Getter
-    private Set<Tag> tags;
+    @Setter
+    private String tags;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "book_genre",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id")
-    )
     @Getter
-    private Set<Genre> genres;
+    @Setter
+    private String genres;
 
 
-    @ManyToOne
-    @JoinColumn(name = "library_id")
     @Getter
+    @Setter
     private Library library;
 
 
@@ -86,7 +65,7 @@ public class Book implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Book book = (Book) o;
+        BookDTO book = (BookDTO) o;
 
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
         if (price != null ? !price.equals(book.price) : book.price != null) return false;
@@ -104,5 +83,22 @@ public class Book implements Serializable {
         result = 31 * result + (tags != null ? tags.hashCode() : 0);
         result = 31 * result + (genres != null ? genres.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "BookDTO{" +
+                "title='" + title + '\'' +
+                ", authors='" + authors + '\'' +
+                ", description='" + description + '\'' +
+                ", discount='" + discount + '\'' +
+                ", price='" + price + '\'' +
+                ", timestamp=" + timestamp +
+                ", url='" + url + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", tags='" + tags + '\'' +
+                ", genres='" + genres + '\'' +
+                ", library=" + library +
+                '}';
     }
 }

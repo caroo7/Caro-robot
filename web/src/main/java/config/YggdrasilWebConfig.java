@@ -31,4 +31,10 @@ public class YggdrasilWebConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
+//    @Bean
+//    public ModelMapper modelMapper() {
+//
+//        return modelMapper;
+//    }
+
 }
