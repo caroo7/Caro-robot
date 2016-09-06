@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class User {
+public class RobotUser {
 
     @Setter
     private String username;

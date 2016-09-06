@@ -1,9 +1,9 @@
 package repositories;
 
-import entities.User;
+import entities.RobotUser;
 
 public interface UserRepository {
 
-    User findByUserName(String username);
+    RobotUser findByUserName(String username);
 
 }
