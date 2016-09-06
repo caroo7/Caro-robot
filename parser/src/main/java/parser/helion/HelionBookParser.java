@@ -62,7 +62,7 @@ class HelionBookParser implements IBookParser {
 
                 return ParserUtils.calculatePercentageDiscount(new Float(priceWithoutDiscount), new Float(priceAfterDiscount));
             }
-            return "100 %";
+            return "100%";
 
         }
         return null;

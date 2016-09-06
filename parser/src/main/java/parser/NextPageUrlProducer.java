@@ -2,15 +2,13 @@ package parser;
 
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
-import parser.IPageUrlParser;
-import parser.PageLoader;
 
 import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 
 /**
  * This thread is needed for getting url addresses to next pages by using ">>" button
- * Publio page is really slow so it is need to produce url next pages and this result is
+ * Some pages are really slow so it is need to produce url next pages and this result is
  * consume by NextPageUrlConsumer which produce url to book details
  */
 @Log4j2
