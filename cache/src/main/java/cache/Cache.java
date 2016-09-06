@@ -10,11 +10,11 @@ import java.util.List;
 @Log4j2
 public class Cache {
 
-    public void initializeCache(BookRepository bookRepo) {
+    public void initializeCache(BookRepository bookRepo, String libName) {
         log.info("Cache creation initialized");
         DBAccessor dbAccessor = new DBAccessor();
         List<Book> bookList = dbAccessor.getBooks(bookRepo);
-        dbAccessor.createCache(bookList);
+        dbAccessor.createCache(bookList, libName);
         log.info("Cache created");
     }
 

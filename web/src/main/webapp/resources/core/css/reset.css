@@ -66,13 +66,20 @@ table {
 }
 
 
-#books{
+#empikBooks{
     margin-top:10px;
     margin-left:30px;
     width: 75%;
     float:left;
 
 
+}
+
+#publioBooks{
+    margin-top:10px;
+    margin-left:30px;
+    width: 75%;
+    float:left;
 }
 
 .panel{

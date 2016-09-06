@@ -39,7 +39,7 @@
         </div>
       </div>
     </nav>
-<div class"container text-center">
+<div class="container text-center">
  <div class="jumbotron">
       <div class="container">
         <h1>Robot library application</h1>
@@ -47,16 +47,16 @@
     </div>
 <div class="container">
     <div id="libraries" class="list-group">
-        <a href="#" class="list-group-item active">Empik</a>
-        <a href="#" class="list-group-item active">Library2</a>
+        <a href="#" class="list-group-item active" onclick="replace('publioBooks','empikBooks')"> Empik</a>
+        <a href="#" class="list-group-item active" onclick="replace('empikBooks','publioBooks')">Publio</a>
         <a href="#" class="list-group-item active">Library3</a>
         <a href="#" class="list-group-item active">Library4</a>
         <a href="#" class="list-group-item active">Library5</a>
 </div>
-    <div id="books">
+    <div id="empikBooks">
 
 
-           <table id="bookTable" class="display" cellspacing="0" width="100%">
+           <table class="bookTable" class="display" cellspacing="0" width="100%">
             <thead>
              <tr id="heads">
              <th>Title</th>
@@ -67,36 +67,99 @@
              <th>Tags</th>
              <th>Genre</th>
              </tr>
+             </thead>
              <tbody>
-                <c:forEach var="b" items="${books}" varStatus="myIndex">
+
+                <c:forEach var="e" items="${empik}" varStatus="myIndex">
                 <tr>
-                    <td>${b.getTitle()}</td>
-                    <td>${b.getAuthors()}</td>
-                    <td>${b.getPrice()}</td>
-                    <td>${b.getDiscount()}</td>
+                    <td>${e.getTitle()}</td>
+                    <td>${e.getAuthors()}</td>
+                    <td>${e.getPrice()}</td>
+                    <td>${e.getDiscount()}</td>
                     <td>
                     <script style="text/javascript">
                                $(function(){
                                     $('#toggler${myIndex.index}').click(function(e){
                                         e.preventDefault();
-                                        $('#hiddenText${myIndex.index}').toggle();
+                                        $('#empikHiddenText${myIndex.index}').toggle();
                                     });
                                });
                     </script>
                     <a href="#" id="toggler${myIndex.index}">
-                    ${b.getDescription().substring(0,40)}...
+
+                            ${e.getDescription().substring(0,40)}...
+
+
                     </a>
-                    <div style="display: none;" id="hiddenText${myIndex.index}">${b.getDescription()}</div></td>
-                    <td>${b.getTags()}</td>
-                    <td>${b.getGenres().toString()}</td>
+                    <div style="display: none;" id="empikHiddenText${myIndex.index}">${e.getDescription()}</div></td>
+                    <td>${e.getTags()}</td>
+                    <td>${e.getGenres().toString()}</td>
                 </tr>
                 </c:forEach>
-                <tbody>
-             </thead>
+                </tbody>
+
 
             </table>
 
     </div>
+
+     <div id="publioBooks" style="display: none;">
+
+
+               <table class="bookTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                 <tr id="heads">
+                 <th>Title</th>
+                 <th>Author</th>
+                 <th>Price</th>
+                 <th>Discount</th>
+                 <th>Description</th>
+                 <th>Tags</th>
+                 <th>Genre</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+
+                    <c:forEach var="e" items="${publio}" varStatus="myIndex">
+                    <tr>
+                        <td>${e.getTitle()}</td>
+                        <td>${e.getAuthors()}</td>
+                        <td>${e.getPrice()}</td>
+                        <td>${e.getDiscount()}</td>
+                        <td>
+                        <script style="text/javascript">
+                                   $(function(){
+                                        $('#toggler${myIndex.index}').click(function(e){
+                                            e.preventDefault();
+                                            $('#publioHiddenText${myIndex.index}').toggle();
+                                        });
+                                   });
+                        </script>
+                        <a href="#" id="toggler${myIndex.index}">
+                        <c:choose>
+                            <c:when test="${e.getDescription().isEmpty()}">
+                                No description provided...
+                                <br />
+                            </c:when>
+                            <c:otherwise>
+                                ${e.getDescription().substring(0,40)}...
+                                <br />
+                            </c:otherwise>
+                        </c:choose>
+
+                        </a>
+                        <div style="display: none;" id="publioHiddenText${myIndex.index}">${e.getDescription()}</div></td>
+                        <td>${e.getTags()}</td>
+                        <td>${e.getGenres().toString()}</td>
+                    </tr>
+                    </c:forEach>
+                    </tbody>
+
+
+                </table>
+
+        </div>
+
 </div>
    <div class="container text-center" align="center">
      <footer >

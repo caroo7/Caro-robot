@@ -18,11 +18,11 @@ public class DBAccessor {
         return bookRepo.findAll();
     }
 
-    private static final String CACHE_FILE_SAVE_LOCATION = "../../web/cache.txt";
+    private static final String CACHE_FILE_SAVE_LOCATION = "../../web/";
 
-    public void createCache(List<Book> list) {
+    public void createCache(List<Book> list, String libName) {
         try {
-            FileOutputStream outputStream = new FileOutputStream(CACHE_FILE_SAVE_LOCATION);
+            FileOutputStream outputStream = new FileOutputStream(CACHE_FILE_SAVE_LOCATION+libName+"cache.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(list);
         } catch (FileNotFoundException fNFE) {

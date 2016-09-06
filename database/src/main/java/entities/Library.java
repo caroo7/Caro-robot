@@ -1,5 +1,6 @@
 package entities;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -16,21 +17,14 @@ public class Library implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Getter
     private String name;
-
+    @Getter
     private String URL;
 
     public Library(String name, String URL) {
         this.name = name;
         this.URL = URL;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getURL() {
-        return URL;
     }
 
     @Override
