@@ -42,6 +42,13 @@ public class Book implements Serializable {
     @Getter
     private Timestamp timestamp;
 
+    @Getter
+    private String url;
+
+    @Getter
+    @Column(name = "cover_url")
+    private String coverUrl;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

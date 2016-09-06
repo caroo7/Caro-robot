@@ -47,6 +47,8 @@ public class BookDetailsToBookAssemblerTest {
     public void testAppropriateBookConversion() {
         // arrange
         Set<BookDetails> booksDetails = prepareBookDetails(true, false);
+        String bookUrl="http://www.empik.com/turkusowe-szale-mroz-remigiusz,p1102728869,ebooki-i-mp3-p";
+        String coverUrl="http://ecsmedia.pl/c/turkusowe-szale-u-iext39550383.jpg";
 
         // act
         Set<Book> convertedBooks = assembler.convert(booksDetails);
@@ -57,6 +59,8 @@ public class BookDetailsToBookAssemblerTest {
             Assert.assertEquals(book.getPrice(), "29,90 zl");
             Assert.assertEquals(book.getDiscount(), "30%");
             Assert.assertEquals(book.getDescription(), "opis");
+            Assert.assertEquals(book.getUrl(), bookUrl);
+            Assert.assertEquals(book.getCoverUrl(),coverUrl);
 
             Set<Author> authors = book.getAuthors();
             for (Author author : authors) {
@@ -104,8 +108,12 @@ public class BookDetailsToBookAssemblerTest {
 
         Set<String> authors = new HashSet<>();
         authors.add("Grisham John");
+
+        String bookUrl="http://www.empik.com/turkusowe-szale-mroz-remigiusz,p1102728869,ebooki-i-mp3-p";
+        String coverUrl="http://ecsmedia.pl/c/turkusowe-szale-u-iext39550383.jpg";
+
         BookDetails.BookDetailsBuilder builder = BookDetails.builder().description("opis").authors(authors)
-                .price("29,90 zl").percentageDiscount("30%").genre("Prawo").tags(Collections.emptySet());
+                .price("29,90 zl").percentageDiscount("30%").genre("Prawo").tags(Collections.emptySet()).url(bookUrl).coverUrl(coverUrl);
 
         if (isValid) {
             builder.title("Firma");

@@ -76,8 +76,11 @@ public class BookDetailsToBookAssembler {
         Set<Genre> genres = retrieveGenres(bookDetails);
         Set<Tag> tags = retrieveTags(bookDetails);
 
+        String url=bookDetails.getUrl();
+        String coverUrl=bookDetails.getCoverUrl();
+
         Book book = Book.builder().title(title).authors(authors).description(description).
-                discount(discount).price(price).timestamp(timestamp).genres(genres).tags(tags).library(library).build();
+                discount(discount).price(price).timestamp(timestamp).genres(genres).tags(tags).library(library).url(url).coverUrl(coverUrl).build();
 
         if (!booksCache.contains(book)) {
             log.debug("Book will be saved on database: " + book);
