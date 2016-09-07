@@ -9,13 +9,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.List;
 
 @Log4j2
 public class DBAccessor {
 
-    public List<Book> getBooks(BookRepository bookRepo, Library library) {
-        return bookRepo.findByLibrary(library);
+
+
+    public List<Book> getBooks(Library library, BookRepository bookRepo) {
+        return bookRepo.findByLibraryAndToDate(library, LocalDate.now());
     }
 
     private static final String CACHE_FILE_SAVE_LOCATION = "../../web/";
