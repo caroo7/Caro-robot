@@ -13,11 +13,8 @@ import java.util.List;
 
 @Log4j2
 public class DBAccessor {
-<<<<<<< HEAD
-=======
 
     private static final String CACHE_FILE_SAVE_LOCATION = "../../web/";
->>>>>>> cf1d8c7... First parts of smelly code removed
 
     public List<Book> getBooks(BookRepository bookRepo, Library library) {
         return bookRepo.findByLibrary(library);
