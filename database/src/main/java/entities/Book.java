@@ -77,7 +77,7 @@ public class Book implements Serializable {
 
 
     /**
-     * Books are distinguished based on title, price (probably it shouldn't be?) and library.
+     * Books are distinguished based on title and library.
      * If in other library there is book with same title it is treated as different book
      * (it will be saved as another record in database).
      */
