@@ -27,7 +27,7 @@ public class YggdrasilWebConfig extends WebMvcConfigurerAdapter {
         viewResolver.setViewClass(JstlView.class);
         viewResolver.setContentType("text/html; charset=utf-8");
         viewResolver.setPrefix("/WEB-INF/views/jsp/");
-        viewResolver.setSuffix(".jsp");
+        viewResolver.setSuffix("index.jsp");
         return viewResolver;
     }
 

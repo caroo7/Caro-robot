@@ -16,7 +16,8 @@ public class YggdrasilController {
     @Autowired
     private CacheReader cacheReader;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         List<Book> empik = cacheReader.getBooksFromCache("EMPIK");
@@ -26,11 +27,6 @@ public class YggdrasilController {
         return model;
     }
 
-    @RequestMapping(value= "/logging")
-    public ModelAndView logging(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
-    }
 
     @RequestMapping(value="/register")
     public ModelAndView register(){
