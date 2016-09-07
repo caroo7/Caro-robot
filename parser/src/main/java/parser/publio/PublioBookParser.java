@@ -1,6 +1,7 @@
 package parser.publio;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
@@ -42,8 +43,8 @@ public class PublioBookParser implements IBookParser {
     /**
      * Price has format 25,90 zł. For extract some data ParserUtils is used.
      *
-     * @param document
-     * @return
+     * @param document contains all book details info
+     * @return calculated value of discount e.g. 40%. No free books in this library
      */
     @Override
     public String getPercentageDiscount(Optional<Document> document) {
@@ -84,7 +85,7 @@ public class PublioBookParser implements IBookParser {
         }
 
         Elements tagsElements = document.get().select("div.product-card-labels-info > a");
-        return tagsElements.stream().map(element -> element.text()).collect(Collectors.toSet());
+        return tagsElements.stream().map(Element::text).collect(Collectors.toSet());
 
     }
 

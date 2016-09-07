@@ -9,12 +9,12 @@ import java.util.concurrent.BlockingQueue;
 @Log4j2
 public abstract class UrlCrawler {
 
-    protected String MAIN_URL;
+    private IPageUrlParser pageUrlParser;
+    private String MAIN_URL;
     protected String PROMOTION_URL;
     protected PageLoader pageLoader;
-    protected IPageUrlParser pageUrlParser;
 
-    protected final int QUEUE_SIZE=10;
+    private final int QUEUE_SIZE=10;
 
     protected UrlCrawler(String mainUrl,String promotionUrl){
         this.MAIN_URL=mainUrl;
@@ -30,7 +30,7 @@ public abstract class UrlCrawler {
 
     public List<String> getLinksToAllBooks() {
 
-        BlockingQueue queue = new ArrayBlockingQueue<>(QUEUE_SIZE);
+        BlockingQueue<String> queue = new ArrayBlockingQueue<>(QUEUE_SIZE);
 
         NextPageUrlProducer nextPageUrlProducer = new NextPageUrlProducer(queue, pageLoader, pageUrlParser, PROMOTION_URL);
         NextPageUrlConsumer nextPageUrlConsumer = new NextPageUrlConsumer(queue, pageLoader, pageUrlParser);

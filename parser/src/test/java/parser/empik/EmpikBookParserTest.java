@@ -13,9 +13,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * Created by grzegorz_sledz on 25.08.16.
- */
 public class EmpikBookParserTest {
 
     @Test

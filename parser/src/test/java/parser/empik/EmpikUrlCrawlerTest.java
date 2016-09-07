@@ -15,15 +15,14 @@ import static org.mockito.Mockito.when;
 
 public class EmpikUrlCrawlerTest {
 
-    private final String MAIN_URL="http://www.empik.com";
-    private final String PROMOTION_URL=MAIN_URL+"/ebooki/promocje";
-
     @Test
     public void testPrepareLinksToAllBooks() throws IOException, URISyntaxException {
         //arrange
         PageLoader pageLoader = mock(PageLoader.class);
         EmpikUrlCrawler empikUrlCrawler = new EmpikUrlCrawler(pageLoader);
-        String genreUrl = MAIN_URL+"/ebooki/kryminaly-i-sensacje";
+        String MAIN_URL = "http://www.empik.com";
+        String genreUrl = MAIN_URL +"/ebooki/kryminaly-i-sensacje";
+        String PROMOTION_URL = MAIN_URL + "/ebooki/promocje";
         when(pageLoader.getPage(PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/empik/ebook_promotions_main.html", MAIN_URL));
         when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/genre_promotion_details.html", MAIN_URL));
 
