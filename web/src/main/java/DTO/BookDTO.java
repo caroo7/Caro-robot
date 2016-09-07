@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class BookDTO implements Serializable {
 
     @Getter
@@ -85,20 +86,4 @@ public class BookDTO implements Serializable {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "BookDTO{" +
-                "title='" + title + '\'' +
-                ", authors='" + authors + '\'' +
-                ", description='" + description + '\'' +
-                ", discount='" + discount + '\'' +
-                ", price='" + price + '\'' +
-                ", timestamp=" + timestamp +
-                ", url='" + url + '\'' +
-                ", coverUrl='" + coverUrl + '\'' +
-                ", tags='" + tags + '\'' +
-                ", genres='" + genres + '\'' +
-                ", library=" + library +
-                '}';
-    }
 }

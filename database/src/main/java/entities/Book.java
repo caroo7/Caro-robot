@@ -70,6 +70,13 @@ public class Book implements Serializable {
     private Set<Genre> genres;
 
 
+    @Getter
+    private String url;
+
+    @Getter
+    @Column(name = "cover_url")
+    private String coverUrl;
+
     @ManyToOne
     @JoinColumn(name = "library_id")
     @Getter
