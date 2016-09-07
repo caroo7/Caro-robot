@@ -44,7 +44,7 @@
         <jetty.version>9.2.11.v20150529</jetty.version>
         <log4j2.version>2.6.2</log4j2.version>
         <slf4j.version>1.7.21</slf4j.version>
-
+        <commons.version>2.1.1</commons.version>
         <jstl.version>1.2</jstl.version>
         <servletapi.version>3.1.0</servletapi.version>
 
@@ -111,6 +111,11 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-core</artifactId>
                 <version>${springsecurity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>${commons.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>

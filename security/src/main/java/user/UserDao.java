@@ -1,6 +1,6 @@
 package user;
 
-import entities.User;
+import entities.RobotUser;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDao implements UserRepository{
+public class UserDao implements UserRepository {
 
     @Autowired
     SessionFactory sessionFactory;
 
     @Override
-    public User findByUserName(String username) {
-        List<User> users = new ArrayList<User>();
+    public RobotUser findByUserName(String username) {
+        List<RobotUser> users = new ArrayList<>();
 
         users = sessionFactory.getCurrentSession()
                 .createQuery("from User where username=?")

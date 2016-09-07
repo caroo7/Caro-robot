@@ -38,7 +38,11 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -102,6 +106,10 @@
         <dependency>
             <groupId>github.yggdrasil</groupId>
             <artifactId>cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>github.yggdrasil</groupId>
+            <artifactId>security</artifactId>
         </dependency>
     </dependencies>
 

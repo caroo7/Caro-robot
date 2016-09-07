@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.List;
 
 @Log4j2
-public class DBAccessor implements Serializable {
+public class DBAccessor{
 
     private static final String CACHE_FILE_SAVE_LOCATION = "../../web/";
 
