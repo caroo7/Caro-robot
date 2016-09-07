@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class ParserUtils {
 
+    private ParserUtils(){}
+
     public static String moveLastWordOnBeginning(String text){
         if(text==null || !text.contains(" ")){
             return text;
@@ -12,8 +14,8 @@ public class ParserUtils {
 
         String result;
 
-        String lastWord = text.substring(text.lastIndexOf(" "));
-        text=text.substring(0,text.length()-lastWord.length());
+        String lastWord = text.substring(text.lastIndexOf(' '));
+        String firstPart=text.substring(0,text.length()-lastWord.length());
 
         result=lastWord.substring(1,lastWord.length())+" "+text;
 

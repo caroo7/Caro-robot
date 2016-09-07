@@ -28,16 +28,14 @@ public class YggdrasilController {
     }
 
 
-    @RequestMapping(value="/register")
-    public ModelAndView register(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
+    @RequestMapping(value = "/register")
+    public ModelAndView register() {
+        return new ModelAndView();
     }
 
-    @RequestMapping(value="/account")
-    public ModelAndView account(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
+    @RequestMapping(value = "/account")
+    public ModelAndView account() {
+        return new ModelAndView();
     }
 
 

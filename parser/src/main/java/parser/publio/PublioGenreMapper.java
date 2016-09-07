@@ -2,13 +2,11 @@ package parser.publio;
 
 import mapper.Mapper;
 
-import java.util.HashMap;
-
 public class PublioGenreMapper extends Mapper {
 
-    {
-        loadProperties("/publio/publio_genres.properties");
-        map = new HashMap<>();
+    static {
+
+
         map.put(props.getProperty("album"), "album");
         map.put(props.getProperty("biographical"), "biographical");
         map.put(props.getProperty("economic"), "economic");
@@ -33,6 +31,10 @@ public class PublioGenreMapper extends Mapper {
         map.put(props.getProperty("political"), "political");
         map.put(props.getProperty("novel"), "novel");
         map.put(props.getProperty("psychology"), "psychology");
+    }
+
+    public PublioGenreMapper() {
+        loadProperties("/publio/publio_genres.properties");
     }
 
 }
