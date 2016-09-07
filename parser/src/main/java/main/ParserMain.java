@@ -1,10 +1,10 @@
 package main;
 
-import DTO.BookDetails;
-import cache.Cache;
 import config.CacheConfiguration;
 import config.DatabaseConfiguration;
 import config.ParserConfiguration;
+import dto.BookDetails;
+import cache.Cache;
 import converter.BookDetailsToBookAssembler;
 import entities.Book;
 import entities.Library;
@@ -23,6 +23,8 @@ import java.util.stream.Collectors;
 @Log4j2
 public class ParserMain {
 
+private ParserMain(){}
+
     public static void main(String[] args) {
         log.info("Parser application starts");
 
@@ -40,13 +42,6 @@ public class ParserMain {
 
         for(Libraries lib: Libraries.values()) {
             log.info("Start parser for " + lib.toString() + " library.");
-
-            // FOR DEMO
-            // *********************************************************************************************************
-            /*if(!lib.name().equals(Libraries.EMPIK.toString())) {
-                continue;
-            }*/
-            // *********************************************************************************************************
 
             Library library = libraryRepo.findByName(lib.name());
             PromotionLibrary actualPromotionLibrary = libraryMapper.getLibrary(library);

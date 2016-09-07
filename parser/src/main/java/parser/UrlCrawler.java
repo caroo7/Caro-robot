@@ -12,8 +12,9 @@ public abstract class UrlCrawler {
     private static final int QUEUE_SIZE = 10;
     protected String promotionURL;
     protected PageLoader pageLoader;
+    private IPageUrlParser pageUrlParser;
 
-    private final int QUEUE_SIZE=10;
+    protected UrlCrawler(String promotionUrl) {
 
         this.promotionURL = promotionUrl;
     }

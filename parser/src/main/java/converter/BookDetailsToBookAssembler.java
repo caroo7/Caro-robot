@@ -1,6 +1,6 @@
 package converter;
 
-import DTO.BookDetails;
+import dto.BookDetails;
 import entities.*;
 import lombok.extern.log4j.Log4j2;
 import mapper.Mapper;
@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Responsible for converting book DTO retrieved from web parser to book entity which will be saved on database
+ * Responsible for converting book dto retrieved from web parser to book entity which will be saved on database
  */
 @Log4j2
 public class BookDetailsToBookAssembler {

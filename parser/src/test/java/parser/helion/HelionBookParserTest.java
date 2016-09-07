@@ -1,6 +1,6 @@
 package parser.helion;
 
-import DTO.BookDetails;
+import dto.BookDetails;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;

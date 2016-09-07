@@ -1,6 +1,6 @@
 package parser;
 
-import DTO.BookDetails;
+import dto.BookDetails;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Document;
