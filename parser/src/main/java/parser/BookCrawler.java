@@ -1,6 +1,6 @@
 package parser;
 
-import DTO.BookDetails;
+import dto.BookDetails;
 
 import java.util.List;
 import java.util.Set;

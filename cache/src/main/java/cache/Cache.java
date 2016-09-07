@@ -17,7 +17,7 @@ public class Cache {
 
     public void initializeCache(Library library, BookRepository bookRepo) {
         log.info("Cache creation initialized");
-        List<Book> bookList = dbAccessor.getBooks(library, bookRepo);
+        List<Book> bookList = dbAccessor.getBooks( bookRepo,library);
         dbAccessor.createCache(bookList, library.getName());
         log.info("Cache created");
     }

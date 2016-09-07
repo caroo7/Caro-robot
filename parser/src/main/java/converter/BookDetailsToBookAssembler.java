@@ -1,6 +1,6 @@
 package converter;
 
-import DTO.BookDetails;
+import dto.BookDetails;
 import entities.*;
 import lombok.extern.log4j.Log4j2;
 import mapper.Mapper;
@@ -10,6 +10,7 @@ import repositories.BookRepository;
 import repositories.GenreRepository;
 import repositories.TagRepository;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Responsible for converting book DTO retrieved from web parser to book entity which will be saved on database
+ * Responsible for converting book dto retrieved from web parser to book entity which will be saved on database
  */
 @Log4j2
 public class BookDetailsToBookAssembler {
@@ -90,9 +91,9 @@ public class BookDetailsToBookAssembler {
 
     private Book retrieveBookFromCacheAndUpdateTime(Book book) {
         int indexInCache = booksCache.indexOf(book);
-        book = booksCache.get(indexInCache);
-        book.setToDate(LocalDate.now());
-        return book;
+        Book bookFromCache = booksCache.get(indexInCache);
+        bookFromCache.setToDate(LocalDate.now());
+        return bookFromCache;
     }
 
     private Set<Author> retrieveAuthors(BookDetails bookDetails) {

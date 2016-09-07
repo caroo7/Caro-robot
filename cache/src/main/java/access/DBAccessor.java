@@ -15,20 +15,18 @@ import java.util.List;
 @Log4j2
 public class DBAccessor {
 
-
-
-    public List<Book> getBooks(Library library, BookRepository bookRepo) {
-        return bookRepo.findByLibraryAndToDate(library, LocalDate.now());
-    }
-
     private static final String CACHE_FILE_SAVE_LOCATION = "../../web/";
 
+    public List<Book> getBooks(BookRepository bookRepo, Library library) {
+        return bookRepo.findByLibrary(library);
+    }
 
     public void createCache(List<Book> list, String libraryName) {
         try {
             FileOutputStream outputStream = new FileOutputStream(CACHE_FILE_SAVE_LOCATION + libraryName);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(list);
+            objectOutputStream.close();
         } catch (FileNotFoundException fNFE) {
             log.error("Exception while accessing the file: " + fNFE);
         } catch (IOException iOE) {

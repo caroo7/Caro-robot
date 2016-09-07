@@ -2,16 +2,17 @@ package parser.publio;
 
 import mapper.Mapper;
 
-import java.util.HashMap;
-
 public class PublioTagMapper extends Mapper {
+    static {
 
-    {
-        loadProperties("/publio/publio_tags.properties");
-        map = new HashMap<>();
+
         map.put(props.getProperty("recent"), "recent");
         map.put(props.getProperty("bestseller"), "bestseller");
         map.put(props.getProperty("promotion"), "promotion");
+    }
+
+    public PublioTagMapper() {
+        loadProperties("/publio/publio_tags.properties");
     }
 
 }

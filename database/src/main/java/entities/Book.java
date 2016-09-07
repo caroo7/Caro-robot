@@ -5,9 +5,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Set;
 
+// not sure about model classes serialization, maybe later we create some kind of dto classes to passing over HTTP
 @Entity
 @Builder
 @AllArgsConstructor
@@ -80,12 +82,15 @@ public class Book implements Serializable {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Book book = (Book) o;
 
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (price != null ? !price.equals(book.price) : book.price != null) return false;
         return library != null ? library.equals(book.library) : book.library == null;
     }
 
@@ -102,4 +107,6 @@ public class Book implements Serializable {
         result = 31 * result + (genres != null ? genres.hashCode() : 0);
         return result;
     }
+
+
 }

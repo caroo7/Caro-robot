@@ -9,21 +9,19 @@ import java.util.concurrent.BlockingQueue;
 @Log4j2
 public abstract class UrlCrawler {
 
-    private IPageUrlParser pageUrlParser;
-    private String MAIN_URL;
-    protected String PROMOTION_URL;
+    private static final int QUEUE_SIZE = 10;
+    protected String promotionURL;
     protected PageLoader pageLoader;
+    private IPageUrlParser pageUrlParser;
 
-    private final int QUEUE_SIZE=10;
+    protected UrlCrawler(String promotionUrl) {
 
-    protected UrlCrawler(String mainUrl,String promotionUrl){
-        this.MAIN_URL=mainUrl;
-        this.PROMOTION_URL=promotionUrl;
+        this.promotionURL = promotionUrl;
     }
 
-    protected UrlCrawler(String mainUrl, String promotionUrl, PageLoader pageLoader, IPageUrlParser pageUrlParser) {
-        this.MAIN_URL = mainUrl;
-        this.PROMOTION_URL = promotionUrl;
+    protected UrlCrawler(String promotionUrl, PageLoader pageLoader, IPageUrlParser pageUrlParser) {
+
+        this.promotionURL = promotionUrl;
         this.pageLoader = pageLoader;
         this.pageUrlParser = pageUrlParser;
     }
@@ -32,7 +30,7 @@ public abstract class UrlCrawler {
 
         BlockingQueue<String> queue = new ArrayBlockingQueue<>(QUEUE_SIZE);
 
-        NextPageUrlProducer nextPageUrlProducer = new NextPageUrlProducer(queue, pageLoader, pageUrlParser, PROMOTION_URL);
+        NextPageUrlProducer nextPageUrlProducer = new NextPageUrlProducer(queue, pageLoader, pageUrlParser, promotionURL);
         NextPageUrlConsumer nextPageUrlConsumer = new NextPageUrlConsumer(queue, pageLoader, pageUrlParser);
 
         Thread nextPageUrlProducerThread = new Thread(nextPageUrlProducer);
@@ -45,7 +43,8 @@ public abstract class UrlCrawler {
         try {
             nextPageUrlConsumerThread.join();
         } catch (InterruptedException e) {
-            log.error(e.getMessage());
+            log.error(e);
+            Thread.currentThread().interrupt();
         }
         return nextPageUrlConsumer.getBookDetailsUrls();
     }

@@ -1,6 +1,6 @@
 package parser.publio;
 
-import DTO.BookDetails;
+import dto.BookDetails;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;
