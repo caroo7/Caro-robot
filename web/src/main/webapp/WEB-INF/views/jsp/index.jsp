@@ -35,7 +35,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <a class="navbar-brand" href="/servlet/logging">Sign in</a>
+          <div class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
           <a class="navbar-brand" href="https://github.com/caroo7/Caro-robot">Github Repository</a>
+
         </div>
       </div>
     </nav>
