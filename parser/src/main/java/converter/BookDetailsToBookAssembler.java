@@ -10,6 +10,7 @@ import repositories.BookRepository;
 import repositories.GenreRepository;
 import repositories.TagRepository;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -91,7 +92,7 @@ public class BookDetailsToBookAssembler {
     private Book retrieveBookFromCacheAndUpdateTime(Book book) {
         int indexInCache = booksCache.indexOf(book);
         Book bookFromCache = booksCache.get(indexInCache);
-        bookFromCache.setTimestamp(new Timestamp(System.nanoTime()));
+        bookFromCache.setToDate(LocalDate.now());
         return bookFromCache;
     }
 

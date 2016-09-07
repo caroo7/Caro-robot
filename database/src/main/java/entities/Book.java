@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -106,4 +107,6 @@ public class Book implements Serializable {
         result = 31 * result + (genres != null ? genres.hashCode() : 0);
         return result;
     }
+
+
 }
