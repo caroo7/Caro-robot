@@ -1,6 +1,7 @@
 package parser;
 
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
@@ -9,16 +10,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Created by Grzesiek on 2016-08-28.
- */
-@Log4j2
-public abstract class UrlParser {
+public interface IPageUrlParser {
 
-    protected List<String> getLinksList(Optional<Document> document, String cssQuery) {
+    String getLinkToNextPage(Optional<Document> document);
+    List<String> getLinksToBooksDetails(Optional<Document> document);
+
+    default List<String> getLinksList(Optional<Document> document, String cssQuery) {
         if(document.isPresent()) {
-            log.debug("cssQuery: '" + cssQuery + "' document: " + document.get().baseUri());
-
             Elements element = document.get().select(cssQuery);
             return element.stream().map(e -> e.absUrl("href")).filter(s -> !s.contains("#")).distinct().collect(Collectors.toList());
         }

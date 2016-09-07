@@ -2,7 +2,6 @@ package entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,6 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@ToString
 @NoArgsConstructor
 public class Author implements Serializable {
 
@@ -41,5 +39,10 @@ public class Author implements Serializable {
     @Override
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

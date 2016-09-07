@@ -1,7 +1,5 @@
 package entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -15,7 +13,7 @@ import java.io.Serializable;
 public class Tag implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -24,4 +22,8 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

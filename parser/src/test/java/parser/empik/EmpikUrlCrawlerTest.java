@@ -9,22 +9,23 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-/**
- * Created by Grzesiek on 2016-08-27.
- */
+
 public class EmpikUrlCrawlerTest {
+
+    private final String MAIN_URL="http://www.empik.com";
+    private final String PROMOTION_URL=MAIN_URL+"/ebooki/promocje";
+
     @Test
     public void testPrepareLinksToAllBooks() throws IOException, URISyntaxException {
         //arrange
         PageLoader pageLoader = mock(PageLoader.class);
         EmpikUrlCrawler empikUrlCrawler = new EmpikUrlCrawler(pageLoader);
-        String genreUrl = empikUrlCrawler.MAIN_URL + "/ebooki/kryminaly-i-sensacje";
-        when(pageLoader.getPage(empikUrlCrawler.PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/empik/ebook_promotions_main.html", empikUrlCrawler.MAIN_URL));
-        when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/genre_promotion_details.html", empikUrlCrawler.MAIN_URL));
+        String genreUrl = MAIN_URL+"/ebooki/kryminaly-i-sensacje";
+        when(pageLoader.getPage(PROMOTION_URL)).thenReturn(Utils.loadHtmlDocument("/empik/ebook_promotions_main.html", MAIN_URL));
+        when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/genre_promotion_details.html", MAIN_URL));
 
 
         when(pageLoader.getPage(genreUrl)).thenReturn(Utils.loadHtmlDocument("/empik/book_list_p1.html", genreUrl));

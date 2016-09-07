@@ -1,7 +1,8 @@
-package parser.publio;
+package parser;
 
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
+import parser.IPageUrlParser;
 import parser.PageLoader;
 
 import java.util.ArrayList;
@@ -13,24 +14,24 @@ import java.util.concurrent.BlockingQueue;
  * This thread is needed for consuming url to next pages to produce urls to books details
  */
 @Log4j2
-class NextPageUrlConsumer implements Runnable {
+public class NextPageUrlConsumer implements Runnable {
 
 
-    BlockingQueue<String> urlToNextPageQueue;
-    PublioUrlParser publioUrlParser;
-    PageLoader pageLoader;
-    List<String>  bookDetailsUrls = new ArrayList<>();
+    private BlockingQueue<String> urlToNextPageQueue;
+    private IPageUrlParser pageUrlParser;
+    private PageLoader pageLoader;
+    private List<String>  bookDetailsUrls = new ArrayList<>();
 
-    public NextPageUrlConsumer(BlockingQueue urlToNextPageQueue,PageLoader pageLoader) {
+    public NextPageUrlConsumer(BlockingQueue<String> urlToNextPageQueue,PageLoader pageLoader,IPageUrlParser pageUrlParser) {
         this.urlToNextPageQueue = urlToNextPageQueue;
         this.pageLoader = pageLoader;
-        this.publioUrlParser = new PublioUrlParser();
+        this.pageUrlParser = pageUrlParser;
     }
 
-    List<String> getListToBookDetails(String page) {
+    private List<String> getListToBookDetails(String page) {
         List<String> pages = new ArrayList<>();
         Optional<Document> document = pageLoader.getPage(page);
-        pages.addAll(publioUrlParser.getLinksToBooksDetails(document));
+        pages.addAll(pageUrlParser.getLinksToBooksDetails(document));
         return pages;
     }
 

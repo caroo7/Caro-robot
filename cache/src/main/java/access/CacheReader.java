@@ -15,7 +15,7 @@ public class CacheReader {
     public List<Book> getBooksFromCache(String libName) {
 
         List<Book> books = new ArrayList<>();
-        try (FileInputStream fileInputStream = new FileInputStream(libName+"cache.txt")) {
+        try (FileInputStream fileInputStream = new FileInputStream(libName)) {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             books = (List<Book>) objectInputStream.readObject();
             objectInputStream.close();
