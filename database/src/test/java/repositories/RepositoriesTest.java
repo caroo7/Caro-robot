@@ -14,7 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,7 +61,7 @@ public class RepositoriesTest extends AbstractTestNGSpringContextTests {
 
         Author author = new Author("Grisham John");
         authorRepo.save(author);
-        Set<Author> authors = new HashSet<Author>(Arrays.asList(author));
+        Set<Author> authors = new HashSet<>(Collections.singletonList(author));
 
         book = Book.builder().title("Firma").authors(authors).description("Swietna ksiazka").discount("30%").
                 price("29zl").timestamp(new Timestamp(System.currentTimeMillis())).tags(tags).genres(genres).build();

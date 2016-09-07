@@ -7,7 +7,6 @@ import parser.IBookParser;
 import parser.utils.ParserUtils;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,8 +45,8 @@ class HelionBookParser implements IBookParser {
     /**
      * Price has format 25,90 zł. For extract some data ParserUtils is used.
      *
-     * @param document
-     * @return
+     * @param document contains all book details info
+     * @return calculated value of discount e.g. 40%. If book is free return 100% discount
      */
     @Override
     public String getPercentageDiscount(Optional<Document> document) {
@@ -88,7 +87,7 @@ class HelionBookParser implements IBookParser {
             elements.select("audio").remove();
             elements.select("strong").remove();
 
-            return elements.stream().map(Element::text).reduce(String::concat).get();
+            return elements.stream().map(Element::text).reduce(String::concat).orElse("");
         }
         return null;
     }
@@ -96,7 +95,6 @@ class HelionBookParser implements IBookParser {
     @Override
     public Set<String> getTags(Optional<Document> document) {
         if (document.isPresent()) {
-            Set<String> tags = new HashSet<>();
             Elements tagsElements = document.get().select("ul.tags > li");
             return tagsElements.stream().filter(e -> !e.text().contains("#")).map(element -> element.text().replaceAll("Przejdź", "").trim()).collect(Collectors.toSet());
         }

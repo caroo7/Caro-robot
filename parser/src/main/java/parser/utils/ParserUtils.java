@@ -10,7 +10,7 @@ public class ParserUtils {
             return text;
         }
 
-        String result="";
+        String result;
 
         String lastWord = text.substring(text.lastIndexOf(" "));
         text=text.substring(0,text.length()-lastWord.length());
