@@ -10,7 +10,7 @@ import repositories.BookRepository;
 import repositories.GenreRepository;
 import repositories.TagRepository;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -56,7 +56,7 @@ public class BookDetailsToBookAssembler {
         this.tagMapper = tagMapper;
         this.library = library;
         authorsCache = authorRepo.findAll();
-        booksCache = bookRepo.findAll();
+        booksCache = bookRepo.findByLibraryAndToDate(library, LocalDate.now().minusDays(1L));
     }
 
     public Set<Book> convert(Set<BookDetails> booksDetails) {
@@ -70,24 +70,25 @@ public class BookDetailsToBookAssembler {
         String description = preparator.validateField(bookDetails.getDescription(), STANDARD_DESCRIPTION_LENGTH);
         String discount = preparator.validateField(bookDetails.getPercentageDiscount(), STANDARD_FIELD_LENGTH);
         String price = preparator.validateField(bookDetails.getPrice(), STANDARD_FIELD_LENGTH);
-        Timestamp timestamp = new Timestamp(System.nanoTime());
 
         Set<Author> authors = retrieveAuthors(bookDetails);
         Set<Genre> genres = retrieveGenres(bookDetails);
         Set<Tag> tags = retrieveTags(bookDetails);
 
         Book book = Book.builder().title(title).authors(authors).description(description).
-                discount(discount).price(price).timestamp(timestamp).genres(genres).tags(tags).library(library).build();
+                discount(discount).price(price).genres(genres).tags(tags).library(library).build();
 
         if (!booksCache.contains(book)) {
             log.debug("Book will be saved on database: " + book);
+            book.setFromDate(LocalDate.now());
+            book.setToDate(LocalDate.now());
             return book;
         }
 
-        return retrieveBookFromCache(book);
+        return retrieveBookFromCacheAndUpdateTime(book);
     }
 
-    private Book retrieveBookFromCache(Book book) {
+    private Book retrieveBookFromCacheAndUpdateTime(Book book) {
         int indexInCache = booksCache.indexOf(book);
         Book bookFromCache = booksCache.get(indexInCache);
         bookFromCache.setTimestamp(new Timestamp(System.nanoTime()));

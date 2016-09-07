@@ -1,10 +1,11 @@
 package entities;
 
+import converter.LocalDateConverter;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Set;
 
 // not sure about model classes serialization, maybe later we create some kind of dto classes to passing over HTTP
@@ -13,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book implements Serializable {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +40,13 @@ public class Book implements Serializable {
 
     @Setter
     @Getter
-    private Timestamp timestamp;
+    @Convert(converter = LocalDateConverter.class)
+    private LocalDate fromDate;
 
+    @Setter
+    @Getter
+    @Convert(converter = LocalDateConverter.class)
+    private LocalDate toDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -70,7 +75,7 @@ public class Book implements Serializable {
 
 
     /**
-     * Books are distinguished based on title, price (probably it shouldn't be?) and library.
+     * Books are distinguished based on title, and library.
      * If in other library there is book with same title it is treated as different book
      * (it will be saved as another record in database).
      */
@@ -83,10 +88,8 @@ public class Book implements Serializable {
 
         Book book = (Book) o;
 
-        if (title != null ? !title.equals(book.title) : book.title != null)
-            return false;
-        if (price != null ? !price.equals(book.price) : book.price != null)
-            return false;
+        if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (price != null ? !price.equals(book.price) : book.price != null) return false;
         return library != null ? library.equals(book.library) : book.library == null;
     }
 
@@ -97,7 +100,8 @@ public class Book implements Serializable {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (discount != null ? discount.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
+        result = 31 * result + (fromDate != null ? fromDate.hashCode() : 0);
+        result = 31 * result + (fromDate != null ? fromDate.hashCode() : 0);
         result = 31 * result + (tags != null ? tags.hashCode() : 0);
         result = 31 * result + (genres != null ? genres.hashCode() : 0);
         return result;
