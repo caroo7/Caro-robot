@@ -70,7 +70,7 @@ public class ParserMain {
             bookRepo.save(books);
 
             Cache cache = ctx.getBean(Cache.class);
-            cache.initializeCache(bookRepo, libraryRepo.findByName(lib.name()));
+            cache.initializeCache(libraryRepo.findByName(lib.name()), bookRepo);
             log.info("End parser for " + lib.name() + " library.");
         }
 

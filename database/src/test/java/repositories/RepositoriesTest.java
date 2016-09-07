@@ -13,7 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,7 +64,7 @@ public class RepositoriesTest extends AbstractTestNGSpringContextTests {
         Set<Author> authors = new HashSet<>(Collections.singletonList(author));
 
         book = Book.builder().title("Firma").authors(authors).description("Swietna ksiazka").discount("30%").
-                price("29zl").timestamp(new Timestamp(System.currentTimeMillis())).tags(tags).genres(genres).build();
+                price("29zl").fromDate(LocalDate.now().minusDays(1L)).toDate(LocalDate.now()).tags(tags).genres(genres).build();
     }
 
     @AfterMethod

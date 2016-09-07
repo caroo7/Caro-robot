@@ -14,6 +14,7 @@ import repositories.AuthorRepository;
 import repositories.BookRepository;
 import repositories.GenreRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,7 +35,7 @@ public class BookDetailsToBookAssemblerTest {
         when(authorRepo.findAll()).thenReturn(new ArrayList<>());
 
         BookRepository bookRepo = mock(BookRepository.class);
-        when(bookRepo.findAll()).thenReturn(new ArrayList<>());
+        when(bookRepo.findByLibraryAndToDate(any(Library.class), any(LocalDate.class))).thenReturn(new ArrayList<>());
 
         assembler = new BookDetailsToBookAssembler();
         assembler.authorRepo = authorRepo;
