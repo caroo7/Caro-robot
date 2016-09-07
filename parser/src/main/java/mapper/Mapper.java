@@ -21,7 +21,7 @@ public abstract class Mapper {
                     .getResourceAsStream(pathToFile), "UTF-8");
             props.load(inputStreamReader);
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error(e);
         }
     }
 

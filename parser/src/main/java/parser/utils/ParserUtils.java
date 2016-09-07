@@ -17,7 +17,7 @@ public class ParserUtils {
         String lastWord = text.substring(text.lastIndexOf(' '));
         String firstPart=text.substring(0,text.length()-lastWord.length());
 
-        result=lastWord.substring(1,lastWord.length())+" "+text;
+        result=lastWord.substring(1,lastWord.length())+" "+firstPart;
 
         return result;
     }

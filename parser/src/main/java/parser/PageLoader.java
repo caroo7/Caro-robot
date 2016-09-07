@@ -1,12 +1,13 @@
 package parser;
 
+import lombok.extern.log4j.Log4j2;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.Optional;
-
+@Log4j2
 public class PageLoader {
 
     private static final String USER_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0";
@@ -22,6 +23,7 @@ public class PageLoader {
             document = response.parse();
         } catch (IOException e) {
             document = null;
+            log.error(e);
         }
         return Optional.ofNullable(document);
     }

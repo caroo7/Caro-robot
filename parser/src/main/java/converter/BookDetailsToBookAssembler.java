@@ -89,9 +89,9 @@ public class BookDetailsToBookAssembler {
 
     private Book retrieveBookFromCache(Book book) {
         int indexInCache = booksCache.indexOf(book);
-        book = booksCache.get(indexInCache);
-        book.setTimestamp(new Timestamp(System.nanoTime()));
-        return book;
+        Book bookFromCache = booksCache.get(indexInCache);
+        bookFromCache.setTimestamp(new Timestamp(System.nanoTime()));
+        return bookFromCache;
     }
 
     private Set<Author> retrieveAuthors(BookDetails bookDetails) {

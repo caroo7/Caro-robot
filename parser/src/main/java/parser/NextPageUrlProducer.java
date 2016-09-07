@@ -49,7 +49,8 @@ class NextPageUrlProducer implements Runnable {
 
             log.debug("finished work - thread exit - putting DONE to urlToNextPageQueue");
         } catch (InterruptedException e) {
-            log.error(e.getMessage());
+            log.error(e);
+            Thread.currentThread().interrupt();
         }
     }
 }
