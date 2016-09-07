@@ -8,6 +8,6 @@ import parser.UrlCrawler;
 class HelionUrlCrawler extends UrlCrawler {
 
     HelionUrlCrawler(PageLoader pageLoader) {
-        super("http://helion.pl","http://helion.pl/kategorie/ebooki?formaty=p,em&ceny=-&wydawca=&jezyk=",pageLoader,new HelionUrlParser());
+        super("http://helion.pl/kategorie/ebooki?formaty=p,em&ceny=-&wydawca=&jezyk=",pageLoader,new HelionUrlParser());
     }
 }

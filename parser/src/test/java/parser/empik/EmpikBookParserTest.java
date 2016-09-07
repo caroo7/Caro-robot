@@ -1,6 +1,6 @@
 package parser.empik;
 
-import DTO.BookDetails;
+import dto.BookDetails;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.testng.annotations.Test;

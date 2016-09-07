@@ -9,8 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+
 @Entity
 @NoArgsConstructor
+
 public class Library implements Serializable {
 
     @Id
@@ -20,17 +22,24 @@ public class Library implements Serializable {
     @Getter
     private String name;
     @Getter
-    private String URL;
+    private String url;
 
-    public Library(String name, String URL) {
+    /**
+     *
+     * @param name the name of the library
+     * @param url the url address of the library
+     */
+    public Library(String name, String url) {
         this.name = name;
-        this.URL = URL;
+        this.url = url;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         Library library = (Library) o;
 

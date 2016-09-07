@@ -15,7 +15,7 @@ class EmpikUrlCrawler extends UrlCrawler {
     private final EmpikUrlParser empikUrlParser;
 
     EmpikUrlCrawler(PageLoader pageLoader) {
-        super("http://www.empik.com","http://www.empik.com/ebooki/promocje");
+        super("http://www.empik.com/ebooki/promocje");
         this.pageLoader = pageLoader;
         this.empikUrlParser = new EmpikUrlParser();
     }
