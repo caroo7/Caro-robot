@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,7 +16,9 @@
         <module>cache</module>
     </modules>
 
-    <description>Web application responsible for presenting books which are on promotion in different bookshops. Another functionality is to retrieve necessary data using parsers</description>
+    <description>Web application responsible for presenting books which are on promotion in different bookshops. Another
+        functionality is to retrieve necessary data using parsers
+    </description>
     <organization>
         <name>yggdrasil</name>
     </organization>
@@ -218,6 +220,13 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>1.1.1</version>
+            </plugin>
+
 
         </plugins>
     </build>
