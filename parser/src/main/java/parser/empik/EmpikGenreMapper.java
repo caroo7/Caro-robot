@@ -2,13 +2,9 @@ package parser.empik;
 
 import mapper.Mapper;
 
-import java.util.HashMap;
-
 public class EmpikGenreMapper extends Mapper {
 
-    {
-        loadProperties("/empik/empik_genres.properties");
-        map = new HashMap<>();
+    static {
         map.put(props.getProperty("biographical"), "biographical");
         map.put(props.getProperty("economic"), "economic");
         map.put(props.getProperty("kids"), "kids");
@@ -37,6 +33,10 @@ public class EmpikGenreMapper extends Mapper {
         map.put(props.getProperty("art"), "art");
         map.put(props.getProperty("vacation"), "vacation");
         map.put(props.getProperty("thriller"), "thriller");
+    }
+
+    public EmpikGenreMapper() {
+        loadProperties("/empik/empik_genres.properties");
     }
 
 }

@@ -42,7 +42,7 @@ class EmpikUrlCrawler extends UrlCrawler {
 
     @Override
     public List<String> getLinksToAllBooks() {
-        Optional<Document> promotionPage = pageLoader.getPage(PROMOTION_URL);
+        Optional<Document> promotionPage = pageLoader.getPage(promotionURL);
         List<String> genrePageUrls = empikUrlParser.getLinksToGenreDetailsPromotion(promotionPage);
         List<String> bookListUrls = getUrlsToPagesWithBooksList(genrePageUrls);
 

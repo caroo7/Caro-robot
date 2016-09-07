@@ -9,19 +9,19 @@ import java.util.concurrent.BlockingQueue;
 @Log4j2
 public abstract class UrlCrawler {
 
-    private final int QUEUE_SIZE = 10;
-    protected String PROMOTION_URL;
+    private static final int QUEUE_SIZE = 10;
+    protected String promotionURL;
     protected PageLoader pageLoader;
     private IPageUrlParser pageUrlParser;
 
     protected UrlCrawler(String promotionUrl) {
 
-        this.PROMOTION_URL = promotionUrl;
+        this.promotionURL = promotionUrl;
     }
 
     protected UrlCrawler(String promotionUrl, PageLoader pageLoader, IPageUrlParser pageUrlParser) {
 
-        this.PROMOTION_URL = promotionUrl;
+        this.promotionURL = promotionUrl;
         this.pageLoader = pageLoader;
         this.pageUrlParser = pageUrlParser;
     }
@@ -30,7 +30,7 @@ public abstract class UrlCrawler {
 
         BlockingQueue<String> queue = new ArrayBlockingQueue<>(QUEUE_SIZE);
 
-        NextPageUrlProducer nextPageUrlProducer = new NextPageUrlProducer(queue, pageLoader, pageUrlParser, PROMOTION_URL);
+        NextPageUrlProducer nextPageUrlProducer = new NextPageUrlProducer(queue, pageLoader, pageUrlParser, promotionURL);
         NextPageUrlConsumer nextPageUrlConsumer = new NextPageUrlConsumer(queue, pageLoader, pageUrlParser);
 
         Thread nextPageUrlProducerThread = new Thread(nextPageUrlProducer);
