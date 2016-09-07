@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by grzegorz_sledz on 25.08.16.
- */
 public class EmpikUrlParserTest {
 
     private final String mainPageUrl = "http://www.empik.com";

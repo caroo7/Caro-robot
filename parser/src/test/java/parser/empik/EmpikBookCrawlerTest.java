@@ -9,10 +9,7 @@ import parser.Utils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -32,7 +29,7 @@ public class EmpikBookCrawlerTest {
     @Test
     public void testGetBooks() throws Exception {
         //arrange
-        List<String> urlsToBookDetails= Arrays.asList(bookDetailsUrl);
+        List<String> urlsToBookDetails= Collections.singletonList(bookDetailsUrl);
 
         Set<String>authors=new HashSet<>();
         authors.add("Miłoszewski Zygmunt");

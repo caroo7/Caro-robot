@@ -1,6 +1,7 @@
 package parser.empik;
 
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import parser.IBookParser;
 import parser.utils.ParserUtils;
 
@@ -22,7 +23,7 @@ class EmpikBookParser implements IBookParser {
     @Override
     public Set<String> getAuthors(Optional<Document> document) {
         if (document.isPresent()) {
-            return  document.get().select("span.pDAuthorList > a").stream().map(element -> element.text()).collect(Collectors.toSet());
+            return  document.get().select("span.pDAuthorList > a").stream().map(Element::text).collect(Collectors.toSet());
         }
         return Collections.emptySet();
     }
@@ -36,9 +37,9 @@ class EmpikBookParser implements IBookParser {
 
     /**
      * Percentage discount on web page is presented as format: 12,80 zł (40%)
-     * The percentage value is exctrated by ParserUtils
-     * @param document
-     * @return
+     * The percentage value is extracted by ParserUtils
+     * @param document contains all book details info
+     * @return percentage value of discount e.g. 40%
      */
     @Override
     public String getPercentageDiscount(Optional<Document> document) {

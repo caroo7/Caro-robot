@@ -2,8 +2,6 @@ package parser;
 
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.nodes.Document;
-import parser.IPageUrlParser;
-import parser.PageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
  * This thread is needed for consuming url to next pages to produce urls to books details
  */
 @Log4j2
-public class NextPageUrlConsumer implements Runnable {
+class NextPageUrlConsumer implements Runnable {
 
 
     private BlockingQueue<String> urlToNextPageQueue;

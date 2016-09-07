@@ -12,15 +12,15 @@ import java.util.concurrent.BlockingQueue;
  * consume by NextPageUrlConsumer which produce url to book details
  */
 @Log4j2
-public class NextPageUrlProducer implements Runnable {
+class NextPageUrlProducer implements Runnable {
 
 
-    private BlockingQueue urlToNextPageQueue;
+    private BlockingQueue<String> urlToNextPageQueue;
     private String startUrl;
     private IPageUrlParser pageUrlParser;
     private PageLoader pageLoader;
 
-    public NextPageUrlProducer(BlockingQueue urlToNextPageQueue, PageLoader pageLoader, IPageUrlParser pageUrlParser,String startUrl) {
+    public NextPageUrlProducer(BlockingQueue<String> urlToNextPageQueue, PageLoader pageLoader, IPageUrlParser pageUrlParser,String startUrl) {
         this.urlToNextPageQueue = urlToNextPageQueue;
         this.startUrl=startUrl;
         this.pageUrlParser=pageUrlParser;
