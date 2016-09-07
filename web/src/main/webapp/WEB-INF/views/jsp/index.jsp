@@ -50,8 +50,8 @@
     </div>
 <div class="container">
     <div id="libraries" class="list-group">
-        <a href="#" class="list-group-item active" onclick="replace('publioBooks','empikBooks')"> Empik</a>
-        <a href="#" class="list-group-item active" onclick="replace('empikBooks','publioBooks')">Publio</a>
+        <a href="${pageContext.servletContext.contextPath}/onDemand/?libName=EMPIK" class="list-group-item active" onclick="replace('publioBooks','empikBooks')"> Empik</a>
+        <a href="${pageContext.servletContext.contextPath}/onDemand/?libName=PUBLIO" class="list-group-item active" onclick="replace('empikBooks','publioBooks')">Publio</a>
         <a href="#" class="list-group-item active">Library3</a>
         <a href="#" class="list-group-item active">Library4</a>
         <a href="#" class="list-group-item active">Library5</a>

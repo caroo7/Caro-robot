@@ -1,6 +1,6 @@
 package converter;
 
-import DTO.BookDTO;
+import dto.BookDTO;
 import entities.Author;
 import entities.Book;
 import entities.Genre;

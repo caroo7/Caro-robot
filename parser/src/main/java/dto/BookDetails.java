@@ -28,29 +28,20 @@ public class BookDetails {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         BookDetails that = (BookDetails) o;
 
-        if (title != null ? !title.equals(that.title) : that.title != null)
-            return false;
-        if (authors != null ? !authors.equals(that.authors) : that.authors != null)
-            return false;
-        if (price != null ? !price.equals(that.price) : that.price != null)
-            return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (authors != null ? !authors.equals(that.authors) : that.authors != null) return false;
+        if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (percentageDiscount != null ? !percentageDiscount.equals(that.percentageDiscount) : that.percentageDiscount != null)
             return false;
-        if (genre != null ? !genre.equals(that.genre) : that.genre != null)
-            return false;
-        if (description != null ? !description.equals(that.description) : that.description != null)
-            return false;
-        if (tags != null ? !tags.equals(that.tags) : that.tags != null)
-            return false;
-        if (url != null ? !url.equals(that.url) : that.url != null)
-            return false;
+        if (genre != null ? !genre.equals(that.genre) : that.genre != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (tags != null ? !tags.equals(that.tags) : that.tags != null) return false;
+        if (url != null ? !url.equals(that.url) : that.url != null) return false;
         return coverUrl != null ? coverUrl.equals(that.coverUrl) : that.coverUrl == null;
 
     }
