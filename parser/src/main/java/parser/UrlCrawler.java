@@ -45,7 +45,8 @@ public abstract class UrlCrawler {
         try {
             nextPageUrlConsumerThread.join();
         } catch (InterruptedException e) {
-            log.error(e.getMessage());
+            log.error(e);
+            Thread.currentThread().interrupt();
         }
         return nextPageUrlConsumer.getBookDetailsUrls();
     }

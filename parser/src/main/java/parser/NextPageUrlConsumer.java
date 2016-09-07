@@ -48,7 +48,8 @@ class NextPageUrlConsumer implements Runnable {
 
                 bookDetailsUrls.addAll(getListToBookDetails(url));
             } catch (InterruptedException e) {
-                log.error(e.getMessage());
+                log.error(e);
+                Thread.currentThread().interrupt();
             }
         }
         log.debug("exit thread");

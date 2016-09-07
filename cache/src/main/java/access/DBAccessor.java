@@ -26,6 +26,7 @@ public class DBAccessor{
             FileOutputStream outputStream = new FileOutputStream(CACHE_FILE_SAVE_LOCATION + libraryName);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(list);
+            objectOutputStream.close();
         } catch (FileNotFoundException fNFE) {
             log.error("Exception while accessing the file: " + fNFE);
         } catch (IOException iOE) {
