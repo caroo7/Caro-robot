@@ -1,5 +1,7 @@
 package config;
 
+import converter.BookMap;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -31,4 +33,10 @@ public class YggdrasilWebConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
+    @Bean
+    public ModelMapper modelMapper() {
+        ModelMapper modelMapper=new ModelMapper();
+        modelMapper.addMappings(new BookMap());
+        return modelMapper;
+    }
 }

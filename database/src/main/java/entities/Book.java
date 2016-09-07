@@ -16,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Book implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -69,6 +70,13 @@ public class Book implements Serializable {
     private Set<Genre> genres;
 
 
+    @Getter
+    private String url;
+
+    @Getter
+    @Column(name = "cover_url")
+    private String coverUrl;
+
     @ManyToOne
     @JoinColumn(name = "library_id")
     @Getter
@@ -76,7 +84,7 @@ public class Book implements Serializable {
 
 
     /**
-     * Books are distinguished based on title, and library.
+     * Books are distinguished based on title and library.
      * If in other library there is book with same title it is treated as different book
      * (it will be saved as another record in database).
      */
