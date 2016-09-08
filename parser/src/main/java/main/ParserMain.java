@@ -55,7 +55,7 @@ private ParserMain(){}
 
             // FOR DEMO
             // *********************************************************************************************************
-            Set<BookDetails> booksToSave = booksDetails.stream().limit(3).collect(Collectors.toSet());
+            Set<BookDetails> booksToSave = booksDetails.stream().limit(15).collect(Collectors.toSet());
             //**********************************************************************************************************
 
             BookDetailsToBookAssembler converter = ctx.getBean(BookDetailsToBookAssembler.class);
