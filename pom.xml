@@ -15,8 +15,7 @@
         <module>web</module>
         <module>cache</module>
     </modules>
-
-    <name>Caro-robot</name>
+    
     <description>Web application responsible for presenting books which are on promotion in different bookshops. Another functionality is to retrieve necessary data using parsers</description>
     <organization>
         <name>yggdrasil</name>
@@ -152,7 +151,6 @@
     </dependencyManagement>
 
     <build>
-        <finalName>Caro-robot</finalName>
         <plugins>
 
             <plugin>
