@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
 import java.util.List;
 
 @Log4j2
@@ -25,7 +24,9 @@ public class DBAccessor {
         try {
             FileOutputStream outputStream = new FileOutputStream(CACHE_FILE_SAVE_LOCATION + libraryName);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(list);
+            for(Book book: list) {
+                objectOutputStream.writeObject(book);
+            }
             objectOutputStream.close();
         } catch (FileNotFoundException fNFE) {
             log.error("Exception while accessing the file: " + fNFE);
