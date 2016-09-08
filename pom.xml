@@ -15,7 +15,7 @@
         <module>web</module>
         <module>cache</module>
     </modules>
-    
+
     <description>Web application responsible for presenting books which are on promotion in different bookshops. Another functionality is to retrieve necessary data using parsers</description>
     <organization>
         <name>yggdrasil</name>

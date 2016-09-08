@@ -9,24 +9,22 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.List;
+import java.util.Set;
 
 @Log4j2
 public class DBAccessor {
 
     private static final String CACHE_FILE_SAVE_LOCATION = "../../web/";
 
-    public List<Book> getBooks(BookRepository bookRepo, Library library) {
+    public Set<Book> getBooks(BookRepository bookRepo, Library library) {
         return bookRepo.findByLibrary(library);
     }
 
-    public void createCache(List<Book> list, String libraryName) {
+    public void createCache(Set<Book> set, String libraryName) {
         try {
             FileOutputStream outputStream = new FileOutputStream(CACHE_FILE_SAVE_LOCATION + libraryName);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            for(Book book: list) {
-                objectOutputStream.writeObject(book);
-            }
+            objectOutputStream.writeObject(set);
             objectOutputStream.close();
         } catch (FileNotFoundException fNFE) {
             log.error("Exception while accessing the file: " + fNFE);
