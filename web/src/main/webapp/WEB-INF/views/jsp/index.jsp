@@ -56,57 +56,8 @@
         <a href="#" class="list-group-item active">Library4</a>
         <a href="#" class="list-group-item active">Library5</a>
 </div>
-    <div id="empikBooks">
 
-
-           <table class="bookTable" class="display" cellspacing="0" width="100%">
-            <thead>
-             <tr id="heads">
-             <th>Title</th>
-             <th>Author</th>
-             <th>Price</th>
-             <th>Discount</th>
-             <th>Description</th>
-             <th>Tags</th>
-             <th>Genre</th>
-             </tr>
-             </thead>
-             <tbody>
-
-                <c:forEach var="e" items="${empik}" varStatus="myIndex">
-                <tr>
-                    <td>${e.getTitle()}</td>
-                    <td>${e.getAuthors()}</td>
-                    <td>${e.getPrice()}</td>
-                    <td>${e.getDiscount()}</td>
-                    <td>
-                    <script style="text/javascript">
-                               $(function(){
-                                    $('#toggler${myIndex.index}').click(function(e){
-                                        e.preventDefault();
-                                        $('#empikHiddenText${myIndex.index}').toggle();
-                                    });
-                               });
-                    </script>
-                    <a href="#" id="toggler${myIndex.index}">
-
-                            ${e.getDescription().substring(0,40)}...
-
-
-                    </a>
-                    <div style="display: none;" id="empikHiddenText${myIndex.index}">${e.getDescription()}</div></td>
-                    <td>${e.getTags()}</td>
-                    <td>${e.getGenres().toString()}</td>
-                </tr>
-                </c:forEach>
-                </tbody>
-
-
-            </table>
-
-    </div>
-
-     <div id="publioBooks" style="display: none;">
+  <div id="publioBooks" style="display: none;">
 
 
                <table class="bookTable" class="display" cellspacing="0" width="100%">
@@ -162,6 +113,57 @@
                 </table>
 
         </div>
+    <div id="empikBooks">
+
+
+           <table class="bookTable" class="display" cellspacing="0" width="100%">
+            <thead>
+             <tr id="heads">
+             <th>Title</th>
+             <th>Author</th>
+             <th>Price</th>
+             <th>Discount</th>
+             <th>Description</th>
+             <th>Tags</th>
+             <th>Genre</th>
+             </tr>
+             </thead>
+             <tbody>
+
+                <c:forEach var="e" items="${empik}" varStatus="myIndex">
+                <tr>
+                    <td>${e.getTitle()}</td>
+                    <td>${e.getAuthors()}</td>
+                    <td>${e.getPrice()}</td>
+                    <td>${e.getDiscount()}</td>
+                    <td>
+                    <script style="text/javascript">
+                               $(function(){
+                                    $('#empiktoggler${myIndex.index}').click(function(e){
+                                        e.preventDefault();
+                                        $('#empikHiddenText${myIndex.index}').toggle();
+                                    });
+                               });
+                    </script>
+                    <a href="#" id="empiktoggler${myIndex.index}">
+
+                            ${e.getDescription().substring(0,40)}...
+
+
+                    </a>
+                    <div style="display: none;" id="empikHiddenText${myIndex.index}">${e.getDescription()}</div></td>
+                    <td>${e.getTags()}</td>
+                    <td>${e.getGenres().toString()}</td>
+                </tr>
+                </c:forEach>
+                </tbody>
+
+
+            </table>
+
+    </div>
+
+
 
 </div>
    <div class="container text-center" align="center">
